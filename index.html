@@ -5,108 +5,108 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>수나공방 콘텐츠 플래너</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#5C6B49">
-<link rel="icon" href="icon-192.png">
-<link rel="apple-touch-icon" href="icon-192.png">
+<meta name="theme-color" content="#92675C">
+<link rel="icon" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #F7F2E7;
-    --bg-elevated: #FFFEFB;
-    --bg-well: #FBF8F1;
-    --ink: #3A3324;
-    --ink-soft: #756B59;
-    --ink-faint: #A79C88;
-    --line: #E4D9C4;
-    --line-soft: #EEE6D5;
+    --bg: #F8EFEC;
+    --bg-elevated: #FFFAF9;
+    --bg-well: #FBF3F1;
+    --ink: #3D2B26;
+    --ink-soft: #7A6059;
+    --ink-faint: #AC968E;
+    --line: #E8D6D0;
+    --line-soft: #F1E4E0;
 
-    --moss: #5C6B49;
-    --moss-ink: #46502F;
-    --moss-tint: #E8ECDF;
+    --moss: #92675C;
+    --moss-ink: #6B463D;
+    --moss-tint: #EFE1DC;
 
-    --clay: #A8623F;
-    --clay-tint: #F1E1D5;
+    --clay: #C98B76;
+    --clay-tint: #F6E5DC;
 
-    --rust: #8C4A3A;
-    --rust-tint: #F0DFD8;
+    --rust: #7C4A45;
+    --rust-tint: #F0DEDA;
 
-    --mustard: #93731F;
-    --mustard-tint: #EFE6C9;
+    --mustard: #A9825A;
+    --mustard-tint: #F1E6D6;
 
-    --locked-bg: #ECE4D1;
-    --locked-ink: #8C8267;
+    --locked-bg: #EDE1DA;
+    --locked-ink: #93796F;
 
-    --ring: #5C6B49;
-    --danger: #A8442F;
-    --on-accent: #FBF8F1;
-    --shadow: 0 1px 2px rgba(58,51,36,0.06), 0 6px 20px -10px rgba(58,51,36,0.18);
+    --ring: #92675C;
+    --danger: #A8483D;
+    --on-accent: #FBF3F1;
+    --shadow: 0 1px 2px rgba(61,43,38,0.06), 0 6px 20px -10px rgba(61,43,38,0.18);
   }
 
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #211E17;
-      --bg-elevated: #2A261D;
-      --bg-well: #262218;
-      --ink: #EEE6D4;
-      --ink-soft: #C1B7A0;
-      --ink-faint: #7C7461;
-      --line: #443E2F;
-      --line-soft: #383325;
+      --bg: #211917;
+      --bg-elevated: #2A201D;
+      --bg-well: #251C19;
+      --ink: #F0E4DF;
+      --ink-soft: #C7B3AC;
+      --ink-faint: #8C7570;
+      --line: #453330;
+      --line-soft: #3A2B28;
 
-      --moss: #A0B487;
-      --moss-ink: #C7D6B2;
-      --moss-tint: #33392A;
+      --moss: #C9998C;
+      --moss-ink: #E4C4BA;
+      --moss-tint: #3A2925;
 
-      --clay: #E0A57C;
-      --clay-tint: #3E2E25;
+      --clay: #E0A98F;
+      --clay-tint: #3E2B23;
 
-      --rust: #D6927F;
-      --rust-tint: #3B2823;
+      --rust: #C99089;
+      --rust-tint: #3B2624;
 
-      --mustard: #D8BE6E;
-      --mustard-tint: #3A331F;
+      --mustard: #D6B784;
+      --mustard-tint: #3A2F1F;
 
-      --locked-bg: #322D22;
-      --locked-ink: #948A73;
+      --locked-bg: #362824;
+      --locked-ink: #A4897F;
 
-      --ring: #A0B487;
+      --ring: #C9998C;
       --danger: #E0917E;
-      --on-accent: #211E17;
+      --on-accent: #211917;
       --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 10px 24px -12px rgba(0,0,0,0.5);
     }
   }
 
   :root[data-theme="dark"] {
-    --bg: #211E17;
-    --bg-elevated: #2A261D;
-    --bg-well: #262218;
-    --ink: #EEE6D4;
-    --ink-soft: #C1B7A0;
-    --ink-faint: #7C7461;
-    --line: #443E2F;
-    --line-soft: #383325;
+    --bg: #211917;
+    --bg-elevated: #2A201D;
+    --bg-well: #251C19;
+    --ink: #F0E4DF;
+    --ink-soft: #C7B3AC;
+    --ink-faint: #8C7570;
+    --line: #453330;
+    --line-soft: #3A2B28;
 
-    --moss: #A0B487;
-    --moss-ink: #C7D6B2;
-    --moss-tint: #33392A;
+    --moss: #C9998C;
+    --moss-ink: #E4C4BA;
+    --moss-tint: #3A2925;
 
-    --clay: #E0A57C;
-    --clay-tint: #3E2E25;
+    --clay: #E0A98F;
+    --clay-tint: #3E2B23;
 
-    --rust: #D6927F;
-    --rust-tint: #3B2823;
+    --rust: #C99089;
+    --rust-tint: #3B2624;
 
-    --mustard: #D8BE6E;
-    --mustard-tint: #3A331F;
+    --mustard: #D6B784;
+    --mustard-tint: #3A2F1F;
 
-    --locked-bg: #322D22;
-    --locked-ink: #948A73;
+    --locked-bg: #362824;
+    --locked-ink: #A4897F;
 
-    --ring: #A0B487;
+    --ring: #C9998C;
     --danger: #E0917E;
-    --on-accent: #211E17;
+    --on-accent: #211917;
     --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 10px 24px -12px rgba(0,0,0,0.5);
   }
 
@@ -157,6 +157,17 @@
   .edit-banner.show { display: block; }
   .status-banner { color: var(--ink); background: var(--rust-tint); }
   .status-banner.show { display: block; }
+
+  .theme-picker {
+    display: none; align-items: center; gap: 10px; flex-wrap: wrap;
+    font-size: 0.84rem; border-radius: 10px; padding: 10px 14px; border: 1px solid var(--line);
+    background: var(--bg-well); color: var(--ink-soft); margin-top: 8px;
+  }
+  .theme-picker.show { display: flex; }
+  .theme-picker .theme-label { font-weight: 600; color: var(--ink); }
+  .theme-picker input[type="color"] {
+    width: 42px; height: 32px; padding: 0; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; background: none;
+  }
 
   section > .section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
   section > .section-head h2 { font-size: 1.25rem; }
@@ -364,6 +375,192 @@
 
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
 </style>
+<script>
+(function () {
+  'use strict';
+  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+  function normHue(h) { h = h % 360; if (h < 0) h += 360; return h; }
+
+  function hexToRgb(hex) {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) hex = hex.split('').map(function (c) { return c + c; }).join('');
+    var num = parseInt(hex, 16);
+    return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 };
+  }
+  function rgbToHex(r, g, b) {
+    function h2(n) { n = clamp(Math.round(n), 0, 255); var s = n.toString(16); return s.length === 1 ? '0' + s : s; }
+    return '#' + h2(r) + h2(g) + h2(b);
+  }
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+    if (max === min) { h = 0; s = 0; }
+    else {
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
+      else if (max === g) h = (b - r) / d + 2;
+      else h = (r - g) / d + 4;
+      h *= 60;
+    }
+    return { h: h, s: s * 100, l: l * 100 };
+  }
+  function hslToRgb(h, s, l) {
+    h = normHue(h) / 360; s = clamp(s, 0, 100) / 100; l = clamp(l, 0, 100) / 100;
+    if (s === 0) { var v = Math.round(l * 255); return { r: v, g: v, b: v }; }
+    function hue2rgb(p, q, t) {
+      if (t < 0) t += 1; if (t > 1) t -= 1;
+      if (t < 1 / 6) return p + (q - p) * 6 * t;
+      if (t < 1 / 2) return q;
+      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+      return p;
+    }
+    var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    var p = 2 * l - q;
+    return {
+      r: Math.round(hue2rgb(p, q, h + 1 / 3) * 255),
+      g: Math.round(hue2rgb(p, q, h) * 255),
+      b: Math.round(hue2rgb(p, q, h - 1 / 3) * 255)
+    };
+  }
+  function hsl(h, s, l) { var rgb = hslToRgb(h, s, l); return rgbToHex(rgb.r, rgb.g, rgb.b); }
+
+  function buildPalette(baseHex) {
+    var rgb0 = hexToRgb(baseHex);
+    var base = rgbToHsl(rgb0.r, rgb0.g, rgb0.b);
+    var h = base.h;
+    var sBase = clamp(base.s, 32, 72);
+    var lBase = clamp(base.l, 26, 42);
+
+    var light = {
+      '--bg': hsl(h, clamp(sBase * 0.5, 14, 34), 95.5),
+      '--bg-elevated': hsl(h, clamp(sBase * 0.35, 8, 22), 98),
+      '--bg-well': hsl(h, clamp(sBase * 0.45, 10, 28), 96.3),
+      '--ink': hsl(h, clamp(sBase * 0.55, 18, 42), 18),
+      '--ink-soft': hsl(h, clamp(sBase * 0.42, 14, 32), 38),
+      '--ink-faint': hsl(h, clamp(sBase * 0.32, 10, 24), 60),
+      '--line': hsl(h, clamp(sBase * 0.48, 14, 32), 84),
+      '--line-soft': hsl(h, clamp(sBase * 0.38, 10, 26), 90),
+
+      '--moss': hsl(h, sBase, lBase),
+      '--moss-ink': hsl(h, clamp(sBase * 1.05, 40, 78), clamp(lBase - 16, 18, 34)),
+      '--moss-tint': hsl(h, clamp(sBase * 0.48, 14, 32), 90),
+
+      '--clay': hsl(h + 35, clamp(sBase * 0.82, 28, 62), clamp(lBase + 10, 42, 62)),
+      '--clay-tint': hsl(h + 35, clamp(sBase * 0.42, 12, 28), 92),
+
+      '--rust': hsl(h - 30, clamp(sBase * 1.05, 35, 72), clamp(lBase - 6, 26, 44)),
+      '--rust-tint': hsl(h - 30, clamp(sBase * 0.42, 12, 28), 92),
+
+      '--mustard': hsl(h + 72, clamp(sBase * 0.66, 22, 52), clamp(lBase + 7, 44, 62)),
+      '--mustard-tint': hsl(h + 72, clamp(sBase * 0.38, 10, 26), 91),
+
+      '--locked-bg': hsl(h, clamp(sBase * 0.32, 7, 18), 89),
+      '--locked-ink': hsl(h, clamp(sBase * 0.28, 7, 18), 55),
+
+      '--ring': hsl(h, sBase, lBase),
+      '--danger': hsl(6, 52, 40),
+      '--on-accent': hsl(h, clamp(sBase * 0.45, 10, 26), 97)
+    };
+
+    var dark = {
+      '--bg': hsl(h, clamp(sBase * 0.42, 12, 26), 12.5),
+      '--bg-elevated': hsl(h, clamp(sBase * 0.4, 12, 26), 15.5),
+      '--bg-well': hsl(h, clamp(sBase * 0.42, 12, 26), 13.8),
+      '--ink': hsl(h, clamp(sBase * 0.28, 8, 20), 92),
+      '--ink-soft': hsl(h, clamp(sBase * 0.32, 10, 24), 78),
+      '--ink-faint': hsl(h, clamp(sBase * 0.3, 8, 22), 55),
+      '--line': hsl(h, clamp(sBase * 0.4, 10, 24), 25),
+      '--line-soft': hsl(h, clamp(sBase * 0.34, 8, 20), 20),
+
+      '--moss': hsl(h, clamp(sBase * 0.85, 30, 60), clamp(lBase + 32, 62, 76)),
+      '--moss-ink': hsl(h, clamp(sBase * 0.7, 24, 50), clamp(lBase + 46, 76, 88)),
+      '--moss-tint': hsl(h, clamp(sBase * 0.44, 12, 28), 19),
+
+      '--clay': hsl(h + 35, clamp(sBase * 0.7, 24, 50), clamp(lBase + 32, 64, 78)),
+      '--clay-tint': hsl(h + 35, clamp(sBase * 0.4, 10, 24), 19),
+
+      '--rust': hsl(h - 30, clamp(sBase * 0.78, 28, 55), clamp(lBase + 28, 60, 74)),
+      '--rust-tint': hsl(h - 30, clamp(sBase * 0.4, 10, 24), 19),
+
+      '--mustard': hsl(h + 72, clamp(sBase * 0.6, 20, 45), clamp(lBase + 30, 62, 76)),
+      '--mustard-tint': hsl(h + 72, clamp(sBase * 0.36, 9, 22), 18),
+
+      '--locked-bg': hsl(h, clamp(sBase * 0.26, 6, 16), 22),
+      '--locked-ink': hsl(h, clamp(sBase * 0.22, 6, 16), 62),
+
+      '--ring': hsl(h, clamp(sBase * 0.85, 30, 60), clamp(lBase + 32, 62, 76)),
+      '--danger': hsl(6, 62, 62),
+      '--on-accent': hsl(h, clamp(sBase * 0.5, 12, 28), 15)
+    };
+
+    return { light: light, dark: dark };
+  }
+
+  function varsToCss(vars, selector) {
+    var lines = Object.keys(vars).map(function (k) { return '  ' + k + ': ' + vars[k] + ';'; });
+    return selector + ' {\n' + lines.join('\n') + '\n}';
+  }
+
+  function fullThemeCss(baseHex) {
+    var pal = buildPalette(baseHex);
+    var sL = hexToRgb(pal.light['--ink']);
+    var lightVars = Object.assign({}, pal.light, {
+      '--shadow': '0 1px 2px rgba(' + sL.r + ',' + sL.g + ',' + sL.b + ',0.06), 0 6px 20px -10px rgba(' + sL.r + ',' + sL.g + ',' + sL.b + ',0.18)'
+    });
+    var darkVars = Object.assign({}, pal.dark, {
+      '--shadow': '0 1px 2px rgba(0,0,0,0.3), 0 6px 20px -10px rgba(0,0,0,0.5)'
+    });
+    return (
+      varsToCss(lightVars, ':root') + '\n' +
+      '@media (prefers-color-scheme: dark) {\n' +
+      varsToCss(darkVars, ':root:not([data-theme="light"])').split('\n').map(function (l) { return '  ' + l; }).join('\n') + '\n' +
+      '}\n' +
+      varsToCss(darkVars, ':root[data-theme="dark"]')
+    );
+  }
+
+  var STORAGE_KEY = 'sunaPlanner.themeColor';
+  var DEFAULT_COLOR = '#92675C';
+
+  function loadThemeColor() {
+    try {
+      var v = localStorage.getItem(STORAGE_KEY);
+      return v && /^#[0-9a-fA-F]{6}$/.test(v) ? v : DEFAULT_COLOR;
+    } catch (e) { return DEFAULT_COLOR; }
+  }
+  function saveThemeColor(hex) {
+    try { localStorage.setItem(STORAGE_KEY, hex); } catch (e) {}
+  }
+  function applyPalette(baseHex) {
+    var css = fullThemeCss(baseHex);
+    var styleEl = document.getElementById('themeOverrideStyle');
+    if (!styleEl) {
+      styleEl = document.createElement('style');
+      styleEl.id = 'themeOverrideStyle';
+      // Insert right after this script tag (i.e. right after the main
+      // hardcoded <style> block) so it wins the cascade regardless of
+      // exactly how the surrounding page is structured.
+      if (document.currentScript && document.currentScript.parentNode) {
+        document.currentScript.parentNode.insertBefore(styleEl, document.currentScript.nextSibling);
+      } else {
+        document.head.appendChild(styleEl);
+      }
+    }
+    styleEl.textContent = css;
+  }
+
+  window.SunaTheme = {
+    loadThemeColor: loadThemeColor,
+    saveThemeColor: saveThemeColor,
+    applyPalette: applyPalette,
+    DEFAULT_COLOR: DEFAULT_COLOR
+  };
+
+  applyPalette(loadThemeColor());
+})();
+</script>
 </head>
 <body>
 <div class="page">
@@ -376,6 +573,11 @@
       <button class="mode-btn" id="editToggleBtn" type="button">✏️ 수정하기</button>
     </div>
     <div class="edit-banner" id="editBanner">지금 수정 모드예요. 자유롭게 고치고, 다 되면 위쪽의 완료 버튼을 눌러주세요. 바꾼 내용은 이 브라우저에 자동으로 저장돼요.</div>
+    <div class="theme-picker" id="themeColorRow">
+      <span class="theme-label">🎨 메인 색상</span>
+      <input type="color" id="themeColorInput" value="#92675C">
+      <span>고르면 배경·글자·포인트 색이 전부 이 색 톤에 맞춰 자동으로 바뀌어요</span>
+    </div>
     <div class="status-banner" id="storageBanner">지금 이 브라우저에서는 저장이 안 돼요 (사생활 보호 모드이거나 저장 공간이 꽉 찼을 수 있어요). 다른 브라우저나 일반 창에서 열어보세요.</div>
   </header>
 
@@ -682,6 +884,8 @@
   var editToggleBtn = document.getElementById('editToggleBtn');
   var editDoneBtn = document.getElementById('editDoneBtn');
   var editBanner = document.getElementById('editBanner');
+  var themeColorRow = document.getElementById('themeColorRow');
+  var themeColorInput = document.getElementById('themeColorInput');
   var mode = 'view';
 
   function setMode(next) {
@@ -689,12 +893,23 @@
     viewModeEl.hidden = mode !== 'view';
     editModeEl.hidden = mode !== 'edit';
     editBanner.classList.toggle('show', mode === 'edit');
+    if (themeColorRow) themeColorRow.classList.toggle('show', mode === 'edit');
     editToggleBtn.textContent = mode === 'edit' ? '👀 보기로 돌아가기' : '✏️ 수정하기';
     editToggleBtn.classList.toggle('is-editing', mode === 'edit');
     if (mode === 'edit') window.scrollTo({ top: 0, behavior: 'auto' });
   }
   editToggleBtn.addEventListener('click', function () { setMode(mode === 'edit' ? 'view' : 'edit'); });
   editDoneBtn.addEventListener('click', function () { setMode('view'); });
+
+  if (themeColorInput && window.SunaTheme) {
+    themeColorInput.value = window.SunaTheme.loadThemeColor();
+    themeColorInput.addEventListener('input', function (e) {
+      window.SunaTheme.applyPalette(e.target.value);
+    });
+    themeColorInput.addEventListener('change', function (e) {
+      window.SunaTheme.saveThemeColor(e.target.value);
+    });
+  }
 
   // ---- generic delegated wiring ----
   function wireFieldChanges(container, onChange) {
