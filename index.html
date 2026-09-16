@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="icon-512.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #F8EFEC;
@@ -111,7 +111,7 @@
   }
 
   * { box-sizing: border-box; }
-  html { color-scheme: light dark; }
+  html { color-scheme: light dark; font-size: 92%; }
 
   body {
     margin: 0;
@@ -122,15 +122,15 @@
     -webkit-font-smoothing: antialiased;
   }
 
-  .page { max-width: 1040px; margin: 0 auto; padding: 40px 20px 64px; display: flex; flex-direction: column; gap: 46px; }
-  h1, h2, h3 { font-family: 'Gowun Batang', serif; font-weight: 700; text-wrap: balance; margin: 0; color: var(--ink); }
+  .page { max-width: 1040px; margin: 0 auto; padding: 24px 16px 40px; display: flex; flex-direction: column; gap: 26px; }
+  h1, h2, h3 { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; text-wrap: balance; margin: 0; color: var(--ink); letter-spacing: -0.01em; }
 
   /* ---------- Hero ---------- */
-  .hero { display: flex; flex-direction: column; gap: 10px; }
-  .eyebrow { margin: 0; font-size: 0.8rem; letter-spacing: 0.14em; color: var(--moss); font-weight: 600; }
-  .hero h1 { font-size: clamp(1.6rem, 4vw, 2.2rem); }
+  .hero { display: flex; flex-direction: column; gap: 6px; }
+  .eyebrow { margin: 0; font-size: 0.76rem; letter-spacing: 0.13em; color: var(--moss); font-weight: 600; }
+  .hero h1 { font-size: clamp(1.4rem, 4vw, 1.9rem); }
   .lede { margin: 4px 0 0; color: var(--ink-soft); max-width: 64ch; font-size: 0.98rem; }
-  .meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: 12px; }
+  .meta-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 6px; }
   .meta-chip { font-size: 0.82rem; padding: 6px 12px; border-radius: 100px; background: var(--moss-tint); color: var(--moss-ink); font-weight: 600; }
   .meta-chip.ghost { background: transparent; color: var(--ink-faint); border: 1px solid var(--line); font-weight: 500; }
 
@@ -169,11 +169,41 @@
     width: 42px; height: 32px; padding: 0; border: 1px solid var(--line); border-radius: 8px; cursor: pointer; background: none;
   }
 
-  section > .section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 4px; }
-  section > .section-head h2 { font-size: 1.25rem; }
-  .section-note { margin: 2px 0 16px; color: var(--ink-faint); font-size: 0.84rem; }
+  /* ---------- Mobile swipe pages (view mode) ---------- */
+  .swipe-dots {
+    display: flex; gap: 16px; border-bottom: 1px solid var(--line-soft); margin-bottom: 10px;
+    overflow-x: auto;
+  }
+  .swipe-dot {
+    appearance: none; border: none; background: none; cursor: pointer; font-family: inherit;
+    font-size: 0.66rem; font-weight: 700; letter-spacing: 0.06em; color: var(--ink-faint);
+    padding: 0 0 8px; position: relative; white-space: nowrap; flex-shrink: 0;
+  }
+  .swipe-dot.active { color: var(--moss); }
+  .swipe-dot.active::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px;
+    background: var(--moss); border-radius: 2px;
+  }
+  .swipe-container {
+    display: flex; overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+  }
+  .swipe-container::-webkit-scrollbar { display: none; }
+  .swipe-page {
+    flex: 0 0 100%; min-width: 100%; scroll-snap-align: start; scroll-snap-stop: always;
+    display: flex; flex-direction: column; gap: 16px; box-sizing: border-box;
+  }
+  @media (min-width: 641px) {
+    .swipe-dots { display: none; }
+    .swipe-container { display: contents; }
+    .swipe-page { display: contents; }
+  }
 
-  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin: 10px 0 18px; font-size: 0.8rem; color: var(--ink-soft); }
+  section > .section-head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 8px; margin-bottom: 2px; }
+  section > .section-head h2 { font-size: 1.08rem; }
+  .section-note { margin: 2px 0 10px; color: var(--ink-faint); font-size: 0.8rem; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 12px; margin: 6px 0 12px; font-size: 0.78rem; color: var(--ink-soft); }
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
   .legend i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; }
   .legend i.edu { background: var(--moss); }
@@ -183,48 +213,52 @@
   .legend i.locked { background: repeating-linear-gradient(135deg, var(--locked-ink) 0 2px, transparent 2px 5px); background-color: var(--locked-bg); }
 
   /* ---------- shared day-card shell ---------- */
-  .week-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
-  .day-card { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
+  .week-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px; }
+  .day-card { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 10px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 5px; }
   .day-card.today { outline: 2px solid var(--ring); outline-offset: 2px; }
   .day-head { display: flex; align-items: baseline; justify-content: space-between; }
-  .day-head h3 { font-size: 1rem; }
-  .today-tag { display: none; font-family: 'Noto Sans KR', sans-serif; font-size: 0.66rem; font-weight: 700; color: var(--bg-elevated); background: var(--ring); padding: 2px 8px; border-radius: 100px; letter-spacing: 0.04em; }
+  .day-head h3 { font-size: 0.92rem; }
+  .today-tag { display: none; font-family: 'Noto Sans KR', sans-serif; font-size: 0.64rem; font-weight: 700; color: var(--bg-elevated); background: var(--ring); padding: 2px 7px; border-radius: 100px; letter-spacing: 0.04em; }
   .day-card.today .today-tag { display: inline-block; }
-  .blocks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 6px; }
-  .empty-note { font-size: 0.78rem; color: var(--ink-faint); padding: 4px 2px; font-style: italic; margin: 0; }
+  .blocks { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 4px; }
+  .empty-note { font-size: 0.76rem; color: var(--ink-faint); padding: 2px 2px; font-style: italic; margin: 0; }
 
   /* ---------- VIEW MODE: read-only blocks ---------- */
-  .vblock { border-radius: 9px; padding: 6px 10px; font-size: 0.82rem; border-left: 3px solid var(--accent, var(--moss)); background: var(--tint, var(--moss-tint)); display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; }
+  .vblock {
+    border-radius: 12px; padding: 9px 10px 9px 12px; font-size: 0.8rem;
+    border-left: none; background: var(--tint, var(--moss-tint));
+    display: flex; flex-direction: column-reverse; gap: 2px;
+  }
   .vblock.cat-교육 { --accent: var(--moss); --tint: var(--moss-tint); }
   .vblock.cat-기획 { --accent: var(--rust); --tint: var(--rust-tint); }
   .vblock.cat-부케 { --accent: var(--clay); --tint: var(--clay-tint); }
   .vblock.cat-개인 { --accent: var(--mustard); --tint: var(--mustard-tint); }
-  .vblock.locked { border-left-color: var(--locked-ink); background-color: var(--locked-bg); background-image: repeating-linear-gradient(135deg, rgba(140,130,103,0.16) 0 2px, transparent 2px 7px); color: var(--locked-ink); }
-  .vblock .t { font-variant-numeric: tabular-nums; font-weight: 700; font-size: 0.72rem; color: var(--ink-soft); flex-shrink: 0; white-space: nowrap; }
+  .vblock.locked { background-color: var(--locked-bg); background-image: repeating-linear-gradient(135deg, rgba(140,130,103,0.16) 0 2px, transparent 2px 7px); color: var(--locked-ink); }
+  .vblock .t { font-variant-numeric: tabular-nums; font-weight: 500; font-size: 0.72rem; color: var(--ink-faint); flex-shrink: 0; white-space: nowrap; }
   .vblock.locked .t, .vblock.locked .d { color: var(--locked-ink); }
-  .vblock .d { color: var(--ink); }
-  .vblock.locked .d { font-weight: 600; }
+  .vblock .d { color: var(--accent, var(--moss)); font-weight: 700; font-size: 0.86rem; }
+  .vblock.locked .d { font-weight: 700; }
 
   /* ---------- VIEW MODE: priorities ---------- */
-  .vpriority-list { list-style: none; margin: 16px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
-  .vpriority { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 16px 16px 16px 14px; display: flex; gap: 12px; box-shadow: var(--shadow); border-left: 4px solid var(--accent, var(--moss)); }
+  .vpriority-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px; }
+  .vpriority { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px 11px 11px; display: flex; gap: 9px; box-shadow: var(--shadow); border-left: 4px solid var(--accent, var(--moss)); }
   .vpriority.cat-교육 { --accent: var(--moss); }
   .vpriority.cat-기획 { --accent: var(--rust); }
   .vpriority.cat-부케 { --accent: var(--clay); }
   .vpriority.cat-개인 { --accent: var(--mustard); }
-  .vpriority .p-num { font-family: 'Gowun Batang', serif; font-size: 1.5rem; color: var(--accent, var(--moss)); line-height: 1; flex-shrink: 0; }
-  .vpriority h3 { font-size: 1rem; margin-bottom: 6px; }
-  .vpriority p { margin: 0; font-size: 0.88rem; color: var(--ink-soft); }
+  .vpriority .p-num { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--accent, var(--moss)); line-height: 1; flex-shrink: 0; }
+  .vpriority h3 { font-size: 0.94rem; margin-bottom: 3px; }
+  .vpriority p { margin: 0; font-size: 0.84rem; color: var(--ink-soft); }
 
   /* ---------- VIEW MODE: checklist ---------- */
-  .videa-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; margin-top: 16px; }
-  .videa-group h3 { font-family: 'Noto Sans KR', sans-serif; font-size: 0.92rem; font-weight: 700; display: flex; align-items: center; gap: 8px; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 1px solid var(--line-soft); }
-  .dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+  .videa-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 10px; }
+  .videa-group h3 { font-family: 'Noto Sans KR', sans-serif; font-size: 0.88rem; font-weight: 700; display: flex; align-items: center; gap: 7px; margin-bottom: 6px; padding-bottom: 5px; border-bottom: 1px solid var(--line-soft); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
   .dot.cat-교육 { background: var(--moss); }
   .dot.cat-기획 { background: var(--rust); }
   .dot.cat-부케 { background: var(--clay); }
   .dot.cat-개인 { background: var(--mustard); }
-  .videa-row { display: flex; align-items: flex-start; gap: 9px; font-size: 0.88rem; padding: 6px 2px; cursor: pointer; color: var(--ink); }
+  .videa-row { display: flex; align-items: flex-start; gap: 8px; font-size: 0.85rem; padding: 4px 2px; cursor: pointer; color: var(--ink); }
   .videa-row input { margin-top: 3px; width: 16px; height: 16px; accent-color: var(--moss); flex-shrink: 0; }
   .videa-row input:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
   .videa-row span { flex: 1; }
@@ -266,13 +300,13 @@
   .regen-btn:hover { filter: brightness(0.97); }
   .regen-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
 
-  .priority-list { list-style: none; margin: 16px 0 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-  .priority-card { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 14px 14px 14px 12px; display: grid; grid-template-columns: auto auto 1fr auto; gap: 10px; align-items: start; box-shadow: var(--shadow); border-left: 4px solid var(--accent, var(--moss)); }
+  .priority-list { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+  .priority-card { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 12px; padding: 10px 10px 10px 10px; display: grid; grid-template-columns: auto auto 1fr auto; gap: 8px; align-items: start; box-shadow: var(--shadow); border-left: 4px solid var(--accent, var(--moss)); }
   .priority-card.cat-교육 { --accent: var(--moss); }
   .priority-card.cat-기획 { --accent: var(--rust); }
   .priority-card.cat-부케 { --accent: var(--clay); }
   .priority-card.cat-개인 { --accent: var(--mustard); }
-  .p-num { font-family: 'Gowun Batang', serif; font-size: 1.4rem; color: var(--accent, var(--moss)); line-height: 1.2; }
+  .p-num { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 1.25rem; color: var(--accent, var(--moss)); line-height: 1.2; }
   .p-order-btns { display: flex; flex-direction: column; gap: 2px; }
   .p-order-btns button { border: 1px solid var(--line); background: var(--bg-well); color: var(--ink-soft); border-radius: 5px; width: 22px; height: 20px; font-size: 0.7rem; cursor: pointer; line-height: 1; }
   .p-order-btns button:hover { border-color: var(--moss); color: var(--moss-ink); }
@@ -281,9 +315,9 @@
   .p-body textarea { font-size: 0.85rem; width: 100%; resize: vertical; min-height: 40px; }
   .p-cat-row { display: flex; align-items: center; gap: 8px; }
 
-  .idea-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; margin-top: 16px; }
-  .idea-group { display: flex; flex-direction: column; gap: 8px; }
-  .idea-group h3 { font-family: 'Noto Sans KR', sans-serif; font-size: 0.92rem; font-weight: 700; display: flex; align-items: center; gap: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--line-soft); }
+  .idea-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 10px; }
+  .idea-group { display: flex; flex-direction: column; gap: 5px; }
+  .idea-group h3 { font-family: 'Noto Sans KR', sans-serif; font-size: 0.88rem; font-weight: 700; display: flex; align-items: center; gap: 7px; padding-bottom: 5px; border-bottom: 1px solid var(--line-soft); }
   .idea-row { display: flex; align-items: center; gap: 8px; }
   .idea-row input[type="checkbox"] { width: 16px; height: 16px; accent-color: var(--moss); flex-shrink: 0; }
   .idea-row input[type="text"] { flex: 1; min-width: 0; border-color: transparent; background: transparent; padding: 4px 4px; }
@@ -298,65 +332,82 @@
   .finish-row { display: flex; justify-content: center; padding-top: 8px; }
 
   /* ---------- Calendar ---------- */
-  .cal-card { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
-  .cal-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
-  .cal-head h3 { font-size: 1.1rem; }
-  .cal-nav { display: flex; gap: 6px; align-items: center; }
-  .cal-nav button { border: 1px solid var(--line); background: var(--bg-well); color: var(--ink-soft); border-radius: 8px; padding: 5px 10px; font-size: 0.85rem; cursor: pointer; font-family: inherit; }
-  .cal-nav button:hover { border-color: var(--moss); color: var(--moss-ink); }
-  .cal-nav button:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
-  .cal-today-btn { font-size: 0.76rem !important; padding: 4px 9px !important; }
-
-  .cal-scroll { overflow-x: auto; }
-  .cal-dow-row { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 4px; min-width: 460px; }
-  .cal-dow { text-align: center; font-size: 0.74rem; color: var(--ink-faint); font-weight: 600; padding: 2px 0; }
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; min-width: 460px; }
-  .cal-cell {
-    border: 1px solid var(--line); background: var(--bg-well); border-radius: 9px; padding: 5px 5px 6px;
-    min-height: 72px; display: flex; flex-direction: column; gap: 3px; cursor: pointer; text-align: left;
-    font-family: inherit; color: var(--ink); align-items: stretch;
+  .cal-card { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 14px 12px; box-shadow: var(--shadow); }
+  .cal-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+  .cal-head h3 {
+    font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; color: var(--ink-faint);
+    text-transform: uppercase; margin: 0;
   }
-  .cal-cell:hover { border-color: var(--moss); }
-  .cal-cell:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
-  .cal-cell.other-month { opacity: 0.4; }
-  .cal-cell.today { border-color: var(--moss); box-shadow: inset 0 0 0 1px var(--moss); }
-  .cal-cell.selected { outline: 2px solid var(--ring); outline-offset: 1px; }
-  .cal-date { font-size: 0.8rem; font-weight: 700; font-variant-numeric: tabular-nums; }
-  .cal-cell.has-important .cal-date::after { content: ' \2605'; color: var(--rust); font-size: 0.7rem; }
-  .cal-dots { display: flex; gap: 3px; }
-  .cal-dot { width: 6px; height: 6px; border-radius: 2px; display: inline-block; }
-  .cal-dot.locked { background-image: repeating-linear-gradient(135deg, var(--locked-ink) 0 1px, transparent 1px 3px); background-color: var(--locked-bg); }
-  .cal-dot.cat-교육 { background: var(--moss); }
-  .cal-dot.cat-기획 { background: var(--rust); }
-  .cal-dot.cat-부케 { background: var(--clay); }
-  .cal-dot.cat-개인 { background: var(--mustard); }
-  .cal-events { display: flex; flex-direction: column; gap: 2px; }
-  .cal-pill { font-size: 0.66rem; background: var(--moss-tint); color: var(--moss-ink); border-radius: 5px; padding: 1px 5px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .cal-pill.important { background: var(--rust-tint); color: var(--rust); font-weight: 700; }
-  .cal-pill.done { opacity: 0.55; text-decoration: line-through; }
-  .cal-more { font-size: 0.65rem; color: var(--ink-faint); }
+  .cal-nav { display: flex; gap: 2px; align-items: center; }
+  .cal-nav button { border: none; background: none; color: var(--ink-faint); border-radius: 6px; padding: 3px 7px; font-size: 0.72rem; cursor: pointer; font-family: inherit; }
+  .cal-nav button:hover { color: var(--moss-ink); }
+  .cal-nav button:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+  .cal-today-btn { font-weight: 700 !important; }
 
-  .cal-detail { margin-top: 14px; border-top: 1px solid var(--line-soft); padding-top: 12px; }
-  .cal-detail h3 { font-size: 0.98rem; margin-bottom: 8px; }
-  .cal-item-row { display: flex; align-items: center; gap: 7px; padding: 5px 2px; }
+  .cal-scroll { overflow-x: visible; }
+  .cal-dow-row { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 6px; }
+  .cal-dow { text-align: center; font-size: 0.68rem; color: var(--ink-faint); font-weight: 700; padding: 2px 0; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 15px; column-gap: 0; }
+  .cal-cell {
+    border: none; background: none; padding: 0; border-radius: 50%;
+    height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer;
+    font-family: inherit; color: var(--ink); position: relative;
+  }
+  .cal-cell:hover .cal-date { color: var(--moss-ink); }
+  .cal-cell:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
+  .cal-cell.other-month { opacity: 0.35; }
+  .cal-cell.today .cal-date {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 50%; background: var(--mustard); color: var(--on-accent);
+  }
+  .cal-cell.selected:not(.today) .cal-date { box-shadow: 0 0 0 2px var(--ring); border-radius: 50%; }
+  .cal-date {
+    font-size: 0.84rem; font-weight: 700; font-variant-numeric: tabular-nums;
+    width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
+  }
+  .cal-dot-mark {
+    position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%);
+    width: 4px; height: 4px; border-radius: 50%; background: var(--ink-faint);
+  }
+  .cal-cell.today .cal-dot-mark { background: var(--mustard); }
+
+  .cal-detail { margin-top: 12px; border-top: 1px solid var(--line-soft); padding-top: 14px; }
+  .cal-day-group { display: flex; gap: 12px; }
+  .cal-day-badge { width: 34px; flex-shrink: 0; }
+  .cal-day-badge .dow { font-size: 0.62rem; font-weight: 700; color: var(--ink-faint); letter-spacing: 0.05em; }
+  .cal-day-badge .num { font-size: 1.35rem; font-weight: 800; color: var(--ink); line-height: 1.25; }
+  .cal-day-badge.is-today .num { color: var(--mustard); }
+  .cal-day-cards { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+  .cal-detail-items { display: flex; flex-direction: column; gap: 8px; }
+  .cal-item-row {
+    display: flex; align-items: center; gap: 7px; padding: 9px 8px 9px 12px;
+    background: var(--moss-tint); border-radius: 14px;
+  }
+  .cal-item-row.done { background: var(--bg-well); }
   .cal-item-row input[type="checkbox"] { width: 15px; height: 15px; accent-color: var(--moss); flex-shrink: 0; }
-  .star-btn { border: none; background: transparent; font-size: 0.95rem; cursor: pointer; color: var(--ink-faint); padding: 2px 4px; line-height: 1; flex-shrink: 0; }
+  .star-btn { border: none; background: transparent; font-size: 0.9rem; cursor: pointer; color: var(--moss-ink); padding: 2px 4px; line-height: 1; flex-shrink: 0; }
   .star-btn:hover { color: var(--rust); }
   .star-btn:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
-  .cal-item-row input[type="text"] { flex: 1; min-width: 0; border-color: transparent; background: transparent; padding: 4px 4px; }
-  .cal-item-row input[type="text"]:hover, .cal-item-row input[type="text"]:focus { background: var(--bg-well); border-color: var(--line); }
+  .cal-item-row input[type="text"] { flex: 1; min-width: 0; border-color: transparent; background: transparent; padding: 4px 4px; font-weight: 700; font-size: 0.92rem; color: var(--moss-ink); }
+  .cal-item-row.done input[type="text"] { font-weight: 500; }
+  .cal-item-row input[type="text"]:hover, .cal-item-row input[type="text"]:focus { background: rgba(255,255,255,0.35); border-color: var(--line); }
   .cal-item-row.done input[type="text"] { color: var(--ink-faint); text-decoration: line-through; text-decoration-color: var(--ink-faint); }
+  .cal-item-row .icon-btn {
+    background: var(--bg-elevated); border-radius: 9px; width: 30px; height: 30px; display: flex;
+    align-items: center; justify-content: center; font-size: 0.8rem; flex-shrink: 0;
+  }
+  .cal-item-row .icon-btn:hover { background: var(--rust-tint); }
 
   /* ---------- Today panel ---------- */
-  .today-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 16px; }
-  .today-block { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 14px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 8px; }
-  .today-block h3 { font-family: 'Noto Sans KR', sans-serif; font-size: 0.92rem; font-weight: 700; padding-bottom: 8px; border-bottom: 1px solid var(--line-soft); margin: 0 0 2px; }
-  #memoBox { width: 100%; min-height: 130px; resize: vertical; font-family: inherit; font-size: 0.85rem; color: var(--ink); background: var(--bg-well); border: 1px solid var(--line); border-radius: 8px; padding: 8px; line-height: 1.55; }
+  .today-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 10px; }
+  .today-block { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 12px; padding: 10px; box-shadow: var(--shadow); display: flex; flex-direction: column; gap: 5px; }
+  .today-block h3 { font-family: 'Noto Sans KR', sans-serif; font-size: 0.88rem; font-weight: 700; padding-bottom: 5px; border-bottom: 1px solid var(--line-soft); margin: 0 0 1px; }
+  #memoBox { width: 100%; min-height: 96px; resize: vertical; font-family: inherit; font-size: 0.85rem; color: var(--ink); background: var(--bg-well); border: 1px solid var(--line); border-radius: 8px; padding: 7px; line-height: 1.5; }
   #memoBox:focus { outline: 2px solid var(--ring); outline-offset: 1px; }
   #todayScheduleList { min-height: 24px; }
 
-  .foot { text-align: center; padding-top: 12px; border-top: 1px solid var(--line-soft); display: flex; flex-direction: column; gap: 4px; }
-  .foot p { font-family: 'Gowun Batang', serif; color: var(--ink-faint); font-size: 0.9rem; letter-spacing: 0.02em; margin: 0; }
+  .foot { text-align: center; padding-top: 8px; border-top: 1px solid var(--line-soft); display: flex; flex-direction: column; gap: 3px; }
+  .foot p { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; color: var(--ink-faint); font-size: 0.86rem; letter-spacing: 0.01em; margin: 0; }
   .foot .fine { font-family: 'Noto Sans KR', sans-serif; font-size: 0.74rem; color: var(--ink-faint); }
 
   [hidden] { display: none !important; }
@@ -584,75 +635,93 @@
   <!-- ============ VIEW MODE ============ -->
   <div id="viewMode">
 
-    <section aria-label="오늘">
-      <div class="section-head"><h2>오늘</h2></div>
-      <p class="section-note">여기도 수정 모드 없이 바로 쓰면 돼요.</p>
-      <div class="today-grid">
-        <div class="today-block">
-          <h3>오늘 할 일</h3>
-          <div class="idea-items" id="todoItems"></div>
-          <div class="idea-add">
-            <input type="text" id="todoAddInput" placeholder="할 일 추가…">
-            <button type="button" id="todoAddBtn">추가</button>
+    <div class="swipe-dots" id="swipeDots">
+      <button type="button" class="swipe-dot" data-page="0">TODAY</button>
+      <button type="button" class="swipe-dot" data-page="1">CALENDAR</button>
+      <button type="button" class="swipe-dot" data-page="2">WEEKLY</button>
+      <button type="button" class="swipe-dot" data-page="3">PRIORITIES</button>
+    </div>
+
+    <div class="swipe-container" id="swipeContainer">
+
+      <div class="swipe-page">
+        <section aria-label="오늘">
+          <div class="section-head"><h2>Today</h2></div>
+          <p class="section-note">여기도 수정 모드 없이 바로 쓰면 돼요.</p>
+          <div class="today-grid">
+            <div class="today-block">
+              <h3>오늘 할 일</h3>
+              <div class="idea-items" id="todoItems"></div>
+              <div class="idea-add">
+                <input type="text" id="todoAddInput" placeholder="할 일 추가…">
+                <button type="button" id="todoAddBtn">추가</button>
+              </div>
+            </div>
+            <div class="today-block">
+              <h3>오늘 스케줄</h3>
+              <ul class="blocks" id="todayScheduleList"></ul>
+            </div>
+            <div class="today-block">
+              <h3>메모</h3>
+              <textarea id="memoBox" rows="6" placeholder="자유롭게 메모하세요…"></textarea>
+            </div>
           </div>
-        </div>
-        <div class="today-block">
-          <h3>오늘 스케줄</h3>
-          <ul class="blocks" id="todayScheduleList"></ul>
-        </div>
-        <div class="today-block">
-          <h3>메모</h3>
-          <textarea id="memoBox" rows="6" placeholder="자유롭게 메모하세요…"></textarea>
-        </div>
+        </section>
       </div>
-    </section>
 
-    <section aria-label="달력">
-      <div class="section-head"><h2>달력</h2></div>
-      <p class="section-note">날짜를 눌러서 그날 일정을 적고, 중요한 건 ☆를 눌러 표시하세요. 여긴 수정 모드 없이 바로 쓰면 돼요.</p>
-      <div class="cal-card">
-        <div class="cal-head">
-          <h3 id="calMonthLabel">2026년 1월</h3>
-          <div class="cal-nav">
-            <button type="button" id="calPrevBtn" title="이전 달">◀</button>
-            <button type="button" id="calTodayBtn" class="cal-today-btn">오늘</button>
-            <button type="button" id="calNextBtn" title="다음 달">▶</button>
+      <div class="swipe-page">
+        <section aria-label="달력">
+          <div class="section-head"><h2>Calendar</h2></div>
+          <p class="section-note">날짜를 눌러서 그날 일정을 적고, 중요한 건 ☆를 눌러 표시하세요. 여긴 수정 모드 없이 바로 쓰면 돼요.</p>
+          <div class="cal-card">
+            <div class="cal-head">
+              <h3 id="calMonthLabel">2026년 1월</h3>
+              <div class="cal-nav">
+                <button type="button" id="calPrevBtn" title="이전 달">◀</button>
+                <button type="button" id="calTodayBtn" class="cal-today-btn">오늘</button>
+                <button type="button" id="calNextBtn" title="다음 달">▶</button>
+              </div>
+            </div>
+            <div class="cal-scroll">
+              <div class="cal-dow-row">
+                <span class="cal-dow">M</span><span class="cal-dow">T</span><span class="cal-dow">W</span><span class="cal-dow">T</span><span class="cal-dow">F</span><span class="cal-dow">S</span><span class="cal-dow">S</span>
+              </div>
+              <div class="cal-grid" id="calGrid"></div>
+            </div>
+            <div class="cal-detail" id="calDetail"></div>
           </div>
-        </div>
-        <div class="cal-scroll">
-          <div class="cal-dow-row">
-            <span class="cal-dow">일</span><span class="cal-dow">월</span><span class="cal-dow">화</span><span class="cal-dow">수</span><span class="cal-dow">목</span><span class="cal-dow">금</span><span class="cal-dow">토</span>
+        </section>
+      </div>
+
+      <div class="swipe-page">
+        <section aria-label="주간 시간표">
+          <div class="section-head"><h2>Weekly Schedule</h2></div>
+          <div class="legend">
+            <span><i class="edu"></i>교육</span>
+            <span><i class="plan"></i>기획</span>
+            <span><i class="bouquet"></i>부케</span>
+            <span><i class="personal"></i>개인</span>
+            <span><i class="locked"></i>고정 수업</span>
           </div>
-          <div class="cal-grid" id="calGrid"></div>
-        </div>
-        <div class="cal-detail" id="calDetail"></div>
+          <div class="week-grid" id="viewWeekGrid"></div>
+        </section>
       </div>
-    </section>
 
-    <section aria-label="주간 시간표">
-      <div class="section-head"><h2>주간 시간표</h2></div>
-      <div class="legend">
-        <span><i class="edu"></i>교육</span>
-        <span><i class="plan"></i>기획</span>
-        <span><i class="bouquet"></i>부케</span>
-        <span><i class="personal"></i>개인</span>
-        <span><i class="locked"></i>고정 수업</span>
+      <div class="swipe-page">
+        <section aria-label="이번 주 우선순위">
+          <div class="section-head"><h2>This Week's Priorities</h2></div>
+          <p class="section-note">숫자는 실행 순서예요. 시간이 부족하면 01부터 채우세요.</p>
+          <ol class="vpriority-list" id="viewPriorityList"></ol>
+        </section>
+
+        <section aria-label="콘텐츠 체크리스트">
+          <div class="section-head"><h2>콘텐츠 체크리스트</h2></div>
+          <p class="section-note">체크하면 완료로 표시돼요. 항목을 추가·삭제하려면 수정 모드로 가세요.</p>
+          <div class="videa-groups" id="viewChecklistGroups"></div>
+        </section>
       </div>
-      <div class="week-grid" id="viewWeekGrid"></div>
-    </section>
 
-    <section aria-label="이번 주 우선순위">
-      <div class="section-head"><h2>이번 주 우선순위</h2></div>
-      <p class="section-note">숫자는 실행 순서예요. 시간이 부족하면 01부터 채우세요.</p>
-      <ol class="vpriority-list" id="viewPriorityList"></ol>
-    </section>
-
-    <section aria-label="콘텐츠 체크리스트">
-      <div class="section-head"><h2>콘텐츠 체크리스트</h2></div>
-      <p class="section-note">체크하면 완료로 표시돼요. 항목을 추가·삭제하려면 수정 모드로 가세요.</p>
-      <div class="videa-groups" id="viewChecklistGroups"></div>
-    </section>
-
+    </div>
   </div>
 
   <!-- ============ EDIT MODE ============ -->
@@ -711,6 +780,7 @@
 <script>
 (function () {
   var DAYS = ['월','화','수','목','금','토','일'];
+  var DAY_EN = { '월': 'MON', '화': 'TUE', '수': 'WED', '목': 'THU', '금': 'FRI', '토': 'SAT', '일': 'SUN' };
   var CATS = ['교육','기획','부케','개인'];
   function dayIdx(d) { var i = DAYS.indexOf(d); return i < 0 ? 0 : i; }
   function toMin(hhmm) { var p = (hhmm || '00:00').split(':'); return (parseInt(p[0],10)||0) * 60 + (parseInt(p[1],10)||0); }
@@ -984,7 +1054,7 @@
         '</li>';
       }).join('') : '<li class="empty-note">고정 수업 없음</li>';
       return '<article class="day-card" data-wd="' + day + '">' +
-        '<div class="day-head"><h3>' + day + '요일</h3><span class="today-tag">오늘</span></div>' +
+        '<div class="day-head"><h3>' + DAY_EN[day] + '</h3><span class="today-tag">오늘</span></div>' +
         '<ul class="blocks">' + rowsHtml + '</ul>' +
         '<button class="add-row-btn" data-action="add-fixed" data-day="' + day + '">+ 고정 수업 추가</button>' +
       '</article>';
@@ -1086,7 +1156,7 @@
         '</li>';
       }).join('') : '<li class="empty-note">일정 없음</li>';
       return '<article class="day-card" data-wd="' + day + '">' +
-        '<div class="day-head"><h3>' + day + '요일</h3><span class="today-tag">오늘</span></div>' +
+        '<div class="day-head"><h3>' + DAY_EN[day] + '</h3><span class="today-tag">오늘</span></div>' +
         '<ul class="blocks">' + rowsHtml + '</ul>' +
         '<button class="add-row-btn" data-action="add-open" data-day="' + day + '">+ 일정 추가</button>' +
       '</article>';
@@ -1109,7 +1179,7 @@
         return '<li class="vblock ' + cls + '"><span class="t">' + esc(it.start) + '–' + esc(it.end) + '</span><span class="d">' + esc(it.label) + '</span></li>';
       }).join('') : '<li class="empty-note">일정 없음</li>';
       return '<article class="day-card" data-wd="' + day + '">' +
-        '<div class="day-head"><h3>' + day + '요일</h3><span class="today-tag">오늘</span></div>' +
+        '<div class="day-head"><h3>' + DAY_EN[day] + '</h3><span class="today-tag">오늘</span></div>' +
         '<ul class="blocks">' + rowsHtml + '</ul>' +
       '</article>';
     }).join('');
@@ -1318,6 +1388,8 @@
 
   // ================= CALENDAR =================
   var DOW_KR = ['일', '월', '화', '수', '목', '금', '토'];
+  var DOW_EN = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
+  var MONTH_EN = ['JANUARY', 'FEBRUARY', 'MARCH', 'APRIL', 'MAY', 'JUNE', 'JULY', 'AUGUST', 'SEPTEMBER', 'OCTOBER', 'NOVEMBER', 'DECEMBER'];
   function pad2(n) { return String(n).padStart(2, '0'); }
   function fmtDate(y, m, d) { return y + '-' + pad2(m + 1) + '-' + pad2(d); }
   function parseDateStr(s) { var p = s.split('-').map(Number); return { y: p[0], m: p[1] - 1, d: p[2] }; }
@@ -1391,9 +1463,9 @@
 
   function renderCalendar() {
     var y = calView.getFullYear(), m = calView.getMonth();
-    calMonthLabel.textContent = y + '년 ' + (m + 1) + '월';
+    calMonthLabel.textContent = MONTH_EN[m] + ' ' + y;
 
-    var firstDow = new Date(y, m, 1).getDay();
+    var firstDow = (new Date(y, m, 1).getDay() + 6) % 7; // Monday-start (0 = Mon)
     var daysInMonth = new Date(y, m + 1, 0).getDate();
     var daysInPrev = new Date(y, m, 0).getDate();
     var cells = [];
@@ -1414,24 +1486,16 @@
       var dateStr = fmtDate(c.y, c.m, c.d);
       var dow = new Date(c.y, c.m, c.d).getDay();
       var dayLabel = DOW_KR[dow];
-      var dots = recurringCatsForDay(dayLabel).map(function (cat) {
-        return '<span class="cal-dot ' + (cat === 'locked' ? 'locked' : 'cat-' + cat) + '"></span>';
-      }).join('');
+      var hasFixed = recurringCatsForDay(dayLabel).length > 0;
       var evts = calEventsFor(dateStr);
-      var visible = evts.slice(0, 2).map(function (e) {
-        return '<span class="cal-pill' + (e.important ? ' important' : '') + (e.done ? ' done' : '') + '">' + (e.important ? '★ ' : '') + esc(e.text) + '</span>';
-      }).join('');
-      var more = evts.length > 2 ? '<span class="cal-more">+' + (evts.length - 2) + '</span>' : '';
-      var hasImportantPending = evts.some(function (e) { return e.important && !e.done; });
+      var hasMarker = hasFixed || evts.length > 0;
       var cls = 'cal-cell' +
         (c.other ? ' other-month' : '') +
         (dateStr === todayStr ? ' today' : '') +
-        (dateStr === selectedDate ? ' selected' : '') +
-        (hasImportantPending ? ' has-important' : '');
+        (dateStr === selectedDate ? ' selected' : '');
       return '<button type="button" class="' + cls + '" data-date="' + dateStr + '">' +
         '<span class="cal-date">' + c.d + '</span>' +
-        '<span class="cal-dots">' + dots + '</span>' +
-        '<span class="cal-events">' + visible + more + '</span>' +
+        (hasMarker ? '<span class="cal-dot-mark"></span>' : '') +
       '</button>';
     }).join('');
 
@@ -1441,7 +1505,7 @@
   function renderCalDetail() {
     var p = parseDateStr(selectedDate);
     var dow = new Date(p.y, p.m, p.d).getDay();
-    var heading = (p.m + 1) + '월 ' + p.d + '일 (' + DOW_KR[dow] + ')' + (selectedDate === todayStr ? ' · 오늘' : '');
+    var isToday = selectedDate === todayStr;
     var evts = calEventsFor(selectedDate);
     var itemsHtml = evts.length ? evts.map(function (e) {
       return '<div class="cal-item-row' + (e.done ? ' done' : '') + '" data-id="' + esc(e.id) + '">' +
@@ -1452,11 +1516,16 @@
       '</div>';
     }).join('') : '<p class="empty-note">이 날짜엔 일정이 없어요.</p>';
 
-    calDetail.innerHTML = '<h3>' + heading + '</h3>' +
-      '<div class="cal-detail-items">' + itemsHtml + '</div>' +
-      '<div class="idea-add">' +
-        '<input type="text" id="calAddInput" placeholder="이 날짜에 일정 추가…">' +
-        '<button type="button" id="calAddBtn">추가</button>' +
+    calDetail.innerHTML =
+      '<div class="cal-day-group">' +
+        '<div class="cal-day-badge' + (isToday ? ' is-today' : '') + '"><div class="dow">' + DOW_EN[dow] + '</div><div class="num">' + p.d + '</div></div>' +
+        '<div class="cal-day-cards">' +
+          '<div class="cal-detail-items">' + itemsHtml + '</div>' +
+          '<div class="idea-add">' +
+            '<input type="text" id="calAddInput" placeholder="이 날짜에 일정 추가…">' +
+            '<button type="button" id="calAddBtn">추가</button>' +
+          '</div>' +
+        '</div>' +
       '</div>';
   }
 
@@ -1483,6 +1552,39 @@
       navigator.serviceWorker.register('sw.js').catch(function () {});
     });
   }
+</script>
+<script>
+(function () {
+  'use strict';
+  var container = document.getElementById('swipeContainer');
+  var dotsWrap = document.getElementById('swipeDots');
+  if (!container || !dotsWrap) return;
+  var dots = Array.prototype.slice.call(dotsWrap.querySelectorAll('.swipe-dot'));
+  var pages = Array.prototype.slice.call(container.querySelectorAll('.swipe-page'));
+  if (!dots.length || !pages.length) return;
+
+  function setActive(idx) {
+    dots.forEach(function (d, i) { d.classList.toggle('active', i === idx); });
+  }
+  dots.forEach(function (d, i) {
+    d.addEventListener('click', function () {
+      if (pages[i] && pages[i].scrollIntoView) {
+        pages[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+      }
+    });
+  });
+  var scrollTimer = null;
+  container.addEventListener('scroll', function () {
+    if (scrollTimer) clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(function () {
+      var w = container.clientWidth || 1;
+      var idx = Math.round(container.scrollLeft / w);
+      idx = Math.max(0, Math.min(pages.length - 1, idx));
+      setActive(idx);
+    }, 60);
+  }, { passive: true });
+  setActive(0);
+})();
 </script>
 </body>
 </html>
