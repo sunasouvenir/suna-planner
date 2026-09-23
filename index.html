@@ -234,21 +234,24 @@
   .vblock.cat-부케 { --accent: var(--clay); --tint: var(--clay-tint); }
   .vblock.cat-개인 { --accent: var(--mustard); --tint: var(--mustard-tint); }
   .vblock.locked { background-color: var(--locked-bg); background-image: repeating-linear-gradient(135deg, rgba(140,130,103,0.16) 0 2px, transparent 2px 7px); color: var(--locked-ink); }
+  .vblock.gap { background: transparent; border: 1.5px dashed var(--ink-faint); padding: 7.5px 8.5px 7.5px 10.5px; }
   .vblock .t { font-variant-numeric: tabular-nums; font-weight: 500; font-size: 0.72rem; color: var(--ink-faint); flex-shrink: 0; white-space: nowrap; }
   .vblock.locked .t, .vblock.locked .d { color: var(--locked-ink); }
+  .vblock.gap .t { color: var(--ink-faint); }
   .vblock .d { color: var(--accent, var(--moss)); font-weight: 700; font-size: 0.86rem; }
   .vblock.locked .d { font-weight: 700; }
+  .vblock.gap .d { color: var(--ink-soft); font-weight: 700; }
 
   /* ---------- VIEW MODE: priorities ---------- */
   .vpriority-list { list-style: none; margin: 10px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 8px; }
-  .vpriority { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 12px; padding: 11px 12px 11px 11px; display: flex; gap: 9px; box-shadow: var(--shadow); border-left: 4px solid var(--accent, var(--moss)); }
-  .vpriority.cat-교육 { --accent: var(--moss); }
-  .vpriority.cat-기획 { --accent: var(--rust); }
-  .vpriority.cat-부케 { --accent: var(--clay); }
-  .vpriority.cat-개인 { --accent: var(--mustard); }
-  .vpriority .p-num { font-family: 'Noto Sans KR', sans-serif; font-weight: 700; font-size: 1.2rem; color: var(--accent, var(--moss)); line-height: 1; flex-shrink: 0; }
-  .vpriority h3 { font-size: 0.94rem; margin-bottom: 3px; }
-  .vpriority p { margin: 0; font-size: 0.84rem; color: var(--ink-soft); }
+  .vpriority { background: var(--tint, var(--moss-tint)); border: none; box-shadow: none; border-radius: 12px; padding: 11px 12px 11px 14px; display: flex; gap: 10px; align-items: flex-start; }
+  .vpriority.cat-교육 { --accent: var(--moss); --tint: var(--moss-tint); }
+  .vpriority.cat-기획 { --accent: var(--rust); --tint: var(--rust-tint); }
+  .vpriority.cat-부케 { --accent: var(--clay); --tint: var(--clay-tint); }
+  .vpriority.cat-개인 { --accent: var(--mustard); --tint: var(--mustard-tint); }
+  .vpriority .p-num { font-family: 'Noto Sans KR', sans-serif; font-weight: 800; font-size: 1.15rem; color: var(--accent, var(--moss)); line-height: 1.3; flex-shrink: 0; }
+  .vpriority h3 { font-size: 0.92rem; margin-bottom: 3px; color: var(--accent, var(--moss)); font-weight: 700; }
+  .vpriority p { margin: 0; font-size: 0.82rem; color: var(--ink-soft); }
 
   /* ---------- VIEW MODE: checklist ---------- */
   .videa-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 10px; }
@@ -347,11 +350,11 @@
   .cal-scroll { overflow-x: visible; }
   .cal-dow-row { display: grid; grid-template-columns: repeat(7, 1fr); margin-bottom: 6px; }
   .cal-dow { text-align: center; font-size: 0.68rem; color: var(--ink-faint); font-weight: 700; padding: 2px 0; }
-  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 15px; column-gap: 0; }
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); row-gap: 6px; column-gap: 0; }
   .cal-cell {
-    border: none; background: none; padding: 0; border-radius: 50%;
-    height: 30px; display: flex; align-items: center; justify-content: center; cursor: pointer;
-    font-family: inherit; color: var(--ink); position: relative;
+    border: none; background: none; padding: 2px 1px 4px; border-radius: 10px;
+    min-height: 30px; display: flex; flex-direction: column; align-items: center; justify-content: flex-start; gap: 1px;
+    cursor: pointer; font-family: inherit; color: var(--ink); position: relative; overflow: hidden;
   }
   .cal-cell:hover .cal-date { color: var(--moss-ink); }
   .cal-cell:focus-visible { outline: 2px solid var(--ring); outline-offset: 1px; }
@@ -363,13 +366,17 @@
   .cal-cell.selected:not(.today) .cal-date { box-shadow: 0 0 0 2px var(--ring); border-radius: 50%; }
   .cal-date {
     font-size: 0.84rem; font-weight: 700; font-variant-numeric: tabular-nums;
-    width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
   }
-  .cal-dot-mark {
-    position: absolute; bottom: -1px; left: 50%; transform: translateX(-50%);
-    width: 4px; height: 4px; border-radius: 50%; background: var(--ink-faint);
+  .cal-mini { display: flex; align-items: center; gap: 2px; max-width: 100%; }
+  .cal-mini-multi { flex-wrap: wrap; justify-content: center; row-gap: 2px; max-width: 26px; }
+  .cal-mini-stack { display: flex; flex-direction: column; align-items: center; gap: 1px; max-width: 100%; }
+  .cal-mini-dots { display: flex; align-items: center; justify-content: center; gap: 2px; flex-wrap: wrap; max-width: 26px; }
+  .cal-mini-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--mustard); flex-shrink: 0; }
+  .cal-mini-text {
+    font-size: 0.52rem; color: var(--ink-faint); white-space: nowrap; overflow: hidden;
+    text-overflow: ellipsis; max-width: 100%; line-height: 1.2;
   }
-  .cal-cell.today .cal-dot-mark { background: var(--mustard); }
 
   .cal-detail { margin-top: 12px; border-top: 1px solid var(--line-soft); padding-top: 14px; }
   .cal-day-group { display: flex; gap: 12px; }
@@ -650,19 +657,19 @@
           <p class="section-note">여기도 수정 모드 없이 바로 쓰면 돼요.</p>
           <div class="today-grid">
             <div class="today-block">
-              <h3>오늘 할 일</h3>
-              <div class="idea-items" id="todoItems"></div>
+              <h3>To-do</h3>
+              <div class="cal-detail-items" id="todayCalList"></div>
               <div class="idea-add">
-                <input type="text" id="todoAddInput" placeholder="할 일 추가…">
-                <button type="button" id="todoAddBtn">추가</button>
+                <input type="text" id="todayCalAddInput" placeholder="오늘 일정 추가…">
+                <button type="button" id="todayCalAddBtn">추가</button>
               </div>
             </div>
             <div class="today-block">
-              <h3>오늘 스케줄</h3>
+              <h3>Schedule</h3>
               <ul class="blocks" id="todayScheduleList"></ul>
             </div>
             <div class="today-block">
-              <h3>메모</h3>
+              <h3>Memo</h3>
               <textarea id="memoBox" rows="6" placeholder="자유롭게 메모하세요…"></textarea>
             </div>
           </div>
@@ -789,7 +796,7 @@
   function uid(p) { return p + Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
 
   // 하루 영업시간(분 단위) — 이 범위 안에서 고정 수업/유지 항목을 뺀 빈 시간을 찾아 채웁니다.
-  var DAY_WINDOW = { '월': [540, 1200], '화': [540, 1200], '수': [540, 1200], '목': [540, 1200], '금': [540, 1200], '토': [600, 1020], '일': [600, 720] };
+  var DAY_WINDOW = { '월': [540, 1380], '화': [540, 1380], '수': [540, 1380], '목': [540, 1380], '금': [540, 1380], '토': [540, 1380], '일': [540, 1380] };
   function minToHHMM(min) { min = Math.max(0, Math.round(min)); var h = Math.floor(min / 60), m = min % 60; return (h < 10 ? '0' : '') + h + ':' + (m < 10 ? '0' : '') + m; }
   function computeDayGaps(day, busyItems) {
     var win = DAY_WINDOW[day] || [540, 1200];
@@ -814,6 +821,14 @@
     while (end - start > maxLen * 1.4) { chunks.push([start, start + maxLen]); start += maxLen; }
     chunks.push([start, end]);
     return chunks;
+  }
+  // 보기 화면에 표시할 때, 하루 일정 사이에 남는 시간이 있으면 "공백" 칸을 끼워 넣습니다 (실제 데이터로 저장하지는 않아요).
+  function withGaps(day, items) {
+    var gaps = computeDayGaps(day, items);
+    var gapItems = gaps.map(function (g) {
+      return { start: minToHHMM(g[0]), end: minToHHMM(g[1]), label: '공백', locked: false, category: 'gap' };
+    });
+    return items.concat(gapItems).sort(function (a, b) { return toMin(a.start) - toMin(b.start); });
   }
 
   // ---------------- default seed data ----------------
@@ -1039,7 +1054,7 @@
 
   function renderFixedGrid() {
     var byDay = {}; DAYS.forEach(function (d) { byDay[d] = []; });
-    state.fixed.slice().sort(function (a, b) { return (a.sortKey || 0) - (b.sortKey || 0); }).forEach(function (it) { if (byDay[it.day]) byDay[it.day].push(it); });
+    state.fixed.slice().sort(function (a, b) { return toMin(a.start) - toMin(b.start); }).forEach(function (it) { if (byDay[it.day]) byDay[it.day].push(it); });
     fixedGrid.innerHTML = DAYS.map(function (day) {
       var rows = byDay[day];
       var rowsHtml = rows.length ? rows.map(function (it) {
@@ -1134,7 +1149,7 @@
 
   function renderOpenGrid() {
     var byDay = {}; DAYS.forEach(function (d) { byDay[d] = []; });
-    state.open.slice().sort(function (a, b) { return (a.sortKey || 0) - (b.sortKey || 0); }).forEach(function (it) { if (byDay[it.day]) byDay[it.day].push(it); });
+    state.open.slice().sort(function (a, b) { return toMin(a.start) - toMin(b.start); }).forEach(function (it) { if (byDay[it.day]) byDay[it.day].push(it); });
     openGrid.innerHTML = DAYS.map(function (day) {
       var rows = byDay[day];
       var rowsHtml = rows.length ? rows.map(function (it) {
@@ -1170,13 +1185,14 @@
     var byDay = {}; DAYS.forEach(function (d) { byDay[d] = []; });
     state.fixed.forEach(function (it) { if (byDay[it.day]) byDay[it.day].push(Object.assign({}, it, { locked: true })); });
     state.open.forEach(function (it) { if (byDay[it.day]) byDay[it.day].push(Object.assign({}, it, { locked: false })); });
-    Object.keys(byDay).forEach(function (d) { byDay[d].sort(function (a, b) { return (a.sortKey || 0) - (b.sortKey || 0); }); });
+    Object.keys(byDay).forEach(function (d) { byDay[d] = withGaps(d, byDay[d]); });
 
     grid.innerHTML = DAYS.map(function (day) {
       var rows = byDay[day];
       var rowsHtml = rows.length ? rows.map(function (it) {
-        var cls = it.locked ? 'locked' : ('cat-' + (CATS.indexOf(it.category) >= 0 ? it.category : '개인'));
-        return '<li class="vblock ' + cls + '"><span class="t">' + esc(it.start) + '–' + esc(it.end) + '</span><span class="d">' + esc(it.label) + '</span></li>';
+        var cls = it.locked ? 'locked' : (it.category === 'gap' ? 'gap' : ('cat-' + (CATS.indexOf(it.category) >= 0 ? it.category : '개인')));
+        var label = (it.category === 'gap' ? '✓ ' : '') + esc(it.label);
+        return '<li class="vblock ' + cls + '"><span class="t">' + esc(it.start) + '–' + esc(it.end) + '</span><span class="d">' + label + '</span></li>';
       }).join('') : '<li class="empty-note">일정 없음</li>';
       return '<article class="day-card" data-wd="' + day + '">' +
         '<div class="day-head"><h3>' + DAY_EN[day] + '</h3><span class="today-tag">오늘</span></div>' +
@@ -1323,42 +1339,6 @@
     });
   }
 
-  // ================= TODAY: quick todos =================
-  var todoItemsWrap = document.getElementById('todoItems');
-  wireFieldChanges(todoItemsWrap, function (id, field, value) { var p = {}; p[field] = value; updateItem('todos', id, p); });
-  wireDelete(todoItemsWrap, function (id) { deleteItem('todos', id); });
-  todoItemsWrap.addEventListener('click', function (e) {
-    var star = e.target.closest('[data-action="star"]');
-    if (!star) return;
-    var id = star.getAttribute('data-id');
-    var it = state.todos.find(function (x) { return x.id === id; });
-    if (it) updateItem('todos', id, { important: !it.important });
-  });
-  document.getElementById('todoAddBtn').addEventListener('click', function () {
-    var input = document.getElementById('todoAddInput');
-    var text = (input.value || '').trim();
-    if (!text) return;
-    var maxTs = state.todos.reduce(function (m, it) { return Math.max(m, it.ts || 0); }, 0);
-    addItem('todos', { text: text, done: false, important: false, ts: maxTs + 1 });
-    input.value = '';
-  });
-  document.getElementById('todoAddInput').addEventListener('keydown', function (e) {
-    if (e.key === 'Enter') { e.preventDefault(); document.getElementById('todoAddBtn').click(); }
-  });
-
-  function renderTodos() {
-    var items = state.todos.slice().sort(function (a, b) { return (a.ts || 0) - (b.ts || 0); });
-    todoItemsWrap.innerHTML = items.length ? items.map(function (it) {
-      var cls = 'idea-row' + (it.done ? ' done' : '') + (it.important ? ' important' : '');
-      return '<div class="' + cls + '" data-id="' + esc(it.id) + '">' +
-        '<input type="checkbox" data-field="done" title="완료" ' + (it.done ? 'checked' : '') + '>' +
-        '<button type="button" class="star-btn" data-action="star" data-id="' + esc(it.id) + '" title="중요 표시">' + (it.important ? '★' : '☆') + '</button>' +
-        '<input type="text" data-field="text" value="' + esc(it.text) + '">' +
-        '<button type="button" class="icon-btn" data-action="delete" data-id="' + esc(it.id) + '" title="삭제">✕</button>' +
-      '</div>';
-    }).join('') : '<p class="empty-note">오늘 할 일이 없어요.</p>';
-  }
-
   // ================= TODAY: schedule glance =================
   function renderTodaySchedule() {
     var list = document.getElementById('todayScheduleList');
@@ -1367,11 +1347,12 @@
     if (todayLabel) {
       state.fixed.forEach(function (it) { if (it.day === todayLabel) items.push(Object.assign({}, it, { locked: true })); });
       state.open.forEach(function (it) { if (it.day === todayLabel) items.push(Object.assign({}, it, { locked: false })); });
-      items.sort(function (a, b) { return (a.sortKey || 0) - (b.sortKey || 0); });
+      items = withGaps(todayLabel, items);
     }
     list.innerHTML = items.length ? items.map(function (it) {
-      var cls = it.locked ? 'locked' : ('cat-' + (CATS.indexOf(it.category) >= 0 ? it.category : '개인'));
-      return '<li class="vblock ' + cls + '"><span class="t">' + esc(it.start) + '–' + esc(it.end) + '</span><span class="d">' + esc(it.label) + '</span></li>';
+      var cls = it.locked ? 'locked' : (it.category === 'gap' ? 'gap' : ('cat-' + (CATS.indexOf(it.category) >= 0 ? it.category : '개인')));
+      var label = (it.category === 'gap' ? '✓ ' : '') + esc(it.label);
+      return '<li class="vblock ' + cls + '"><span class="t">' + esc(it.start) + '–' + esc(it.end) + '</span><span class="d">' + label + '</span></li>';
     }).join('') : '<li class="empty-note">오늘은 등록된 일정이 없어요.</li>';
   }
 
@@ -1414,6 +1395,15 @@
   function calEventsFor(dateStr) {
     return state.calendar.filter(function (e) { return e.date === dateStr; })
       .sort(function (a, b) { return (b.important - a.important) || ((a.ts || 0) - (b.ts || 0)); });
+  }
+
+  function calItemRowHTML(e) {
+    return '<div class="cal-item-row' + (e.done ? ' done' : '') + '" data-id="' + esc(e.id) + '">' +
+      '<input type="checkbox" data-field="done" ' + (e.done ? 'checked' : '') + '>' +
+      '<button type="button" class="star-btn" data-action="star" data-id="' + esc(e.id) + '" title="중요 표시">' + (e.important ? '★' : '☆') + '</button>' +
+      '<input type="text" data-field="text" value="' + esc(e.text) + '">' +
+      '<button type="button" class="icon-btn" data-action="delete" data-id="' + esc(e.id) + '" title="삭제">✕</button>' +
+    '</div>';
   }
 
   var calGrid = document.getElementById('calGrid');
@@ -1461,6 +1451,35 @@
     }
   });
 
+  // ================= TODAY: today's calendar events (mirrors calendar page for today) =================
+  var todayCalList = document.getElementById('todayCalList');
+  wireFieldChanges(todayCalList, function (id, field, value) { updateItem('calendar', id, (function () { var p = {}; p[field] = value; return p; })()); });
+  wireDelete(todayCalList, function (id) { deleteItem('calendar', id); });
+  todayCalList.addEventListener('click', function (e) {
+    var star = e.target.closest('[data-action="star"]');
+    if (star) {
+      var id = star.getAttribute('data-id');
+      var it = state.calendar.find(function (x) { return x.id === id; });
+      if (it) updateItem('calendar', id, { important: !it.important });
+    }
+  });
+  document.getElementById('todayCalAddBtn').addEventListener('click', function () {
+    var input = document.getElementById('todayCalAddInput');
+    var text = (input.value || '').trim();
+    if (!text) return;
+    var maxTs = state.calendar.reduce(function (m, it2) { return Math.max(m, it2.ts || 0); }, 0);
+    addItem('calendar', { date: todayStr, text: text, important: false, done: false, ts: maxTs + 1 });
+    input.value = '';
+  });
+  document.getElementById('todayCalAddInput').addEventListener('keydown', function (e) {
+    if (e.key === 'Enter') { e.preventDefault(); document.getElementById('todayCalAddBtn').click(); }
+  });
+
+  function renderTodayCalItems() {
+    var evts = calEventsFor(todayStr);
+    todayCalList.innerHTML = evts.length ? evts.map(calItemRowHTML).join('') : '<p class="empty-note">오늘 등록된 일정이 없어요.</p>';
+  }
+
   function renderCalendar() {
     var y = calView.getFullYear(), m = calView.getMonth();
     calMonthLabel.textContent = MONTH_EN[m] + ' ' + y;
@@ -1484,18 +1503,26 @@
 
     calGrid.innerHTML = cells.map(function (c) {
       var dateStr = fmtDate(c.y, c.m, c.d);
-      var dow = new Date(c.y, c.m, c.d).getDay();
-      var dayLabel = DOW_KR[dow];
-      var hasFixed = recurringCatsForDay(dayLabel).length > 0;
       var evts = calEventsFor(dateStr);
-      var hasMarker = hasFixed || evts.length > 0;
+      var mini = '';
+      if (evts.length === 1) {
+        mini = '<span class="cal-mini"><span class="cal-mini-dot"></span><span class="cal-mini-text">' + esc(evts[0].text) + '</span></span>';
+      } else if (evts.length > 1) {
+        var dotsHtml = '';
+        for (var k = 0; k < evts.length; k++) dotsHtml += '<span class="cal-mini-dot"></span>';
+        if (evts[0].important) {
+          mini = '<span class="cal-mini-stack"><span class="cal-mini-dots">' + dotsHtml + '</span><span class="cal-mini-text">' + esc(evts[0].text) + '</span></span>';
+        } else {
+          mini = '<span class="cal-mini cal-mini-multi">' + dotsHtml + '</span>';
+        }
+      }
       var cls = 'cal-cell' +
         (c.other ? ' other-month' : '') +
         (dateStr === todayStr ? ' today' : '') +
         (dateStr === selectedDate ? ' selected' : '');
       return '<button type="button" class="' + cls + '" data-date="' + dateStr + '">' +
         '<span class="cal-date">' + c.d + '</span>' +
-        (hasMarker ? '<span class="cal-dot-mark"></span>' : '') +
+        mini +
       '</button>';
     }).join('');
 
@@ -1507,14 +1534,7 @@
     var dow = new Date(p.y, p.m, p.d).getDay();
     var isToday = selectedDate === todayStr;
     var evts = calEventsFor(selectedDate);
-    var itemsHtml = evts.length ? evts.map(function (e) {
-      return '<div class="cal-item-row' + (e.done ? ' done' : '') + '" data-id="' + esc(e.id) + '">' +
-        '<input type="checkbox" data-field="done" ' + (e.done ? 'checked' : '') + '>' +
-        '<button type="button" class="star-btn" data-action="star" data-id="' + esc(e.id) + '" title="중요 표시">' + (e.important ? '★' : '☆') + '</button>' +
-        '<input type="text" data-field="text" value="' + esc(e.text) + '">' +
-        '<button type="button" class="icon-btn" data-action="delete" data-id="' + esc(e.id) + '" title="삭제">✕</button>' +
-      '</div>';
-    }).join('') : '<p class="empty-note">이 날짜엔 일정이 없어요.</p>';
+    var itemsHtml = evts.length ? evts.map(calItemRowHTML).join('') : '<p class="empty-note">이 날짜엔 일정이 없어요.</p>';
 
     calDetail.innerHTML =
       '<div class="cal-day-group">' +
@@ -1538,7 +1558,7 @@
     renderViewPriorities();
     renderChecklist();
     renderViewChecklist();
-    renderTodos();
+    renderTodayCalItems();
     renderTodaySchedule();
     renderCalendar();
   }
