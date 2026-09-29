@@ -410,7 +410,7 @@
   function normalize(p) {
     if (!Array.isArray(p.stages) || p.stages.length < MIN_STAGES) p.stages = PRESETS[DEFAULT_PRESET].slice();
     p.stage = Math.max(0, Math.min(p.stages.length, p.stage | 0));
-    if (!p.icon) p.icon = '🎁';
+    if (!p.icon) p.icon = '🤍';
     p.focus = p.focus === true;
     if (!p.stageDates || typeof p.stageDates !== 'object') p.stageDates = {};
     if (!Array.isArray(p.logs)) p.logs = [];
