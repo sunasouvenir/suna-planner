@@ -8,6 +8,9 @@
 <meta name="theme-color" content="#F6F6F7">
 <link rel="icon" href="icon-512.png">
 <link rel="apple-touch-icon" href="icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Arimo:wght@400;500;600;700&family=Cormorant+Garamond:wght@600;700&display=swap">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
 <script>
   // Follow the light/dark choice made in the planner (자동/라이트/다크).
@@ -66,7 +69,7 @@
   html { color-scheme: light dark; -webkit-text-size-adjust: 100%; }
   body {
     background: var(--bg); color: var(--ink);
-    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    font-family: Arimo, 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
     font-size: 12px; line-height: 1.5; letter-spacing: -0.01em; -webkit-font-smoothing: antialiased;
     -webkit-tap-highlight-color: transparent;
   }
@@ -255,6 +258,14 @@
   .dialog .ok.danger { background: var(--danger); color: #fff; }
   .dialog .cancel { background: var(--card); }
   .dialog .extra { margin-right: auto; color: var(--danger); background: none !important; padding-left: 0 !important; }
+  /* English: serif for titles only, grotesque sans (Arimo) for everything else; Korean falls back to Pretendard */
+  .ti { font-family: 'Cormorant Garamond', 'Pretendard Variable', Pretendard, serif; font-weight: 700; letter-spacing: .01em; font-variant-numeric: lining-nums; font-feature-settings: 'lnum' 1; }
+  .hero .big small, .sec-t span { font-family: Arimo, 'Pretendard Variable', Pretendard, sans-serif; letter-spacing: 0; }
+  .sec-t span { font-size: 10px; font-weight: 500; color: var(--muted); }
+  /* detail: more air between title, one-line summary and progress */
+  .oneline { margin: 16px 2px 0; }
+  .bigpct { margin: 14px 2px 6px; }
+  .oneline:not([hidden]) + .bigpct { margin-top: 22px; }
 </style>
 </head>
 <body>
@@ -265,94 +276,94 @@
   <section id="listView" hidden>
     <div class="hello">
       <div class="logo" role="img" aria-label="수나 수브니르 로고"></div>
-      <div><h1>안녕하세요, 수나 수브니르</h1><p class="muted" id="helloSub"></p></div>
+      <div><h1 class="ti">Hello, Suna Souvenir</h1><p class="muted" id="helloSub"></p></div>
       <button type="button" class="themebtn" id="themeBtn" aria-label="화면 모드 바꾸기"></button>
       <a class="round" href="index.html" title="플래너" aria-label="플래너로 가기">📅</a>
     </div>
     <div class="hero">
-      <div class="t">전체 평균 진행률</div>
-      <div class="big" id="heroPct"></div>
+      <div class="t">Overall Progress</div>
+      <div class="big ti" id="heroPct"></div>
       <div class="seg" id="heroSeg"></div>
-      <div class="btns"><button type="button" id="addBtn">＋ 새 사업</button><button type="button" id="allBtn">📋 전체 보기</button></div>
+      <div class="btns"><button type="button" id="addBtn">＋ New</button><button type="button" id="allBtn">View All</button></div>
     </div>
-    <div class="search">🔍<input id="searchInput" type="search" placeholder="사업 이름 검색" aria-label="사업 검색"><button type="button" class="f" id="filterBtn"></button></div>
+    <div class="search">🔍<input id="searchInput" type="search" placeholder="Search projects" aria-label="Search projects"><button type="button" class="f" id="filterBtn"></button></div>
     <div id="listBody"></div>
   </section>
 
   <!-- ============ DETAIL ============ -->
   <section id="detailView" hidden>
-    <div class="bar3"><a class="back" href="#/" aria-label="목록으로">←</a>사업 상세<button type="button" class="e" id="editLink">수정</button></div>
-    <div class="idrow"><div class="round box" id="dIcon"></div><div><div class="k">사업 이름</div><div class="v" id="dName"></div></div><span id="dPill"></span></div>
+    <div class="bar3"><a class="back" href="#/" aria-label="목록으로">←</a><span class="ti">Project Detail</span><button type="button" class="e" id="editLink">Edit</button></div>
+    <div class="idrow"><div class="round box" id="dIcon"></div><div><div class="k">Project</div><div class="v" id="dName"></div></div><span id="dPill"></span></div>
     <div class="oneline" id="dSummary"></div>
-    <div class="bigpct"><b id="dPct"></b><span id="dStage"></span></div>
+    <div class="bigpct"><b class="ti" id="dPct"></b><span id="dStage"></span></div>
     <div class="stepper" id="dSteps"></div>
     <p class="hint">단계를 누르면 바로 바뀌어요 · 지금 단계를 한 번 더 누르면 한 단계 뒤로</p>
-    <button type="button" class="bigbtn" id="editBtn">✏️ 수정하기</button>
+    <button type="button" class="bigbtn" id="editBtn">✏️ Edit</button>
     <div class="info">
-      <div class="t">📦 사업 정보</div>
+      <div class="t ti">Project Info</div>
       <div class="box" id="dKv"></div>
       <div class="box long" id="dLong"></div>
       <div class="thumbs" id="dThumbs"></div>
     </div>
-    <div class="tl"><div class="grab"></div><div class="ttl">📝 진행 메모</div><div id="dLogs"></div></div>
+    <div class="tl"><div class="grab"></div><div class="ttl ti">Progress Notes</div><div id="dLogs"></div></div>
   </section>
 
   <!-- ============ EDIT ============ -->
   <section id="editView" hidden>
     <div class="editbar">
       <button type="button" class="back" id="backBtn" aria-label="저장하고 나가기">←</button>
-      <span class="savechip" id="saveChip"><i></i><span id="saveText">자동 저장 중</span></span>
-      <button type="button" class="done" id="doneBtn">완료</button>
+      <span class="savechip" id="saveChip"><i></i><span id="saveText">Autosave on</span></span>
+      <button type="button" class="done" id="doneBtn">Done</button>
     </div>
 
-    <div class="lab">사업 이름</div>
+    <div class="lab">Name</div>
     <div class="name-row">
       <input class="inp" id="fName" data-key="name" placeholder="예: 압화 DIY 키트 상품 기획">
       <button type="button" class="star" id="starBtn" aria-label="지금 집중 중인 사업으로 표시" aria-pressed="false">☆</button>
     </div>
     <p class="star-hint" id="starHint">☆를 누르면 처음 화면 맨 위 "지금 집중 중인 사업"에 나와요</p>
-    <div class="lab">아이콘</div>
+    <div class="lab">Icon</div>
     <div class="icons" id="fIcons"></div>
 
-    <div class="lab">진행 단계<span>눌러서 선택 · 길게 눌러 이름 수정/삭제</span></div>
+    <div class="lab">Stage<span>눌러서 선택 · 길게 눌러 이름 수정/삭제</span></div>
     <div class="chips" id="fChips"></div>
-    <div class="links-row"><span class="k">단계 템플릿</span><span id="fPresets" style="display:contents"></span></div>
+    <div class="links-row"><span class="k">Template</span><span id="fPresets" style="display:contents"></span></div>
 
-    <div class="lab">📝 진행 상황 메모<span>기록하면 날짜·시간이 붙어요</span></div>
+    <div class="lab">Progress Note<span>기록하면 날짜·시간이 붙어요</span></div>
     <div class="memo-row">
       <textarea class="ta" id="fMemo" rows="1" placeholder="오늘 한 일을 적어주세요…"></textarea>
-      <button type="button" class="done" id="memoAddBtn">기록</button>
+      <button type="button" class="done" id="memoAddBtn">Add</button>
     </div>
     <div class="memo-list" id="fLogs" hidden></div>
 
-    <div class="lab">① 한 줄 요약</div>
+    <div class="lab">Summary</div>
     <input class="inp" id="fSummary" data-key="summary" placeholder="이 사업을 한 줄로">
-    <div class="lab">② 어디에 사용할지</div>
+    <div class="lab">Usage</div>
     <textarea class="ta" id="fUsage" data-key="usage" rows="1" placeholder="예: 스마트스토어 · 클래스 재료 · 지원사업 제출"></textarea>
-    <div class="lab">③ 사업 내용<span>길게 써도 계속 저장돼요</span></div>
+    <div class="lab">Details<span>길게 써도 계속 저장돼요</span></div>
     <div class="ta-wrap"><textarea class="ta long-ta" id="fContent" data-key="content" placeholder="사업에 대한 자세한 내용"></textarea><span class="cnt" id="fCount"></span></div>
-    <div class="lab">④ 관련 이미지</div>
+    <div class="lab">Images</div>
     <div class="thumbs" id="fThumbs"></div>
-    <div class="lab">⑤ 어디서 진행 중인지</div>
+    <div class="lab">Tools</div>
     <div class="links-row" id="fTools" style="margin-top:0"></div>
     <input class="inp" id="fToolOther" data-key="toolOther" placeholder="기타 도구·장소 (직접 입력)" style="margin-top:6px">
-    <div class="lab">저장 위치</div>
+    <div class="lab">Location</div>
     <input class="inp" id="fFile" data-key="fileLocation" placeholder="예: 노션 / 키트 기획서, 구글드라이브/사업계획서.hwp">
-    <div class="lab">링크<span>한 줄에 하나씩</span></div>
+    <div class="lab">Link<span>한 줄에 하나씩</span></div>
     <textarea class="ta" id="fLinks" data-key="links" rows="1" placeholder="https://..."></textarea>
 
     <div class="dangerzone">
-      <button type="button" class="del" id="deleteBtn">이 사업 삭제</button>
-      <button type="button" class="done" id="doneBtn2">완료</button>
+      <button type="button" class="del" id="deleteBtn">Delete project</button>
+      <button type="button" class="done" id="doneBtn2">Done</button>
     </div>
     <input type="file" id="fImgInput" accept="image/*" multiple hidden>
   </section>
 </div>
 
 <nav class="nav" id="nav" hidden>
-  <a href="#/" class="on" id="homeBtn">⌂ 홈</a>
-  <a href="index.html" aria-label="플래너">📅 플래너</a>
-  <button type="button" id="navAdd" aria-label="새 사업">＋</button>
+  <a href="#/" class="on" id="homeBtn">⌂ Home</a>
+  <a href="index.html" aria-label="Planner">📅 Planner</a>
+  <button type="button" id="navAdd" aria-label="New project">＋</button>
 </nav>
 
 <div class="lightbox" id="lightbox"><img alt=""></div>
@@ -362,8 +373,8 @@
     <input class="inp" id="dialogInput" hidden>
     <div class="acts">
       <button type="button" class="extra" id="dialogExtra" hidden></button>
-      <button type="button" class="cancel" id="dialogCancel">취소</button>
-      <button type="button" class="ok" id="dialogOk">확인</button>
+      <button type="button" class="cancel" id="dialogCancel">Cancel</button>
+      <button type="button" class="ok" id="dialogOk">OK</button>
     </div>
   </div>
 </div>
@@ -382,7 +393,8 @@
   var ICONS = ['🌿', '🌸', '✨', '🎨', '🎄', '🎁', '🤍', '🖤', '💜', '🩷', '👀', '📚', '🔎', '✏️', '📍', '⚒️', '💡', '🗒️'];
   var TOOLS = ['Claude', 'ChatGPT', '직접 작업', 'Gemini', '노션', '기타'];
   var MIN_STAGES = 2, MAX_STAGES = 10;
-  var FILTERS = ['전체', '진행 중', '완성'];
+  var FILTERS = ['All', 'In progress', 'Done'];
+  var FILTER_KO = { 'All': '전체', 'In progress': '진행 중', 'Done': '완성' };
 
   function $(id) { return document.getElementById(id); }
   function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
@@ -456,9 +468,9 @@
   function setSaveState(kind) {
     var chip = $('saveChip');
     chip.classList.remove('saving', 'error');
-    if (kind === 'saving') { chip.classList.add('saving'); $('saveText').textContent = '저장 중…'; }
-    else if (kind === 'error') { chip.classList.add('error'); $('saveText').textContent = '저장 실패'; }
-    else $('saveText').textContent = '자동 저장됨 · ' + hm(Date.now());
+    if (kind === 'saving') { chip.classList.add('saving'); $('saveText').textContent = 'Saving…'; }
+    else if (kind === 'error') { chip.classList.add('error'); $('saveText').textContent = 'Save failed'; }
+    else $('saveText').textContent = 'Saved · ' + hm(Date.now());
   }
 
   // ---------------- images (IndexedDB, falls back to inline data URLs) ----------------
@@ -531,7 +543,7 @@
       var rm = document.createElement('button');
       rm.type = 'button'; rm.className = 'rm'; rm.textContent = '✕'; rm.setAttribute('aria-label', '사진 삭제');
       rm.addEventListener('click', function () {
-        ask({ msg: '이 사진을 삭제할까요?', ok: '삭제', danger: true }, function () {
+        ask({ msg: '이 사진을 삭제할까요?', ok: 'Delete', danger: true }, function () {
           p.images = p.images.filter(function (x) { return x !== img; });
           deleteImage(img);
           touch(p); rerender();
@@ -560,9 +572,9 @@
     return t;
   }
   function pillHtml(p) {
-    if (isDone(p)) return '<span class="pill green">완성</span>';
-    if (p.stage === 0) return '<span class="pill gray">시작 전</span>';
-    return '<span class="pill blue">진행 중</span>';
+    if (isDone(p)) return '<span class="pill green">Done</span>';
+    if (p.stage === 0) return '<span class="pill gray">Not started</span>';
+    return '<span class="pill blue">In progress</span>';
   }
   function setStage(p, n) {
     var now = Date.now();
@@ -615,7 +627,7 @@
     var inp = $('dialogInput');
     inp.hidden = opts.value == null;
     inp.value = opts.value || '';
-    $('dialogOk').textContent = opts.ok || '확인';
+    $('dialogOk').textContent = opts.ok || 'OK';
     $('dialogOk').className = 'ok' + (opts.danger ? ' danger' : '');
     $('dialogExtra').hidden = !opts.extra;
     $('dialogExtra').textContent = opts.extra || '';
@@ -638,7 +650,7 @@
     var done = all.filter(isDone);
     var avg = active.length ? Math.round(active.reduce(function (s, p) { return s + pct(p); }, 0) / active.length) : (done.length ? 100 : 0);
 
-    $('helloSub').textContent = all.length ? '진행 중인 사업 ' + active.length + '개' : '첫 사업을 등록해보세요';
+    $('helloSub').textContent = all.length ? active.length + (active.length === 1 ? ' project' : ' projects') + ' in progress' : 'Add your first project';
     $('heroPct').innerHTML = avg + '%<small>진행 중 ' + active.length + ' · 완성 ' + done.length + '</small>';
     var seg = '';
     for (var i = 0; i < 6; i++) {
@@ -653,8 +665,8 @@
     var q = $('searchInput').value.trim().toLowerCase();
     var f = FILTERS[filterIdx];
     var ps = all.filter(function (p) {
-      if (f === '진행 중' && isDone(p)) return false;
-      if (f === '완성' && !isDone(p)) return false;
+      if (f === 'In progress' && isDone(p)) return false;
+      if (f === 'Done' && !isDone(p)) return false;
       if (!q) return true;
       return (p.name + ' ' + p.summary).toLowerCase().indexOf(q) >= 0;
     }).sort(function (a, b) { return b.updatedAt - a.updatedAt; });
@@ -662,33 +674,33 @@
     var body = $('listBody');
     body.innerHTML = '';
     if (!all.length) {
-      body.innerHTML = '<div class="empty">아직 등록된 사업이 없어요.<br><b>＋ 새 사업</b>을 눌러 시작해보세요.<br><span class="muted">사업계획서, 키트 상품 기획, 제작 등 무엇이든 괜찮아요.</span></div>';
+      body.innerHTML = '<div class="empty">아직 등록된 사업이 없어요.<br><b>＋ New</b>를 눌러 시작해보세요.<br><span class="muted">사업계획서, 키트 상품 기획, 제작 등 무엇이든 괜찮아요.</span></div>';
       return;
     }
     if (!ps.length) {
-      body.innerHTML = '<div class="empty">' + (q ? '"' + esc(q) + '"에 맞는 사업이 없어요.' : f + ' 사업이 없어요.') + '</div>';
+      body.innerHTML = '<div class="empty">' + (q ? '"' + esc(q) + '"에 맞는 사업이 없어요.' : FILTER_KO[f] + ' 사업이 없어요.') + '</div>';
       return;
     }
     // Projects starred in the edit screen get the big tracking card; a search shows plain results.
     var focusList = q ? [] : ps.filter(function (p) { return p.focus; });
-    if (focusList.length) body.insertAdjacentHTML('beforeend', '<div class="sec-t">지금 집중 중인 사업</div>');
+    if (focusList.length) body.insertAdjacentHTML('beforeend', '<div class="sec-t ti">Focus</div>');
     focusList.forEach(function (focus) {
       var a = document.createElement('a');
       a.className = 'focus';
       a.href = '#/p/' + focus.id;
       var where = whereList(focus);
       a.innerHTML =
-        '<div class="top"><div style="min-width:0"><div class="k">사업 이름</div><div class="name">' + esc(focus.icon) + ' ' + esc(focus.name || '이름 없는 사업') + '</div></div>' +
+        '<div class="top"><div style="min-width:0"><div class="k">Project</div><div class="name">' + esc(focus.icon) + ' ' + esc(focus.name || '이름 없는 사업') + '</div></div>' +
         '<span class="pill ' + (focus.stage ? 'blue' : 'gray') + '">' + esc(stageLabel(focus)) + '</span></div>' +
-        '<div class="meta"><div>진행 도구<b>' + esc(where.join(' · ') || '—') + '</b></div>' +
-        '<div style="text-align:right">진행률<b>' + focus.stage + ' / ' + focus.stages.length + ' · ' + pct(focus) + '%</b></div></div>' +
+        '<div class="meta"><div>Tools<b>' + esc(where.join(' · ') || '—') + '</b></div>' +
+        '<div style="text-align:right">Progress<b>' + focus.stage + ' / ' + focus.stages.length + ' · ' + pct(focus) + '%</b></div></div>' +
         '<div class="stepper"></div>';
       body.appendChild(a);
       renderStepper(a.querySelector('.stepper'), focus, false, null);
     });
     var rest = ps.filter(function (p) { return focusList.indexOf(p) < 0; });
     if (rest.length) {
-      body.insertAdjacentHTML('beforeend', '<div class="sec-t">' + (focusList.length ? '다른 사업' : q ? '검색 결과' : f === '완성' ? '완성된 사업' : '사업 목록') + '</div>');
+      body.insertAdjacentHTML('beforeend', '<div class="sec-t ti">' + (focusList.length ? 'Others' : q ? 'Search results' : f === 'Done' ? 'Done' : 'Projects') + '<span>' + rest.length + (rest.length === 1 ? ' project' : ' projects') + '</span></div>');
       rest.forEach(function (p) {
         var a = document.createElement('a');
         a.className = 'mini';
@@ -734,19 +746,19 @@
     var links = p.links.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
     function row(label, html) { return '<div class="kv"><span>' + label + '</span>' + html + '</div>'; }
     function val(v) { return v ? '<b>' + esc(v) + '</b>' : '<b class="none">—</b>'; }
-    var kv = row('② 어디에 사용', val(p.usage)) +
-      row('⑤ 진행 도구', val(where.join(' · '))) +
-      row('저장 위치', val(p.fileLocation));
+    var kv = row('Usage', val(p.usage)) +
+      row('Tools', val(where.join(' · '))) +
+      row('Location', val(p.fileLocation));
     links.forEach(function (l, i) {
       var safe = /^https?:\/\//i.test(l);
-      kv += row(i ? '' : '링크', safe
+      kv += row(i ? '' : 'Link', safe
         ? '<a href="' + esc(l) + '" target="_blank" rel="noopener">' + esc(l.replace(/^https?:\/\/(www\.)?/i, '')) + ' ↗</a>'
         : '<b>' + esc(l) + '</b>');
     });
     $('dKv').innerHTML = kv;
 
     var lg = $('dLong');
-    lg.innerHTML = '<div class="h"><span>③ 사업 내용</span><span>' + (p.content ? p.content.length + '자' : '') + '</span></div>' +
+    lg.innerHTML = '<div class="h"><span>Details</span><span>' + (p.content ? p.content.length : '') + '</span></div>' +
       (p.content ? '<div class="body' + (longOpen ? '' : ' clamp') + '">' + esc(p.content) + '</div><button type="button" class="more" hidden></button>'
                  : '<div class="body muted">아직 적지 않았어요</div>');
     var bodyEl = lg.querySelector('.body'), more = lg.querySelector('.more');
@@ -754,7 +766,7 @@
       requestAnimationFrame(function () {
         var overflowing = bodyEl.scrollHeight > bodyEl.clientHeight + 2;
         more.hidden = !(overflowing || longOpen);
-        more.textContent = longOpen ? '접기 ↑' : '전체 내용 보기 ↓';
+        more.textContent = longOpen ? 'Show less ↑' : 'Read more ↓';
       });
       more.addEventListener('click', function () { longOpen = !longOpen; renderDetail(p); });
     }
@@ -786,7 +798,7 @@
         var x = document.createElement('button');
         x.type = 'button'; x.className = 'x'; x.textContent = '✕'; x.setAttribute('aria-label', '기록 삭제');
         x.addEventListener('click', function () {
-          ask({ msg: '이 기록을 삭제할까요?', ok: '삭제', danger: true }, function () {
+          ask({ msg: '이 기록을 삭제할까요?', ok: 'Delete', danger: true }, function () {
             p.logs = p.logs.filter(function (y) { return y !== l; });
             touch(p); renderEditLogs(p);
           });
@@ -886,9 +898,9 @@
     if (p.stages.length < MAX_STAGES) {
       var add = document.createElement('button');
       add.type = 'button'; add.className = 'chip add';
-      add.textContent = '＋ 단계 추가';
+      add.textContent = '＋ Add stage';
       add.addEventListener('click', function () {
-        ask({ msg: '새 단계 이름', value: '', ok: '추가' }, function (v) {
+        ask({ msg: '새 단계 이름', value: '', ok: 'Add' }, function (v) {
           v = v.trim(); if (!v) return;
           p.stages.push(v);
           touch(p); renderChips(p);
@@ -899,7 +911,7 @@
     renderPresets(p);  // keep the template tag highlight in sync with the stage names
   }
   function renameStage(p, i) {
-    ask({ msg: (i + 1) + '단계 이름 수정', value: p.stages[i], ok: '저장', extra: p.stages.length > MIN_STAGES ? '단계 삭제' : '' },
+    ask({ msg: (i + 1) + '단계 이름 수정', value: p.stages[i], ok: 'Save', extra: p.stages.length > MIN_STAGES ? 'Delete stage' : '' },
       function (v) { v = v.trim(); if (!v) return; p.stages[i] = v; touch(p); renderChips(p); },
       function () {
         p.stages.splice(i, 1);
@@ -932,7 +944,7 @@
           touch(p); renderChips(p); renderPresets(p);
         }
         if (p.stage === 0) apply();
-        else ask({ msg: '단계 이름을 "' + name + '" 템플릿으로 바꿀까요? 현재 진행 위치(' + p.stage + '단계)는 유지돼요.', ok: '바꾸기' }, apply);
+        else ask({ msg: '단계 이름을 "' + name + '" 템플릿으로 바꿀까요? 현재 진행 위치(' + p.stage + '단계)는 유지돼요.', ok: 'Apply' }, apply);
       });
       wrap.appendChild(b);
     });
@@ -1004,7 +1016,7 @@
     renderEditLogs(p);
     updateCount();
     $('saveChip').classList.remove('saving', 'error');
-    $('saveText').textContent = '적는 대로 자동 저장돼요';
+    $('saveText').textContent = 'Autosave on';
     requestAnimationFrame(function () {
       Array.prototype.forEach.call(document.querySelectorAll('#editView textarea'), autoGrow);
     });
@@ -1022,7 +1034,7 @@
   $('deleteBtn').addEventListener('click', function () {
     var p = current;
     if (!p) return;
-    ask({ msg: '"' + (p.name || '이름 없는 사업') + '"을(를) 삭제할까요? 되돌릴 수 없어요.', ok: '삭제', danger: true }, function () {
+    ask({ msg: '"' + (p.name || '이름 없는 사업') + '"을(를) 삭제할까요? 되돌릴 수 없어요.', ok: 'Delete', danger: true }, function () {
       p.images.forEach(deleteImage);
       state.projects = state.projects.filter(function (x) { return x !== p; });
       if (saveTimer) clearTimeout(saveTimer);
@@ -1035,7 +1047,7 @@
 
   // ---------------- theme (same setting as the planner) ----------------
   var THEME_KEY = 'sunaPlanner.themeMode';
-  var THEME_LABELS = { auto: '🌗 자동', light: '☀️ 라이트', dark: '🌙 다크' };
+  var THEME_LABELS = { auto: '🌗 Auto', light: '☀️ Light', dark: '🌙 Dark' };
   function themeMode() {
     try { var v = localStorage.getItem(THEME_KEY); return v === 'light' || v === 'dark' ? v : 'auto'; } catch (e) { return 'auto'; }
   }
