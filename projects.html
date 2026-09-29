@@ -2,584 +2,355 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
 <title>수나공방 사업 진행표</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#92675C">
+<meta name="theme-color" content="#F6F6F7">
 <link rel="icon" href="icon-512.png">
 <link rel="apple-touch-icon" href="icon-512.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<script>
+  // Follow the light/dark choice made in the planner (자동/라이트/다크).
+  (function () {
+    try {
+      var m = localStorage.getItem('sunaPlanner.themeMode');
+      if (m === 'light' || m === 'dark') document.documentElement.setAttribute('data-theme', m);
+    } catch (e) {}
+  })();
+</script>
 <style>
   :root {
-    --bg: #F8EFEC;
-    --bg-elevated: #FFFAF9;
-    --bg-well: #FBF3F1;
-    --ink: #3D2B26;
-    --ink-soft: #7A6059;
-    --ink-faint: #AC968E;
-    --line: #E8D6D0;
-    --line-soft: #F1E4E0;
-
-    --moss: #92675C;
-    --moss-ink: #6B463D;
-    --moss-tint: #EFE1DC;
-
-    --clay: #C98B76;
-    --clay-tint: #F6E5DC;
-
-    --rust: #7C4A45;
-    --rust-tint: #F0DEDA;
-
-    --mustard: #A9825A;
-    --mustard-tint: #F1E6D6;
-
-    --locked-bg: #EDE1DA;
-    --locked-ink: #93796F;
-
-    --ring: #92675C;
-    --danger: #A8483D;
-    --on-accent: #FBF3F1;
-    --shadow: 0 1px 2px rgba(61,43,38,0.06), 0 6px 20px -10px rgba(61,43,38,0.18);
+    --bg: #F6F6F7;
+    --surface: #FFFFFF;
+    --card: #EDEDEF;
+    --info: #E9EBF1;
+    --ink: #141414;
+    --ink-2: #55555A;
+    --muted: #8D8D93;
+    --faint: #A8A8AD;
+    --line: #E4E4E6;
+    --line-soft: #F2F2F4;
+    --track: #DADADD;
+    --dot: #D5D5D8;
+    --accent: #141414;
+    --on-accent: #FFFFFF;
+    --hero-sub: #A8A8AD;
+    --hero-seg: #3A3A3D;
+    --blue: #3B6FD8;  --blue-bg: #E3ECFB;
+    --green: #2E8A4A; --green-bg: #E2F3E6;
+    --gray-bg: #EDEDEF;
+    --danger: #D14343;
+    --shadow: 0 1px 3px rgba(0,0,0,.06);
+    --float: 0 10px 30px -8px rgba(0,0,0,.25);
   }
-
   @media (prefers-color-scheme: dark) {
     :root:not([data-theme="light"]) {
-      --bg: #211917;
-      --bg-elevated: #2A201D;
-      --bg-well: #251C19;
-      --ink: #F0E4DF;
-      --ink-soft: #C7B3AC;
-      --ink-faint: #8C7570;
-      --line: #453330;
-      --line-soft: #3A2B28;
-
-      --moss: #C9998C;
-      --moss-ink: #E4C4BA;
-      --moss-tint: #3A2925;
-
-      --clay: #E0A98F;
-      --clay-tint: #3E2B23;
-
-      --rust: #C99089;
-      --rust-tint: #3B2624;
-
-      --mustard: #D6B784;
-      --mustard-tint: #3A2F1F;
-
-      --locked-bg: #362824;
-      --locked-ink: #A4897F;
-
-      --ring: #C9998C;
-      --danger: #E0917E;
-      --on-accent: #211917;
-      --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 10px 24px -12px rgba(0,0,0,0.5);
+      --bg: #0F0F10; --surface: #1B1B1E; --card: #232327; --info: #1F2230;
+      --ink: #F2F2F3; --ink-2: #C4C4C8; --muted: #8E8E94; --faint: #6E6E74;
+      --line: #2E2E33; --line-soft: #26262A; --track: #3A3A3F; --dot: #3A3A3F;
+      --accent: #F2F2F3; --on-accent: #141414; --hero-sub: #6B6B70; --hero-seg: #CFCFD3;
+      --blue: #7FA6F2; --blue-bg: #1E2A44; --green: #6CC98A; --green-bg: #183324; --gray-bg: #2A2A2E;
+      --danger: #F07A7A; --shadow: 0 1px 3px rgba(0,0,0,.4); --float: 0 10px 30px -8px rgba(0,0,0,.7);
     }
   }
-
   :root[data-theme="dark"] {
-    --bg: #211917;
-    --bg-elevated: #2A201D;
-    --bg-well: #251C19;
-    --ink: #F0E4DF;
-    --ink-soft: #C7B3AC;
-    --ink-faint: #8C7570;
-    --line: #453330;
-    --line-soft: #3A2B28;
-
-    --moss: #C9998C;
-    --moss-ink: #E4C4BA;
-    --moss-tint: #3A2925;
-
-    --clay: #E0A98F;
-    --clay-tint: #3E2B23;
-
-    --rust: #C99089;
-    --rust-tint: #3B2624;
-
-    --mustard: #D6B784;
-    --mustard-tint: #3A2F1F;
-
-    --locked-bg: #362824;
-    --locked-ink: #A4897F;
-
-    --ring: #C9998C;
-    --danger: #E0917E;
-    --on-accent: #211917;
-    --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 10px 24px -12px rgba(0,0,0,0.5);
+    --bg: #0F0F10; --surface: #1B1B1E; --card: #232327; --info: #1F2230;
+    --ink: #F2F2F3; --ink-2: #C4C4C8; --muted: #8E8E94; --faint: #6E6E74;
+    --line: #2E2E33; --line-soft: #26262A; --track: #3A3A3F; --dot: #3A3A3F;
+    --accent: #F2F2F3; --on-accent: #141414; --hero-sub: #6B6B70; --hero-seg: #CFCFD3;
+    --blue: #7FA6F2; --blue-bg: #1E2A44; --green: #6CC98A; --green-bg: #183324; --gray-bg: #2A2A2E;
+    --danger: #F07A7A; --shadow: 0 1px 3px rgba(0,0,0,.4); --float: 0 10px 30px -8px rgba(0,0,0,.7);
   }
 
-  * { box-sizing: border-box; }
-  html { color-scheme: light dark; font-size: 92%; }
-
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { color-scheme: light dark; -webkit-text-size-adjust: 100%; }
   body {
-    margin: 0;
-    background: var(--bg);
-    color: var(--ink);
-    font-family: 'Noto Sans KR', -apple-system, 'Malgun Gothic', sans-serif;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    background: var(--bg); color: var(--ink);
+    font-family: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
+    font-size: 12px; line-height: 1.5; letter-spacing: -0.01em; -webkit-font-smoothing: antialiased;
+    -webkit-tap-highlight-color: transparent;
   }
+  button, input, textarea { font: inherit; color: inherit; letter-spacing: inherit; }
+  button { background: none; border: 0; cursor: pointer; }
+  a { color: inherit; text-decoration: none; }
+  [hidden] { display: none !important; }
+  :focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
-  .page { max-width: 760px; margin: 0 auto; padding: 20px 16px 60px; display: flex; flex-direction: column; gap: 18px; }
-  h1, h2, h3 { font-weight: 700; margin: 0; color: var(--ink); letter-spacing: -0.01em; text-wrap: balance; }
-  button { font-family: inherit; }
-  input, textarea, select { font-family: inherit; font-size: 1rem; color: var(--ink); }
+  .page { max-width: 480px; margin: 0 auto; padding: calc(14px + env(safe-area-inset-top)) 16px 110px; }
+  .muted { color: var(--muted); }
 
-  .topbar { display: flex; align-items: center; gap: 10px; }
-  .topbar .spacer { flex: 1; }
-  .eyebrow { margin: 0; font-size: 0.76rem; letter-spacing: 0.13em; color: var(--moss); font-weight: 600; }
-  .title { font-size: clamp(1.35rem, 4.5vw, 1.8rem); }
-
-  .btn {
-    font-size: 0.88rem; font-weight: 700; padding: 9px 16px; border-radius: 100px;
-    border: 1px solid var(--moss); background: var(--moss); color: var(--on-accent); cursor: pointer;
-    display: inline-flex; align-items: center; gap: 6px; text-decoration: none; white-space: nowrap;
-  }
-  .btn:hover { filter: brightness(1.06); }
-  .btn:focus-visible, .icon-btn:focus-visible, .step:focus-visible, .card:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
-  .btn.ghost { background: transparent; color: var(--moss-ink); }
-  .btn.danger { background: transparent; border-color: var(--danger); color: var(--danger); }
-  .btn.small { padding: 6px 12px; font-size: 0.8rem; }
-  .icon-btn {
-    width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg-elevated);
-    color: var(--ink); cursor: pointer; font-size: 1.1rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; flex: none;
-  }
-
-  /* ---------- progress bar ---------- */
-  .bar { height: 8px; border-radius: 100px; background: var(--line-soft); overflow: hidden; }
-  .bar > span { display: block; height: 100%; border-radius: 100px; background: var(--moss); transition: width .3s ease; }
-  .bar.done > span { background: var(--mustard); }
-  .pct { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--moss-ink); }
-
-  /* ---------- summary strip ---------- */
-  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .stat { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
-  .stat b { display: block; font-size: 1.3rem; font-variant-numeric: tabular-nums; color: var(--ink); }
-  .stat span { font-size: 0.76rem; color: var(--ink-soft); }
-
-  /* ---------- list ---------- */
-  .list { display: flex; flex-direction: column; gap: 10px; }
-  .card {
-    display: block; width: 100%; text-align: left; cursor: pointer;
-    background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px;
-    box-shadow: var(--shadow); color: var(--ink); text-decoration: none;
-  }
-  .card:hover { border-color: var(--moss); }
-  .card-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
-  .card-name { font-weight: 700; font-size: 1.02rem; flex: 1; min-width: 0; overflow-wrap: anywhere; }
-  .card-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; font-size: 0.78rem; color: var(--ink-soft); }
-  .chip { font-size: 0.74rem; padding: 3px 9px; border-radius: 100px; background: var(--moss-tint); color: var(--moss-ink); font-weight: 600; }
-  .chip.soft { background: transparent; border: 1px solid var(--line); color: var(--ink-soft); font-weight: 500; }
-  .chip.done { background: var(--mustard-tint); color: var(--mustard); }
-  .list-label { font-size: 0.8rem; color: var(--ink-faint); font-weight: 600; margin: 8px 2px 0; }
-  .empty { text-align: center; padding: 40px 16px; color: var(--ink-soft); border: 1px dashed var(--line); border-radius: 14px; }
+  .pill { display: inline-flex; align-items: center; border-radius: 99px; font-size: 10px; font-weight: 600; padding: 4px 9px; white-space: nowrap; flex: none; }
+  .pill.blue { background: var(--blue-bg); color: var(--blue); }
+  .pill.green { background: var(--green-bg); color: var(--green); }
+  .pill.gray { background: var(--gray-bg); color: var(--muted); }
+  .round { width: 34px; height: 34px; border-radius: 50%; background: var(--surface); box-shadow: var(--shadow); display: inline-flex; align-items: center; justify-content: center; font-size: 14px; flex: none; }
 
   /* ---------- stepper ---------- */
-  .steps { display: grid; grid-template-columns: repeat(var(--n, 6), minmax(0, 1fr)); gap: 6px; }
-  .step {
-    display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 2px; border-radius: 10px;
-    border: 1px solid var(--line); background: var(--bg-elevated); color: var(--ink-soft); cursor: pointer; min-width: 0;
-  }
-  .step .num { width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; border: 1.5px solid var(--line); background: var(--bg); }
-  .step .lbl { font-size: 0.72rem; line-height: 1.25; text-align: center; overflow-wrap: anywhere; }
-  .step.passed { background: var(--moss-tint); color: var(--moss-ink); border-color: transparent; }
-  .step.passed .num { background: var(--moss); border-color: var(--moss); color: var(--on-accent); }
-  .step.current { border-color: var(--moss); color: var(--moss-ink); font-weight: 700; box-shadow: 0 0 0 2px var(--moss-tint); }
-  .step.current .num { background: var(--moss); border-color: var(--moss); color: var(--on-accent); }
-  .steps-hint { font-size: 0.76rem; color: var(--ink-faint); margin-top: 6px; }
-  @media (max-width: 480px) {
-    .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  }
+  .stepper { display: flex; position: relative; margin: 0 -4px; }
+  .stepper .track, .stepper .fill { position: absolute; top: 11px; height: 2.5px; border-radius: 3px; }
+  .stepper .track { background: var(--track); }
+  .stepper .fill { background: var(--accent); transition: width .25s ease; }
+  .st { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 8px; position: relative; padding: 4px 0 2px; }
+  .st:first-of-type { align-items: flex-start; } .st:last-of-type { align-items: flex-end; }
+  .st .dot { width: 15px; height: 15px; border-radius: 50%; background: var(--dot); display: flex; align-items: center; justify-content: center; margin: 0 4px; }
+  .st.ok .dot { background: var(--accent); box-shadow: 0 0 0 2.5px var(--bg-dot, var(--card)), 0 0 0 3.8px var(--accent); }
+  .st.ok .dot::after { content: ""; width: 5px; height: 2.5px; border-left: 1.6px solid var(--on-accent); border-bottom: 1.6px solid var(--on-accent); transform: rotate(-45deg) translate(.5px,-.5px); }
+  .st.cur .dot { background: var(--bg-dot, var(--card)); box-shadow: 0 0 0 2px var(--accent); }
+  .st.cur .dot::after { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); }
+  .st .lb { font-size: 9px; color: var(--muted); line-height: 1.3; text-align: center; overflow-wrap: anywhere; word-break: keep-all; padding: 0 1px; }
+  .st:first-of-type .lb { text-align: left; } .st:last-of-type .lb { text-align: right; }
+  .st.cur .lb { color: var(--ink); font-weight: 700; }
+  .st .lb small { display: block; font-size: 8.5px; color: var(--faint); font-weight: 500; }
 
-  /* ---------- detail ---------- */
-  .panel { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
-  .progress-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
-  .progress-head .stage-now { font-weight: 700; color: var(--moss-ink); }
-  .sections { display: flex; flex-direction: column; gap: 12px; }
-  .sec { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
-  .sec h3 { font-size: 0.86rem; color: var(--moss); display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-  .sec h3 .n { width: 20px; height: 20px; border-radius: 50%; background: var(--moss-tint); color: var(--moss-ink); font-size: 0.72rem; display: inline-flex; align-items: center; justify-content: center; }
-  .sec .body { white-space: pre-wrap; overflow-wrap: anywhere; }
-  .sec .none { color: var(--ink-faint); font-size: 0.9rem; }
-  .imgs { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
-  .imgs figure { margin: 0; position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: var(--bg-well); border: 1px solid var(--line); }
-  .imgs img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
-  .imgs .rm { position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; border-radius: 50%; border: 0; background: rgba(0,0,0,.55); color: #fff; cursor: pointer; }
-  .where-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 6px; }
-  .links { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
-  .links a { color: var(--moss-ink); overflow-wrap: anywhere; }
-  .kv { font-size: 0.86rem; color: var(--ink-soft); }
-  .kv b { color: var(--ink); font-weight: 600; }
+  /* ---------- LIST ---------- */
+  .hello { display: flex; align-items: center; gap: 10px; }
+  .av { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg,#D9B7A6,#92675C); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; flex: none; }
+  .hello h1 { font-size: 13.5px; font-weight: 700; }
+  .hello p { font-size: 10px; }
+  .hero { background: var(--accent); color: var(--on-accent); border-radius: 22px; padding: 16px 16px 16px; margin-top: 14px; }
+  .hero .t { font-size: 10px; color: var(--hero-sub); }
+  .hero .big { font-size: 28px; font-weight: 800; letter-spacing: -0.02em; line-height: 1.2; }
+  .hero .big small { font-size: 10.5px; font-weight: 600; color: var(--hero-sub); margin-left: 6px; letter-spacing: 0; }
+  .seg { display: flex; gap: 3px; margin-top: 9px; }
+  .seg i { flex: 1; height: 4px; border-radius: 4px; background: var(--hero-seg); opacity: .35; }
+  .seg i.on { background: var(--on-accent); opacity: 1; }
+  .hero .btns { display: flex; gap: 8px; margin-top: 14px; }
+  .hero .btns button { flex: 1; background: var(--on-accent); color: var(--accent); border-radius: 99px; padding: 10px 0; font-weight: 700; font-size: 11.5px; }
+  .search { margin-top: 12px; display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1px solid var(--line); border-radius: 99px; padding: 5px 5px 5px 14px; }
+  .search input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font-size: 12px; }
+  .search input::placeholder { color: var(--faint); }
+  .search .f { height: 28px; padding: 0 11px; border-radius: 99px; background: var(--accent); color: var(--on-accent); font-size: 10px; font-weight: 700; white-space: nowrap; }
+  .sec-t { display: flex; justify-content: space-between; align-items: center; margin: 16px 2px 8px; font-size: 12.5px; font-weight: 700; }
+  .sec-t button { font-size: 10px; font-weight: 600; color: var(--ink-2); }
+  .focus { display: block; background: var(--card); border-radius: 18px; padding: 13px 14px 12px; --bg-dot: var(--card); }
+  .focus .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+  .k { font-size: 9px; color: var(--muted); }
+  .focus .name { font-size: 13.5px; font-weight: 800; margin-top: 1px; overflow-wrap: anywhere; }
+  .focus .meta { display: flex; justify-content: space-between; gap: 10px; margin: 9px 0 8px; font-size: 9px; color: var(--muted); }
+  .focus .meta b { display: block; font-size: 10.5px; color: var(--ink); font-weight: 700; margin-top: 1px; }
+  .mini { display: flex; align-items: center; gap: 10px; padding: 10px 12px; margin-top: 7px; background: var(--surface); border-radius: 18px; }
+  .mini .th { width: 36px; height: 36px; border-radius: 11px; flex: none; display: flex; align-items: center; justify-content: center; font-size: 16px; background: var(--card); }
+  .mini .txt { min-width: 0; flex: 1; }
+  .mini .nm { font-weight: 700; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mini .sub { font-size: 9.5px; color: var(--muted); margin-top: 1px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mini .pct { text-align: right; font-weight: 800; font-size: 12.5px; flex: none; }
+  .mini .bar { width: 56px; height: 4px; background: var(--card); border-radius: 4px; margin-top: 4px; overflow: hidden; }
+  .mini .bar i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
+  .empty { text-align: center; padding: 30px 16px; color: var(--muted); background: var(--surface); border-radius: 18px; font-size: 11.5px; line-height: 1.7; margin-top: 16px; }
+  .nav { position: fixed; left: 50%; bottom: calc(16px + env(safe-area-inset-bottom)); transform: translateX(-50%); background: var(--surface); border-radius: 99px; padding: 6px; display: flex; align-items: center; gap: 6px; box-shadow: var(--float); z-index: 20; }
+  .nav a, .nav button { height: 36px; min-width: 42px; padding: 0 12px; border-radius: 99px; display: inline-flex; align-items: center; justify-content: center; gap: 5px; font-size: 10.5px; font-weight: 700; color: var(--ink-2); white-space: nowrap; }
+  .nav .on { background: var(--accent); color: var(--on-accent); padding: 0 16px; }
 
-  /* ---------- edit form ---------- */
-  .form { display: flex; flex-direction: column; gap: 14px; }
-  .field { display: flex; flex-direction: column; gap: 6px; }
-  .field > label, .field > .label { font-size: 0.84rem; font-weight: 700; color: var(--moss-ink); }
-  .field .hint { font-size: 0.76rem; color: var(--ink-faint); font-weight: 400; }
-  .input, .textarea, .select {
-    width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg);
-    outline: none;
-  }
-  .input:focus, .textarea:focus, .select:focus { border-color: var(--moss); box-shadow: 0 0 0 3px var(--moss-tint); }
-  .textarea { min-height: 110px; resize: vertical; line-height: 1.6; }
-  .textarea.tall { min-height: 180px; }
-  .stage-edit { display: flex; flex-direction: column; gap: 6px; }
-  .stage-row { display: flex; gap: 6px; align-items: center; }
-  .stage-row .n { width: 26px; flex: none; text-align: center; font-weight: 700; color: var(--moss-ink); font-size: 0.86rem; }
-  .stage-row .input { flex: 1; min-width: 0; }
-  .stage-row .icon-btn { width: 32px; height: 32px; font-size: 0.9rem; }
-  .row-actions { display: flex; flex-wrap: wrap; gap: 8px; }
-  .tools { display: flex; flex-wrap: wrap; gap: 6px; }
-  .tool { padding: 7px 12px; border-radius: 100px; border: 1px solid var(--line); background: var(--bg); color: var(--ink-soft); cursor: pointer; font-size: 0.84rem; }
-  .tool.on { background: var(--moss); border-color: var(--moss); color: var(--on-accent); font-weight: 700; }
+  /* ---------- DETAIL ---------- */
+  .bar3 { display: grid; grid-template-columns: 60px 1fr 60px; align-items: center; font-size: 13px; font-weight: 700; text-align: center; }
+  .bar3 .back { font-size: 18px; text-align: left; height: 34px; }
+  .bar3 .e { text-align: right; font-size: 11.5px; color: var(--blue); font-weight: 700; height: 34px; }
+  .idrow { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+  .idrow .box { width: 38px; height: 38px; font-size: 16px; }
+  .idrow .v { font-size: 15px; font-weight: 800; overflow-wrap: anywhere; line-height: 1.3; }
+  .idrow > div:nth-child(2) { min-width: 0; flex: 1; }
+  .oneline { font-size: 11px; color: var(--ink-2); margin: 9px 2px 0; line-height: 1.5; overflow-wrap: anywhere; }
+  .bigpct { display: flex; align-items: baseline; gap: 7px; margin: 12px 2px 6px; }
+  .bigpct b { font-size: 24px; font-weight: 800; letter-spacing: -0.02em; }
+  .bigpct span { font-size: 10.5px; color: var(--muted); }
+  #dSteps { --bg-dot: var(--bg); }
+  .hint { font-size: 9px; color: var(--faint); margin: 6px 2px 0; }
+  .bigbtn { display: block; width: 100%; margin-top: 12px; background: var(--accent); color: var(--on-accent); border-radius: 13px; padding: 12px 0; text-align: center; font-weight: 700; font-size: 12px; }
+  .info { margin-top: 12px; background: var(--info); border-radius: 18px; padding: 10px 6px 6px; }
+  .info .t { font-size: 10.5px; color: var(--muted); font-weight: 600; padding: 0 8px 8px; }
+  .info .box { background: var(--surface); border-radius: 14px; padding: 3px 12px; }
+  .info .box + .box, .info .thumbs { margin-top: 6px; }
+  .kv { display: flex; justify-content: space-between; gap: 14px; padding: 8px 0; font-size: 10.5px; }
+  .kv + .kv { border-top: 1px solid var(--line-soft); }
+  .kv span { color: var(--muted); flex: none; }
+  .kv b { font-weight: 700; text-align: right; overflow-wrap: anywhere; white-space: pre-wrap; min-width: 0; }
+  .kv a { color: var(--blue); font-weight: 700; text-align: right; overflow-wrap: anywhere; min-width: 0; }
+  .kv .none { color: var(--faint); font-weight: 500; }
+  .long { padding: 10px 12px 11px !important; }
+  .long .h { display: flex; justify-content: space-between; font-size: 10px; color: var(--muted); margin-bottom: 5px; }
+  .long .body { font-size: 11px; line-height: 1.65; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .long .body.clamp { display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; }
+  .long .more { margin-top: 6px; font-size: 10.5px; color: var(--blue); font-weight: 700; }
+  .thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; padding: 0 2px 2px; }
+  .thumbs > * { aspect-ratio: 1; border-radius: 12px; overflow: hidden; background: var(--surface); position: relative; }
+  .thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
+  .thumbs .plus { display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 11px; font-weight: 700; }
+  .thumbs .rm { position: absolute; top: 3px; right: 3px; width: 22px; height: 22px; border-radius: 50%; background: rgba(0,0,0,.6); color: #fff; font-size: 10px; }
+  .tl { margin-top: 10px; background: var(--surface); border-radius: 18px; padding: 10px 14px 4px; }
+  .tl .grab { width: 32px; height: 2.5px; background: var(--accent); border-radius: 3px; margin: 0 auto 10px; }
+  .tl .ttl { font-size: 10.5px; color: var(--muted); font-weight: 600; margin-bottom: 8px; }
+  .tli { display: flex; gap: 10px; position: relative; padding-bottom: 11px; }
+  .tli .tm { width: 42px; font-size: 10.5px; font-weight: 700; flex: none; }
+  .tli .tm small { display: block; font-size: 9px; color: var(--faint); font-weight: 500; }
+  .tli .d { width: 12px; height: 12px; border-radius: 50%; background: var(--accent); flex: none; margin-top: 2px; position: relative; }
+  .tli .d::after { content: ""; position: absolute; left: 3.4px; top: 3px; width: 4px; height: 2px; border-left: 1.3px solid var(--on-accent); border-bottom: 1.3px solid var(--on-accent); transform: rotate(-45deg); }
+  .tli:not(:last-child)::before { content: ""; position: absolute; left: 57.5px; top: 16px; bottom: 0; border-left: 1.2px dashed var(--track); }
+  .tli .tx { font-size: 11px; color: var(--ink-2); line-height: 1.5; white-space: pre-wrap; overflow-wrap: anywhere; flex: 1; min-width: 0; }
+  .tli .x { color: var(--faint); font-size: 11px; width: 22px; height: 22px; flex: none; }
+  .tl .none { font-size: 10.5px; color: var(--faint); padding-bottom: 10px; }
 
-  .save-state {
-    position: sticky; top: 0; z-index: 5; margin: -4px -4px 0; padding: 8px 12px; border-radius: 10px;
-    background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(6px);
-    display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--ink-soft);
-  }
-  .save-state .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--moss); flex: none; }
-  .save-state.saving .dot { background: var(--mustard); }
-  .save-state.error .dot { background: var(--danger); }
-  .save-state.error { color: var(--danger); }
-  .save-state .spacer { flex: 1; }
+  /* ---------- EDIT ---------- */
+  .editbar { position: sticky; top: 0; z-index: 10; display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 8px 0; margin-top: -8px; background: var(--bg); }
+  .editbar .back { font-size: 18px; width: 40px; height: 34px; text-align: left; }
+  .done { background: var(--accent); color: var(--on-accent); border-radius: 99px; padding: 7px 14px; font-size: 11px; font-weight: 700; }
+  .savechip { display: inline-flex; align-items: center; gap: 5px; background: var(--green-bg); color: var(--green); border-radius: 99px; padding: 5px 10px; font-size: 10px; font-weight: 700; white-space: nowrap; }
+  .savechip i { width: 5px; height: 5px; border-radius: 50%; background: currentColor; }
+  .savechip.saving { background: var(--blue-bg); color: var(--blue); }
+  .savechip.error { background: #FBE3E3; color: var(--danger); }
+  .lab { font-size: 10.5px; font-weight: 700; color: var(--ink-2); margin: 14px 2px 6px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .lab span { font-weight: 500; color: var(--faint); font-size: 9.5px; text-align: right; }
+  .inp, .ta { display: block; width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 11px; padding: 9px 11px; font-size: 12px; outline: none; }
+  .inp { font-weight: 600; }
+  .inp::placeholder, .ta::placeholder { color: var(--faint); font-weight: 500; }
+  .inp:focus, .ta:focus { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent); }
+  .ta { resize: none; line-height: 1.65; min-height: 64px; overflow: hidden; }
+  .ta.long-ta { min-height: 140px; }
+  .ta-wrap { position: relative; }
+  .ta-wrap .cnt { position: absolute; right: 10px; bottom: 6px; font-size: 9px; color: var(--faint); pointer-events: none; }
+  .ta-wrap .ta { padding-bottom: 20px; }
+  .icons { display: flex; flex-wrap: wrap; gap: 5px; }
+  .icons button { width: 34px; height: 34px; border-radius: 11px; background: var(--surface); border: 1px solid var(--line); font-size: 15px; }
+  .icons button.on { border: 1.6px solid var(--accent); background: var(--card); }
+  .chips { display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
+  .chip { background: var(--surface); border: 1px solid var(--line); border-radius: 11px; padding: 7px 4px; text-align: center; font-size: 10.5px; font-weight: 600; color: var(--ink-2); display: flex; flex-direction: column; align-items: center; gap: 1px; min-height: 44px; justify-content: center; overflow-wrap: anywhere; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+  .chip .n { font-size: 8.5px; color: var(--faint); }
+  .chip.ok { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .chip.ok .n { color: var(--hero-sub); }
+  .chip.cur { border: 1.6px solid var(--accent); color: var(--ink); font-weight: 800; }
+  .chip.add { border-style: dashed; color: var(--muted); }
+  .links-row { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 7px; align-items: center; }
+  .links-row .k { margin-right: 2px; }
+  .tag { border-radius: 99px; padding: 5px 10px; font-size: 10px; font-weight: 600; background: var(--surface); border: 1px solid var(--line); color: var(--ink-2); }
+  .tag.on { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .memo-row { display: flex; gap: 6px; align-items: flex-end; }
+  .memo-row .ta { flex: 1; min-height: 40px; }
+  .memo-row .done { padding: 10px 14px; flex: none; }
+  .memo-list { margin-top: 6px; background: var(--surface); border-radius: 14px; padding: 10px 12px 0; }
+  .memo-list .tli { padding-bottom: 9px; }
+  .memo-list .tli:not(:last-child)::before { left: 57.5px; }
+  .dangerzone { margin-top: 26px; display: flex; justify-content: space-between; align-items: center; }
+  .del { color: var(--danger); font-size: 11px; font-weight: 700; padding: 8px 0; }
 
-  .banner { font-size: 0.84rem; border-radius: 10px; padding: 10px 14px; border: 1px solid var(--danger); color: var(--danger); display: none; }
+  .banner { font-size: 11px; border-radius: 12px; padding: 9px 12px; background: #FBE3E3; color: var(--danger); margin-bottom: 10px; display: none; }
   .banner.show { display: block; }
-
-  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.88); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
   .lightbox.show { display: flex; }
-  .lightbox img { max-width: 100%; max-height: 100%; border-radius: 8px; }
-
+  .lightbox img { max-width: 100%; max-height: 100%; border-radius: 10px; }
   .dialog { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: none; align-items: center; justify-content: center; z-index: 60; padding: 16px; }
   .dialog.show { display: flex; }
-  .dialog .box { background: var(--bg-elevated); border-radius: 14px; padding: 18px; max-width: 360px; width: 100%; box-shadow: var(--shadow); }
-  .dialog p { margin: 0 0 14px; }
-  .dialog .row-actions { justify-content: flex-end; }
-  [hidden] { display: none !important; }
+  .dialog .box { background: var(--surface); border-radius: 18px; padding: 16px; max-width: 320px; width: 100%; box-shadow: var(--float); }
+  .dialog p { margin-bottom: 12px; font-size: 12.5px; font-weight: 600; }
+  .dialog .inp { margin-bottom: 12px; }
+  .dialog .acts { display: flex; gap: 6px; justify-content: flex-end; }
+  .dialog .acts button { padding: 8px 14px; border-radius: 99px; font-size: 11.5px; font-weight: 700; }
+  .dialog .ok { background: var(--accent); color: var(--on-accent); }
+  .dialog .ok.danger { background: var(--danger); color: #fff; }
+  .dialog .cancel { background: var(--card); }
+  .dialog .extra { margin-right: auto; color: var(--danger); background: none !important; padding-left: 0 !important; }
 </style>
-<script>
-(function () {
-  'use strict';
-  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
-  function normHue(h) { h = h % 360; if (h < 0) h += 360; return h; }
-
-  function hexToRgb(hex) {
-    hex = hex.replace('#', '');
-    if (hex.length === 3) hex = hex.split('').map(function (c) { return c + c; }).join('');
-    var num = parseInt(hex, 16);
-    return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 };
-  }
-  function rgbToHex(r, g, b) {
-    function h2(n) { n = clamp(Math.round(n), 0, 255); var s = n.toString(16); return s.length === 1 ? '0' + s : s; }
-    return '#' + h2(r) + h2(g) + h2(b);
-  }
-  function rgbToHsl(r, g, b) {
-    r /= 255; g /= 255; b /= 255;
-    var max = Math.max(r, g, b), min = Math.min(r, g, b);
-    var h, s, l = (max + min) / 2;
-    if (max === min) { h = 0; s = 0; }
-    else {
-      var d = max - min;
-      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
-      if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
-      else if (max === g) h = (b - r) / d + 2;
-      else h = (r - g) / d + 4;
-      h *= 60;
-    }
-    return { h: h, s: s * 100, l: l * 100 };
-  }
-  function hslToRgb(h, s, l) {
-    h = normHue(h) / 360; s = clamp(s, 0, 100) / 100; l = clamp(l, 0, 100) / 100;
-    if (s === 0) { var v = Math.round(l * 255); return { r: v, g: v, b: v }; }
-    function hue2rgb(p, q, t) {
-      if (t < 0) t += 1; if (t > 1) t -= 1;
-      if (t < 1 / 6) return p + (q - p) * 6 * t;
-      if (t < 1 / 2) return q;
-      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
-      return p;
-    }
-    var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
-    var p = 2 * l - q;
-    return {
-      r: Math.round(hue2rgb(p, q, h + 1 / 3) * 255),
-      g: Math.round(hue2rgb(p, q, h) * 255),
-      b: Math.round(hue2rgb(p, q, h - 1 / 3) * 255)
-    };
-  }
-  function hsl(h, s, l) { var rgb = hslToRgb(h, s, l); return rgbToHex(rgb.r, rgb.g, rgb.b); }
-
-  function buildPalette(baseHex) {
-    var rgb0 = hexToRgb(baseHex);
-    var base = rgbToHsl(rgb0.r, rgb0.g, rgb0.b);
-    var h = base.h;
-    var sBase = clamp(base.s, 32, 72);
-    var lBase = clamp(base.l, 26, 42);
-
-    var light = {
-      '--bg': hsl(h, clamp(sBase * 0.5, 14, 34), 95.5),
-      '--bg-elevated': hsl(h, clamp(sBase * 0.35, 8, 22), 98),
-      '--bg-well': hsl(h, clamp(sBase * 0.45, 10, 28), 96.3),
-      '--ink': hsl(h, clamp(sBase * 0.55, 18, 42), 18),
-      '--ink-soft': hsl(h, clamp(sBase * 0.42, 14, 32), 38),
-      '--ink-faint': hsl(h, clamp(sBase * 0.32, 10, 24), 60),
-      '--line': hsl(h, clamp(sBase * 0.48, 14, 32), 84),
-      '--line-soft': hsl(h, clamp(sBase * 0.38, 10, 26), 90),
-
-      '--moss': hsl(h, sBase, lBase),
-      '--moss-ink': hsl(h, clamp(sBase * 1.05, 40, 78), clamp(lBase - 16, 18, 34)),
-      '--moss-tint': hsl(h, clamp(sBase * 0.48, 14, 32), 90),
-
-      '--clay': hsl(h + 35, clamp(sBase * 0.82, 28, 62), clamp(lBase + 10, 42, 62)),
-      '--clay-tint': hsl(h + 35, clamp(sBase * 0.42, 12, 28), 92),
-
-      '--rust': hsl(h - 30, clamp(sBase * 1.05, 35, 72), clamp(lBase - 6, 26, 44)),
-      '--rust-tint': hsl(h - 30, clamp(sBase * 0.42, 12, 28), 92),
-
-      '--mustard': hsl(h + 72, clamp(sBase * 0.66, 22, 52), clamp(lBase + 7, 44, 62)),
-      '--mustard-tint': hsl(h + 72, clamp(sBase * 0.38, 10, 26), 91),
-
-      '--locked-bg': hsl(h, clamp(sBase * 0.32, 7, 18), 89),
-      '--locked-ink': hsl(h, clamp(sBase * 0.28, 7, 18), 55),
-
-      '--ring': hsl(h, sBase, lBase),
-      '--danger': hsl(6, 52, 40),
-      '--on-accent': hsl(h, clamp(sBase * 0.45, 10, 26), 97)
-    };
-
-    var dark = {
-      '--bg': hsl(h, clamp(sBase * 0.42, 12, 26), 12.5),
-      '--bg-elevated': hsl(h, clamp(sBase * 0.4, 12, 26), 15.5),
-      '--bg-well': hsl(h, clamp(sBase * 0.42, 12, 26), 13.8),
-      '--ink': hsl(h, clamp(sBase * 0.28, 8, 20), 92),
-      '--ink-soft': hsl(h, clamp(sBase * 0.32, 10, 24), 78),
-      '--ink-faint': hsl(h, clamp(sBase * 0.3, 8, 22), 55),
-      '--line': hsl(h, clamp(sBase * 0.4, 10, 24), 25),
-      '--line-soft': hsl(h, clamp(sBase * 0.34, 8, 20), 20),
-
-      '--moss': hsl(h, clamp(sBase * 0.85, 30, 60), clamp(lBase + 32, 62, 76)),
-      '--moss-ink': hsl(h, clamp(sBase * 0.7, 24, 50), clamp(lBase + 46, 76, 88)),
-      '--moss-tint': hsl(h, clamp(sBase * 0.44, 12, 28), 19),
-
-      '--clay': hsl(h + 35, clamp(sBase * 0.7, 24, 50), clamp(lBase + 32, 64, 78)),
-      '--clay-tint': hsl(h + 35, clamp(sBase * 0.4, 10, 24), 19),
-
-      '--rust': hsl(h - 30, clamp(sBase * 0.78, 28, 55), clamp(lBase + 28, 60, 74)),
-      '--rust-tint': hsl(h - 30, clamp(sBase * 0.4, 10, 24), 19),
-
-      '--mustard': hsl(h + 72, clamp(sBase * 0.6, 20, 45), clamp(lBase + 30, 62, 76)),
-      '--mustard-tint': hsl(h + 72, clamp(sBase * 0.36, 9, 22), 18),
-
-      '--locked-bg': hsl(h, clamp(sBase * 0.26, 6, 16), 22),
-      '--locked-ink': hsl(h, clamp(sBase * 0.22, 6, 16), 62),
-
-      '--ring': hsl(h, clamp(sBase * 0.85, 30, 60), clamp(lBase + 32, 62, 76)),
-      '--danger': hsl(6, 62, 62),
-      '--on-accent': hsl(h, clamp(sBase * 0.5, 12, 28), 15)
-    };
-
-    return { light: light, dark: dark };
-  }
-
-  function varsToCss(vars, selector) {
-    var lines = Object.keys(vars).map(function (k) { return '  ' + k + ': ' + vars[k] + ';'; });
-    return selector + ' {\n' + lines.join('\n') + '\n}';
-  }
-
-  function fullThemeCss(baseHex) {
-    var pal = buildPalette(baseHex);
-    var sL = hexToRgb(pal.light['--ink']);
-    var lightVars = Object.assign({}, pal.light, {
-      '--shadow': '0 1px 2px rgba(' + sL.r + ',' + sL.g + ',' + sL.b + ',0.06), 0 6px 20px -10px rgba(' + sL.r + ',' + sL.g + ',' + sL.b + ',0.18)'
-    });
-    var darkVars = Object.assign({}, pal.dark, {
-      '--shadow': '0 1px 2px rgba(0,0,0,0.3), 0 6px 20px -10px rgba(0,0,0,0.5)'
-    });
-    return (
-      varsToCss(lightVars, ':root') + '\n' +
-      '@media (prefers-color-scheme: dark) {\n' +
-      varsToCss(darkVars, ':root:not([data-theme="light"])').split('\n').map(function (l) { return '  ' + l; }).join('\n') + '\n' +
-      '}\n' +
-      varsToCss(darkVars, ':root[data-theme="dark"]')
-    );
-  }
-
-  var STORAGE_KEY = 'sunaPlanner.themeColor';
-  var DEFAULT_COLOR = '#92675C';
-  var MODE_STORAGE_KEY = 'sunaPlanner.themeMode';
-  var DEFAULT_MODE = 'auto';
-
-  function loadThemeColor() {
-    try {
-      var v = localStorage.getItem(STORAGE_KEY);
-      return v && /^#[0-9a-fA-F]{6}$/.test(v) ? v : DEFAULT_COLOR;
-    } catch (e) { return DEFAULT_COLOR; }
-  }
-  function saveThemeColor(hex) {
-    try { localStorage.setItem(STORAGE_KEY, hex); } catch (e) {}
-  }
-  function loadThemeMode() {
-    try {
-      var v = localStorage.getItem(MODE_STORAGE_KEY);
-      return v === 'light' || v === 'dark' ? v : DEFAULT_MODE;
-    } catch (e) { return DEFAULT_MODE; }
-  }
-  function saveThemeMode(mode) {
-    try {
-      if (mode === 'auto') localStorage.removeItem(MODE_STORAGE_KEY);
-      else localStorage.setItem(MODE_STORAGE_KEY, mode);
-    } catch (e) {}
-  }
-  function applyThemeMode(mode) {
-    if (mode === 'light' || mode === 'dark') {
-      document.documentElement.setAttribute('data-theme', mode);
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-    }
-  }
-  function applyPalette(baseHex) {
-    var css = fullThemeCss(baseHex);
-    var styleEl = document.getElementById('themeOverrideStyle');
-    if (!styleEl) {
-      styleEl = document.createElement('style');
-      styleEl.id = 'themeOverrideStyle';
-      // Insert right after this script tag (i.e. right after the main
-      // hardcoded <style> block) so it wins the cascade regardless of
-      // exactly how the surrounding page is structured.
-      if (document.currentScript && document.currentScript.parentNode) {
-        document.currentScript.parentNode.insertBefore(styleEl, document.currentScript.nextSibling);
-      } else {
-        document.head.appendChild(styleEl);
-      }
-    }
-    styleEl.textContent = css;
-  }
-
-  window.SunaTheme = {
-    loadThemeColor: loadThemeColor,
-    saveThemeColor: saveThemeColor,
-    applyPalette: applyPalette,
-    loadThemeMode: loadThemeMode,
-    saveThemeMode: saveThemeMode,
-    applyThemeMode: applyThemeMode,
-    DEFAULT_COLOR: DEFAULT_COLOR,
-    DEFAULT_MODE: DEFAULT_MODE
-  };
-
-  applyPalette(loadThemeColor());
-  applyThemeMode(loadThemeMode());
-})();
-</script>
 </head>
 <body>
-<div class="page" id="app">
+<div class="page">
   <div class="banner" id="storageBanner">이 브라우저에서는 저장이 안 되고 있어요 (사생활 보호 모드이거나 저장 공간이 꽉 찼을 수 있어요). 사진 수를 줄이거나 다른 브라우저로 열어주세요.</div>
 
   <!-- ============ LIST ============ -->
   <section id="listView" hidden>
-    <div class="topbar">
-      <a class="icon-btn" href="index.html" title="플래너로 돌아가기" aria-label="플래너로 돌아가기">←</a>
-      <div>
-        <p class="eyebrow">수나공방 · PROJECTS</p>
-        <h1 class="title">진행 중인 사업</h1>
-      </div>
-      <span class="spacer"></span>
-      <button class="btn" type="button" id="addBtn">＋ 새 사업</button>
+    <div class="hello">
+      <div class="av">수</div>
+      <div><h1>안녕하세요, 수나공방</h1><p class="muted" id="helloSub"></p></div>
+      <a class="round" href="index.html" style="margin-left:auto" title="플래너" aria-label="플래너로 가기">📅</a>
     </div>
-    <div class="stats" id="stats" style="margin-top:16px"></div>
-    <div class="list" id="list" style="margin-top:14px"></div>
+    <div class="hero">
+      <div class="t">전체 평균 진행률</div>
+      <div class="big" id="heroPct"></div>
+      <div class="seg" id="heroSeg"></div>
+      <div class="btns"><button type="button" id="addBtn">＋ 새 사업</button><button type="button" id="allBtn">📋 전체 보기</button></div>
+    </div>
+    <div class="search">🔍<input id="searchInput" type="search" placeholder="사업 이름 검색" aria-label="사업 검색"><button type="button" class="f" id="filterBtn"></button></div>
+    <div id="listBody"></div>
   </section>
 
   <!-- ============ DETAIL ============ -->
   <section id="detailView" hidden>
-    <div class="topbar">
-      <a class="icon-btn" href="#/" aria-label="목록으로">←</a>
-      <span class="spacer"></span>
-      <button class="btn" type="button" id="editBtn">✏️ 수정하기</button>
+    <div class="bar3"><a class="back" href="#/" aria-label="목록으로">←</a>사업 상세<button type="button" class="e" id="editLink">수정</button></div>
+    <div class="idrow"><div class="round box" id="dIcon"></div><div><div class="k">사업 이름</div><div class="v" id="dName"></div></div><span id="dPill"></span></div>
+    <div class="oneline" id="dSummary"></div>
+    <div class="bigpct"><b id="dPct"></b><span id="dStage"></span></div>
+    <div class="stepper" id="dSteps"></div>
+    <p class="hint">단계를 누르면 바로 바뀌어요 · 지금 단계를 한 번 더 누르면 한 단계 뒤로</p>
+    <button type="button" class="bigbtn" id="editBtn">✏️ 수정하기</button>
+    <div class="info">
+      <div class="t">📦 사업 정보</div>
+      <div class="box" id="dKv"></div>
+      <div class="box long" id="dLong"></div>
+      <div class="thumbs" id="dThumbs"></div>
     </div>
-    <h1 class="title" id="dName" style="margin:14px 0 12px"></h1>
-    <div class="panel">
-      <div class="progress-head">
-        <span>현재 단계 · <span class="stage-now" id="dStage"></span></span>
-        <span class="pct" id="dPct"></span>
-      </div>
-      <div class="bar" id="dBar"><span></span></div>
-      <div class="steps" id="dSteps" style="margin-top:14px"></div>
-      <p class="steps-hint">단계를 누르면 바로 진행 단계가 바뀌어요.</p>
-    </div>
-    <div class="sections" id="dSections" style="margin-top:14px"></div>
+    <div class="tl"><div class="grab"></div><div class="ttl">📝 진행 메모</div><div id="dLogs"></div></div>
   </section>
 
   <!-- ============ EDIT ============ -->
   <section id="editView" hidden>
-    <div class="save-state" id="saveState"><span class="dot"></span><span id="saveText">자동 저장 중이에요</span><span class="spacer"></span><button class="btn small" type="button" id="doneBtn">완료</button></div>
-    <div class="form" style="margin-top:12px">
-      <div class="field">
-        <label for="fName">사업 이름</label>
-        <input class="input" id="fName" data-key="name" placeholder="예: 레진 코스터 신제품">
-      </div>
-
-      <div class="field">
-        <span class="label">진행 단계 <span class="hint">· 이름을 바꾸고, 지금 단계를 눌러 선택하세요</span></span>
-        <div class="steps" id="fSteps"></div>
-        <div class="stage-edit" id="fStageNames" style="margin-top:8px"></div>
-        <div class="row-actions">
-          <button class="btn ghost small" type="button" id="addStageBtn">＋ 단계 추가</button>
-          <button class="btn ghost small" type="button" id="resetStagesBtn">기본 단계로</button>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="fProgress">진행 상황 메모 <span class="hint">· 적는 대로 자동 저장돼요</span></label>
-        <textarea class="textarea tall" id="fProgress" data-key="progressNote" placeholder="오늘 어디까지 했는지, 다음에 할 일 등을 자유롭게 적어두세요"></textarea>
-      </div>
-
-      <div class="field">
-        <label for="fSummary">1. 한 줄 요약</label>
-        <input class="input" id="fSummary" data-key="summary" placeholder="이 사업을 한 줄로">
-      </div>
-      <div class="field">
-        <label for="fUsage">2. 어디에 사용할지</label>
-        <textarea class="textarea" id="fUsage" data-key="usage" placeholder="예: 스마트스토어 판매, 원데이 클래스 재료, 인스타 콘텐츠"></textarea>
-      </div>
-      <div class="field">
-        <label for="fContent">3. 사업 내용</label>
-        <textarea class="textarea tall" id="fContent" data-key="content" placeholder="사업에 대한 자세한 내용"></textarea>
-      </div>
-      <div class="field">
-        <span class="label">4. 관련 이미지</span>
-        <div class="imgs" id="fImgs"></div>
-        <div class="row-actions">
-          <label class="btn ghost small" style="cursor:pointer">📷 사진 추가<input type="file" id="fImgInput" accept="image/*" multiple hidden></label>
-        </div>
-      </div>
-      <div class="field">
-        <span class="label">5. 어디서 진행 중인지</span>
-        <div class="tools" id="fTools"></div>
-        <input class="input" id="fToolOther" data-key="toolOther" placeholder="기타 도구·장소 (직접 입력)">
-        <label for="fFile" class="hint" style="margin-top:4px">저장 위치 (파일 이름, 폴더, 대화 제목 등)</label>
-        <input class="input" id="fFile" data-key="fileLocation" placeholder="예: 구글드라이브/수나공방/코스터.docx, Claude 대화 '코스터 기획'">
-        <label for="fLinks" class="hint" style="margin-top:4px">링크 (한 줄에 하나씩)</label>
-        <textarea class="textarea" id="fLinks" data-key="links" placeholder="https://..."></textarea>
-      </div>
-
-      <div class="row-actions" style="justify-content:space-between; margin-top:8px">
-        <button class="btn danger small" type="button" id="deleteBtn">이 사업 삭제</button>
-        <button class="btn" type="button" id="doneBtn2">완료</button>
-      </div>
+    <div class="editbar">
+      <button type="button" class="back" id="backBtn" aria-label="저장하고 나가기">←</button>
+      <span class="savechip" id="saveChip"><i></i><span id="saveText">자동 저장 중</span></span>
+      <button type="button" class="done" id="doneBtn">완료</button>
     </div>
+
+    <div class="lab">사업 이름</div>
+    <input class="inp" id="fName" data-key="name" placeholder="예: 압화 DIY 키트 상품 기획">
+    <div class="lab">아이콘</div>
+    <div class="icons" id="fIcons"></div>
+
+    <div class="lab">진행 단계<span>눌러서 선택 · 길게 눌러 이름 수정/삭제</span></div>
+    <div class="chips" id="fChips"></div>
+    <div class="links-row"><span class="k">단계 템플릿</span><span id="fPresets" style="display:contents"></span></div>
+
+    <div class="lab">📝 진행 상황 메모<span>기록하면 날짜·시간이 붙어요</span></div>
+    <div class="memo-row">
+      <textarea class="ta" id="fMemo" rows="1" placeholder="오늘 한 일을 적어주세요…"></textarea>
+      <button type="button" class="done" id="memoAddBtn">기록</button>
+    </div>
+    <div class="memo-list" id="fLogs" hidden></div>
+
+    <div class="lab">① 한 줄 요약</div>
+    <input class="inp" id="fSummary" data-key="summary" placeholder="이 사업을 한 줄로">
+    <div class="lab">② 어디에 사용할지</div>
+    <textarea class="ta" id="fUsage" data-key="usage" rows="1" placeholder="예: 스마트스토어 · 클래스 재료 · 지원사업 제출"></textarea>
+    <div class="lab">③ 사업 내용<span>길게 써도 계속 저장돼요</span></div>
+    <div class="ta-wrap"><textarea class="ta long-ta" id="fContent" data-key="content" placeholder="사업에 대한 자세한 내용"></textarea><span class="cnt" id="fCount"></span></div>
+    <div class="lab">④ 관련 이미지</div>
+    <div class="thumbs" id="fThumbs"></div>
+    <div class="lab">⑤ 어디서 진행 중인지</div>
+    <div class="links-row" id="fTools" style="margin-top:0"></div>
+    <input class="inp" id="fToolOther" data-key="toolOther" placeholder="기타 도구·장소 (직접 입력)" style="margin-top:6px">
+    <div class="lab">저장 위치</div>
+    <input class="inp" id="fFile" data-key="fileLocation" placeholder="예: 노션 / 키트 기획서, 구글드라이브/사업계획서.hwp">
+    <div class="lab">링크<span>한 줄에 하나씩</span></div>
+    <textarea class="ta" id="fLinks" data-key="links" rows="1" placeholder="https://..."></textarea>
+
+    <div class="dangerzone">
+      <button type="button" class="del" id="deleteBtn">이 사업 삭제</button>
+      <button type="button" class="done" id="doneBtn2">완료</button>
+    </div>
+    <input type="file" id="fImgInput" accept="image/*" multiple hidden>
   </section>
 </div>
 
+<nav class="nav" id="nav" hidden>
+  <a href="#/" class="on">⌂ 홈</a>
+  <a href="index.html" aria-label="플래너">📅 플래너</a>
+  <button type="button" id="navAdd" aria-label="새 사업">＋</button>
+</nav>
+
 <div class="lightbox" id="lightbox"><img alt=""></div>
-<div class="dialog" id="dialog">
+<div class="dialog" id="dialog" role="dialog" aria-modal="true">
   <div class="box">
     <p id="dialogMsg"></p>
-    <div class="row-actions">
-      <button class="btn ghost small" type="button" id="dialogCancel">취소</button>
-      <button class="btn danger small" type="button" id="dialogOk">확인</button>
+    <input class="inp" id="dialogInput" hidden>
+    <div class="acts">
+      <button type="button" class="extra" id="dialogExtra" hidden></button>
+      <button type="button" class="cancel" id="dialogCancel">취소</button>
+      <button type="button" class="ok" id="dialogOk">확인</button>
     </div>
   </div>
 </div>
@@ -589,9 +360,16 @@
   'use strict';
 
   var LS_KEY = 'sunaProjects.v1';
-  var DEFAULT_STAGES = ['건조', '건조 완료', '작업 시작', '레진 작업 중', '샌딩 중', '완성'];
+  var PRESETS = {
+    '상품 기획': ['아이디어', '시장 조사', '원가 계산', '샘플 제작', '촬영·상세', '출시'],
+    '문서·계획서': ['자료 조사', '목차 구성', '초안 작성', '검토', '수정', '제출'],
+    '제작': ['건조', '건조 완료', '작업 시작', '레진 작업 중', '샌딩 중', '완성']
+  };
+  var DEFAULT_PRESET = '상품 기획';
+  var ICONS = ['🎁', '📄', '🌸', '🧑‍🏫', '💡', '🛍️', '📦', '🎨', '📷', '✏️', '🌿', '💰'];
   var TOOLS = ['Claude', 'ChatGPT', '직접 작업', 'Gemini', '노션', '기타'];
   var MIN_STAGES = 2, MAX_STAGES = 10;
+  var FILTERS = ['진행 중', '전체', '완성'];
 
   function $(id) { return document.getElementById(id); }
   function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
@@ -600,18 +378,38 @@
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
+  function pad(n) { return n < 10 ? '0' + n : '' + n; }
+  function md(ts) { var d = new Date(ts); return (d.getMonth() + 1) + '.' + d.getDate(); }
+  function hm(ts) { var d = new Date(ts); return pad(d.getHours()) + ':' + pad(d.getMinutes()); }
 
   // ---------------- storage ----------------
   var state = load();
   function load() {
+    var s = { projects: [] };
     try {
       var raw = localStorage.getItem(LS_KEY);
-      if (raw) {
-        var p = JSON.parse(raw);
-        if (p && Array.isArray(p.projects)) return p;
-      }
+      if (raw) { var p = JSON.parse(raw); if (p && Array.isArray(p.projects)) s = p; }
     } catch (e) {}
-    return { projects: [] };
+    s.projects.forEach(normalize);
+    return s;
+  }
+  // Fill in fields added after v1 so older saved projects keep working.
+  function normalize(p) {
+    if (!Array.isArray(p.stages) || p.stages.length < MIN_STAGES) p.stages = PRESETS[DEFAULT_PRESET].slice();
+    p.stage = Math.max(0, Math.min(p.stages.length, p.stage | 0));
+    if (!p.icon) p.icon = '🎁';
+    if (!p.stageDates || typeof p.stageDates !== 'object') p.stageDates = {};
+    if (!Array.isArray(p.logs)) p.logs = [];
+    if (p.progressNote) {  // v1 had a single memo box; keep it as the first timeline entry
+      p.logs.push({ id: uid(), ts: p.updatedAt || Date.now(), text: p.progressNote });
+      delete p.progressNote;
+    }
+    if (!Array.isArray(p.images)) p.images = [];
+    if (!Array.isArray(p.tools)) p.tools = [];
+    ['name', 'summary', 'usage', 'content', 'toolOther', 'fileLocation', 'links', 'memoDraft'].forEach(function (k) {
+      if (typeof p[k] !== 'string') p[k] = '';
+    });
+    return p;
   }
 
   var saveTimer = null;
@@ -629,28 +427,24 @@
     if (!saveTimer) return;
     clearTimeout(saveTimer);
     saveTimer = null;
-    var ok = persist();
-    setSaveState(ok ? 'saved' : 'error');
+    setSaveState(persist() ? 'saved' : 'error');
   }
   function scheduleSave() {
     setSaveState('saving');
     if (saveTimer) clearTimeout(saveTimer);
     saveTimer = setTimeout(flushSave, 400);
   }
-  // Save immediately if the app is backgrounded / closed / crashes mid-typing.
+  // Save right away if the app is backgrounded, closed or reloaded mid-typing.
   document.addEventListener('visibilitychange', function () { if (document.hidden) flushSave(); });
   window.addEventListener('pagehide', flushSave);
   window.addEventListener('beforeunload', flushSave);
 
   function setSaveState(kind) {
-    var el = $('saveState'), txt = $('saveText');
-    el.classList.remove('saving', 'error');
-    if (kind === 'saving') { el.classList.add('saving'); txt.textContent = '저장 중…'; }
-    else if (kind === 'error') { el.classList.add('error'); txt.textContent = '저장 실패 — 저장 공간을 확인해주세요'; }
-    else {
-      var d = new Date();
-      txt.textContent = '자동 저장됨 · ' + d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0') + ':' + String(d.getSeconds()).padStart(2, '0');
-    }
+    var chip = $('saveChip');
+    chip.classList.remove('saving', 'error');
+    if (kind === 'saving') { chip.classList.add('saving'); $('saveText').textContent = '저장 중…'; }
+    else if (kind === 'error') { chip.classList.add('error'); $('saveText').textContent = '저장 실패'; }
+    else $('saveText').textContent = '자동 저장됨 · ' + hm(Date.now());
   }
 
   // ---------------- images (IndexedDB, falls back to inline data URLs) ----------------
@@ -665,7 +459,7 @@
   });
   function idbTx(mode, fn) {
     return idbReady.then(function () {
-      if (!idb) return Promise.reject(new Error('no idb'));
+      if (!idb) throw new Error('no idb');
       return new Promise(function (resolve, reject) {
         var tx = idb.transaction('images', mode);
         var r = fn(tx.objectStore('images'));
@@ -677,11 +471,10 @@
   var urlCache = {};
   function imageSrc(img) {
     if (img.data) return Promise.resolve(img.data);
-    if (urlCache[img.id]) return Promise.resolve(urlCache[img.id]);
-    return idbTx('readonly', function (s) { return s.get(img.id); }).then(function (v) {
-      urlCache[img.id] = v || '';
-      return urlCache[img.id];
-    }).catch(function () { return ''; });
+    if (urlCache[img.id] != null) return Promise.resolve(urlCache[img.id]);
+    return idbTx('readonly', function (s) { return s.get(img.id); })
+      .then(function (v) { urlCache[img.id] = v || ''; return urlCache[img.id]; })
+      .catch(function () { return ''; });
   }
   function storeImage(dataUrl) {
     var id = uid();
@@ -713,199 +506,282 @@
       reader.readAsDataURL(file);
     });
   }
-  function fillImages(container, p, removable) {
-    container.innerHTML = '';
-    (p.images || []).forEach(function (img) {
-      var fig = document.createElement('figure');
-      var el = document.createElement('img');
-      el.alt = '';
-      fig.appendChild(el);
-      imageSrc(img).then(function (src) { if (src) el.src = src; });
-      el.addEventListener('click', function () { if (el.src) openLightbox(el.src); });
-      if (removable) {
-        var rm = document.createElement('button');
-        rm.type = 'button'; rm.className = 'rm'; rm.textContent = '✕'; rm.setAttribute('aria-label', '사진 삭제');
-        rm.addEventListener('click', function () {
-          confirmDialog('이 사진을 삭제할까요?', function () {
-            p.images = p.images.filter(function (x) { return x !== img; });
-            deleteImage(img);
-            touch(p); fillImages(container, p, true);
-          });
+  function thumb(img, removable, p, rerender) {
+    var fig = document.createElement('div');
+    var el = document.createElement('img');
+    el.alt = '';
+    fig.appendChild(el);
+    imageSrc(img).then(function (src) { if (src) el.src = src; });
+    el.addEventListener('click', function () { if (el.src) openLightbox(el.src); });
+    if (removable) {
+      var rm = document.createElement('button');
+      rm.type = 'button'; rm.className = 'rm'; rm.textContent = '✕'; rm.setAttribute('aria-label', '사진 삭제');
+      rm.addEventListener('click', function () {
+        ask({ msg: '이 사진을 삭제할까요?', ok: '삭제', danger: true }, function () {
+          p.images = p.images.filter(function (x) { return x !== img; });
+          deleteImage(img);
+          touch(p); rerender();
         });
-        fig.appendChild(rm);
-      }
-      container.appendChild(fig);
-    });
+      });
+      fig.appendChild(rm);
+    }
+    return fig;
   }
 
   // ---------------- model helpers ----------------
   function newProject() {
-    return {
-      id: uid(), name: '', stages: DEFAULT_STAGES.slice(), stage: 0,
-      progressNote: '', summary: '', usage: '', content: '', images: [],
-      tools: [], toolOther: '', fileLocation: '', links: '',
-      createdAt: Date.now(), updatedAt: Date.now()
-    };
+    return normalize({ id: uid(), stages: PRESETS[DEFAULT_PRESET].slice(), stage: 0, createdAt: Date.now(), updatedAt: Date.now() });
   }
   function find(id) {
     for (var i = 0; i < state.projects.length; i++) if (state.projects[i].id === id) return state.projects[i];
     return null;
   }
-  function pct(p) { return p.stages.length ? Math.round(p.stage / p.stages.length * 100) : 0; }
-  function stageLabel(p) { return p.stage > 0 ? p.stages[p.stage - 1] : '시작 전'; }
-  function isDone(p) { return p.stages.length > 0 && p.stage >= p.stages.length; }
+  function pct(p) { return Math.round(p.stage / p.stages.length * 100); }
+  function stageLabel(p) { return p.stage > 0 ? (p.stages[p.stage - 1] || p.stage + '단계') : '시작 전'; }
+  function isDone(p) { return p.stage >= p.stages.length; }
   function touch(p) { p.updatedAt = Date.now(); scheduleSave(); }
-  function whereText(p) {
-    var t = (p.tools || []).filter(function (x) { return x !== '기타'; });
+  function whereList(p) {
+    var t = p.tools.filter(function (x) { return x !== '기타'; });
     if (p.toolOther) t.push(p.toolOther);
     return t;
   }
-  function ago(ts) {
-    var s = Math.floor((Date.now() - ts) / 1000);
-    if (s < 60) return '방금 전';
-    if (s < 3600) return Math.floor(s / 60) + '분 전';
-    if (s < 86400) return Math.floor(s / 3600) + '시간 전';
-    if (s < 86400 * 30) return Math.floor(s / 86400) + '일 전';
-    var d = new Date(ts);
-    return (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
+  function pillHtml(p) {
+    if (isDone(p)) return '<span class="pill green">완성</span>';
+    if (p.stage === 0) return '<span class="pill gray">시작 전</span>';
+    return '<span class="pill blue">진행 중</span>';
+  }
+  function setStage(p, n) {
+    var now = Date.now();
+    for (var i = 1; i <= n; i++) if (!p.stageDates[i]) p.stageDates[i] = now;
+    for (var j = n + 1; j <= p.stages.length; j++) delete p.stageDates[j];
+    if (n > 0 && p.stage !== n) p.stageDates[n] = now;
+    p.stage = n;
+    touch(p);
   }
 
   // ---------------- shared UI ----------------
-  function renderSteps(container, p, onPick) {
-    container.style.setProperty('--n', p.stages.length);
+  function renderStepper(container, p, withDates, onPick) {
     container.innerHTML = '';
+    var track = document.createElement('i'); track.className = 'track';
+    var fill = document.createElement('i'); fill.className = 'fill';
+    container.appendChild(track); container.appendChild(fill);
     p.stages.forEach(function (name, i) {
-      var n = i + 1;
-      var b = document.createElement('button');
-      b.type = 'button';
-      b.className = 'step' + (n < p.stage ? ' passed' : '') + (n === p.stage ? ' current' : '');
-      b.setAttribute('aria-pressed', n === p.stage ? 'true' : 'false');
-      b.innerHTML = '<span class="num">' + (n < p.stage ? '✓' : n) + '</span><span class="lbl">' + esc(name || (n + '단계')) + '</span>';
-      b.addEventListener('click', function () {
-        // tapping the current stage again steps back one, so a mis-tap is undoable
-        p.stage = (p.stage === n) ? n - 1 : n;
-        touch(p); onPick();
+      var k = i + 1;
+      var el = document.createElement(onPick ? 'button' : 'div');
+      if (onPick) { el.type = 'button'; el.setAttribute('aria-label', k + '단계 ' + name + (k === p.stage ? ' (현재)' : '')); }
+      el.className = 'st' + (k < p.stage || isDone(p) ? ' ok' : k === p.stage ? ' cur' : '');
+      var date = withDates && p.stageDates[k] && k <= p.stage ? '<small>' + md(p.stageDates[k]) + '</small>' : '';
+      el.innerHTML = '<span class="dot"></span><span class="lb">' + esc(name || k + '단계') + date + '</span>';
+      if (onPick) el.addEventListener('click', function () {
+        setStage(p, p.stage === k ? k - 1 : k);
+        onPick();
       });
-      container.appendChild(b);
+      container.appendChild(el);
+    });
+    // Line runs between the first and last dot centers; fill up to the current dot.
+    requestAnimationFrame(function () {
+      var dots = container.querySelectorAll('.dot');
+      if (!dots.length) return;
+      var box = container.getBoundingClientRect();
+      function cx(d) { var r = d.getBoundingClientRect(); return r.left + r.width / 2 - box.left; }
+      var a = cx(dots[0]), b = cx(dots[dots.length - 1]);
+      track.style.left = a + 'px'; track.style.width = (b - a) + 'px';
+      fill.style.left = a + 'px';
+      fill.style.width = (p.stage > 0 ? cx(dots[p.stage - 1]) - a : 0) + 'px';
     });
   }
-  function setBar(bar, p) {
-    bar.querySelector('span').style.width = pct(p) + '%';
-    bar.classList.toggle('done', isDone(p));
-  }
-  function openLightbox(src) {
-    var lb = $('lightbox');
-    lb.querySelector('img').src = src;
-    lb.classList.add('show');
-  }
+  function openLightbox(src) { var lb = $('lightbox'); lb.querySelector('img').src = src; lb.classList.add('show'); }
   $('lightbox').addEventListener('click', function () { this.classList.remove('show'); });
 
-  var dialogCb = null;
-  function confirmDialog(msg, cb) {
-    $('dialogMsg').textContent = msg;
-    dialogCb = cb;
+  // Small modal: confirm, or prompt when opts.value is given.
+  var dlg = null;
+  function ask(opts, onOk, onExtra) {
+    dlg = { ok: onOk, extra: onExtra };
+    $('dialogMsg').textContent = opts.msg;
+    var inp = $('dialogInput');
+    inp.hidden = opts.value == null;
+    inp.value = opts.value || '';
+    $('dialogOk').textContent = opts.ok || '확인';
+    $('dialogOk').className = 'ok' + (opts.danger ? ' danger' : '');
+    $('dialogExtra').hidden = !opts.extra;
+    $('dialogExtra').textContent = opts.extra || '';
     $('dialog').classList.add('show');
-    $('dialogOk').focus();
+    setTimeout(function () { (opts.value != null ? inp : $('dialogOk')).focus(); }, 30);
   }
-  $('dialogCancel').addEventListener('click', function () { $('dialog').classList.remove('show'); dialogCb = null; });
-  $('dialogOk').addEventListener('click', function () {
-    $('dialog').classList.remove('show');
-    var cb = dialogCb; dialogCb = null;
-    if (cb) cb();
-  });
+  function closeDialog() { $('dialog').classList.remove('show'); var d = dlg; dlg = null; return d; }
+  $('dialogCancel').addEventListener('click', closeDialog);
+  $('dialogOk').addEventListener('click', function () { var d = closeDialog(); if (d && d.ok) d.ok($('dialogInput').value); });
+  $('dialogExtra').addEventListener('click', function () { var d = closeDialog(); if (d && d.extra) d.extra(); });
+  $('dialogInput').addEventListener('keydown', function (e) { if (e.key === 'Enter') $('dialogOk').click(); });
+
+  function autoGrow(ta) { ta.style.height = 'auto'; ta.style.height = ta.scrollHeight + 2 + 'px'; }
 
   // ---------------- LIST ----------------
+  var filterIdx = 0;
   function renderList() {
-    var ps = state.projects.slice();
-    var active = ps.filter(function (p) { return !isDone(p); }).sort(function (a, b) { return b.updatedAt - a.updatedAt; });
-    var done = ps.filter(isDone).sort(function (a, b) { return b.updatedAt - a.updatedAt; });
-    var avg = active.length ? Math.round(active.reduce(function (s, p) { return s + pct(p); }, 0) / active.length) : 0;
+    var all = state.projects;
+    var active = all.filter(function (p) { return !isDone(p); });
+    var done = all.filter(isDone);
+    var avg = active.length ? Math.round(active.reduce(function (s, p) { return s + pct(p); }, 0) / active.length) : (done.length ? 100 : 0);
 
-    $('stats').innerHTML =
-      '<div class="stat"><b>' + active.length + '</b><span>진행 중</span></div>' +
-      '<div class="stat"><b>' + done.length + '</b><span>완성</span></div>' +
-      '<div class="stat"><b>' + avg + '%</b><span>평균 진행률</span></div>';
+    $('helloSub').textContent = all.length ? '진행 중인 사업 ' + active.length + '개' : '첫 사업을 등록해보세요';
+    $('heroPct').innerHTML = avg + '%<small>진행 중 ' + active.length + ' · 완성 ' + done.length + '</small>';
+    var seg = '';
+    for (var i = 0; i < 6; i++) {
+      var lo = i / 6 * 100, hi = (i + 1) / 6 * 100;
+      if (avg >= hi) seg += '<i class="on"></i>';
+      else if (avg > lo) seg += '<i style="opacity:1;background:linear-gradient(90deg,var(--on-accent) ' + Math.round((avg - lo) / (hi - lo) * 100) + '%,color-mix(in srgb,var(--hero-seg) 35%,var(--accent)) 0)"></i>';
+      else seg += '<i></i>';
+    }
+    $('heroSeg').innerHTML = seg;
+    $('filterBtn').textContent = FILTERS[filterIdx];
 
-    var list = $('list');
-    list.innerHTML = '';
-    if (!ps.length) {
-      list.innerHTML = '<div class="empty">아직 등록된 사업이 없어요.<br>오른쪽 위 <b>＋ 새 사업</b>을 눌러 시작해보세요.</div>';
+    var q = $('searchInput').value.trim().toLowerCase();
+    var f = FILTERS[filterIdx];
+    var ps = all.filter(function (p) {
+      if (f === '진행 중' && isDone(p)) return false;
+      if (f === '완성' && !isDone(p)) return false;
+      if (!q) return true;
+      return (p.name + ' ' + p.summary).toLowerCase().indexOf(q) >= 0;
+    }).sort(function (a, b) { return b.updatedAt - a.updatedAt; });
+
+    var body = $('listBody');
+    body.innerHTML = '';
+    if (!all.length) {
+      body.innerHTML = '<div class="empty">아직 등록된 사업이 없어요.<br><b>＋ 새 사업</b>을 눌러 시작해보세요.<br><span class="muted">사업계획서, 키트 상품 기획, 제작 등 무엇이든 괜찮아요.</span></div>';
       return;
     }
-    function card(p) {
-      var a = document.createElement('a');
-      a.className = 'card';
-      a.href = '#/p/' + p.id;
-      var where = whereText(p);
-      a.innerHTML =
-        '<div class="card-head"><span class="card-name">' + esc(p.name || '이름 없는 사업') + '</span>' +
-        '<span class="pct">' + pct(p) + '%</span></div>' +
-        '<div class="bar' + (isDone(p) ? ' done' : '') + '"><span style="width:' + pct(p) + '%"></span></div>' +
-        '<div class="card-meta">' +
-          '<span class="chip' + (isDone(p) ? ' done' : '') + '">' + (p.stage > 0 ? p.stage + '/' + p.stages.length + ' · ' : '') + esc(stageLabel(p)) + '</span>' +
-          where.map(function (w) { return '<span class="chip soft">' + esc(w) + '</span>'; }).join('') +
-          '<span style="margin-left:auto">' + ago(p.updatedAt) + '</span>' +
-        '</div>' +
-        (p.summary ? '<div class="kv" style="margin-top:6px">' + esc(p.summary) + '</div>' : '');
-      return a;
+    if (!ps.length) {
+      body.innerHTML = '<div class="empty">' + (q ? '"' + esc(q) + '"에 맞는 사업이 없어요.' : f + ' 사업이 없어요.') + '</div>';
+      return;
     }
-    active.forEach(function (p) { list.appendChild(card(p)); });
-    if (done.length) {
-      var lbl = document.createElement('p');
-      lbl.className = 'list-label';
-      lbl.textContent = '완성된 사업';
-      list.appendChild(lbl);
-      done.forEach(function (p) { list.appendChild(card(p)); });
+    // The most recently touched in-progress project gets the big tracking card.
+    var focus = (!q && f !== '완성') ? ps.filter(function (p) { return !isDone(p); })[0] : null;
+    if (focus) {
+      body.insertAdjacentHTML('beforeend', '<div class="sec-t">지금 집중 중인 사업</div>');
+      var a = document.createElement('a');
+      a.className = 'focus';
+      a.href = '#/p/' + focus.id;
+      var where = whereList(focus);
+      a.innerHTML =
+        '<div class="top"><div style="min-width:0"><div class="k">사업 이름</div><div class="name">' + esc(focus.icon) + ' ' + esc(focus.name || '이름 없는 사업') + '</div></div>' +
+        '<span class="pill ' + (focus.stage ? 'blue' : 'gray') + '">' + esc(stageLabel(focus)) + '</span></div>' +
+        '<div class="meta"><div>진행 도구<b>' + esc(where.join(' · ') || '—') + '</b></div>' +
+        '<div style="text-align:right">진행률<b>' + focus.stage + ' / ' + focus.stages.length + ' · ' + pct(focus) + '%</b></div></div>' +
+        '<div class="stepper"></div>';
+      body.appendChild(a);
+      renderStepper(a.querySelector('.stepper'), focus, false, null);
+    }
+    var rest = ps.filter(function (p) { return p !== focus; });
+    if (rest.length) {
+      body.insertAdjacentHTML('beforeend', '<div class="sec-t">' + (focus ? '다른 사업' : f === '완성' ? '완성된 사업' : '사업 목록') + '</div>');
+      rest.forEach(function (p) {
+        var a = document.createElement('a');
+        a.className = 'mini';
+        a.href = '#/p/' + p.id;
+        var sub = [stageLabel(p)].concat(whereList(p)).join(' · ');
+        a.innerHTML =
+          '<div class="th">' + esc(p.icon) + '</div>' +
+          '<div class="txt"><div class="nm">' + esc(p.name || '이름 없는 사업') + '</div><div class="sub">' + esc(sub) + '</div></div>' +
+          '<div class="pct">' + pct(p) + '%<div class="bar"><i style="width:' + pct(p) + '%"></i></div></div>';
+        body.appendChild(a);
+      });
     }
   }
-  $('addBtn').addEventListener('click', function () {
+  function addProject() {
     var p = newProject();
     state.projects.push(p);
     persist();
     location.hash = '#/p/' + p.id + '/edit';
-  });
+  }
+  $('addBtn').addEventListener('click', addProject);
+  $('navAdd').addEventListener('click', addProject);
+  $('allBtn').addEventListener('click', function () { filterIdx = 1; $('searchInput').value = ''; renderList(); });
+  $('filterBtn').addEventListener('click', function () { filterIdx = (filterIdx + 1) % FILTERS.length; renderList(); });
+  $('searchInput').addEventListener('input', renderList);
 
   // ---------------- DETAIL ----------------
   var current = null;
+  var longOpen = false, thumbsOpen = false;
   function renderDetail(p) {
+    $('dIcon').textContent = p.icon;
     $('dName').textContent = p.name || '이름 없는 사업';
-    $('dStage').textContent = stageLabel(p);
+    $('dPill').innerHTML = pillHtml(p);
+    $('dSummary').textContent = p.summary ? '① ' + p.summary : '';
+    $('dSummary').hidden = !p.summary;
     $('dPct').textContent = pct(p) + '%';
-    setBar($('dBar'), p);
-    renderSteps($('dSteps'), p, function () { flushSave(); renderDetail(p); });
+    $('dStage').textContent = p.stage ? p.stage + '단계 · ' + stageLabel(p) : '시작 전';
+    renderStepper($('dSteps'), p, true, function () { flushSave(); renderDetail(p); });
 
-    var box = $('dSections');
-    box.innerHTML = '';
-    function sec(n, title, html) {
-      var s = document.createElement('div');
-      s.className = 'sec';
-      s.innerHTML = '<h3>' + (n ? '<span class="n">' + n + '</span>' : '') + esc(title) + '</h3>' + html;
-      box.appendChild(s);
-      return s;
+    var where = whereList(p);
+    var links = p.links.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+    function row(label, html) { return '<div class="kv"><span>' + label + '</span>' + html + '</div>'; }
+    function val(v) { return v ? '<b>' + esc(v) + '</b>' : '<b class="none">—</b>'; }
+    var kv = row('② 어디에 사용', val(p.usage)) +
+      row('⑤ 진행 도구', val(where.join(' · '))) +
+      row('저장 위치', val(p.fileLocation));
+    links.forEach(function (l, i) {
+      var safe = /^https?:\/\//i.test(l);
+      kv += row(i ? '' : '링크', safe
+        ? '<a href="' + esc(l) + '" target="_blank" rel="noopener">' + esc(l.replace(/^https?:\/\/(www\.)?/i, '')) + ' ↗</a>'
+        : '<b>' + esc(l) + '</b>');
+    });
+    $('dKv').innerHTML = kv;
+
+    var lg = $('dLong');
+    lg.innerHTML = '<div class="h"><span>③ 사업 내용</span><span>' + (p.content ? p.content.length + '자' : '') + '</span></div>' +
+      (p.content ? '<div class="body' + (longOpen ? '' : ' clamp') + '">' + esc(p.content) + '</div><button type="button" class="more" hidden></button>'
+                 : '<div class="body muted">아직 적지 않았어요</div>');
+    var bodyEl = lg.querySelector('.body'), more = lg.querySelector('.more');
+    if (more) {
+      requestAnimationFrame(function () {
+        var overflowing = bodyEl.scrollHeight > bodyEl.clientHeight + 2;
+        more.hidden = !(overflowing || longOpen);
+        more.textContent = longOpen ? '접기 ↑' : '전체 내용 보기 ↓';
+      });
+      more.addEventListener('click', function () { longOpen = !longOpen; renderDetail(p); });
     }
-    function text(v) { return v ? '<div class="body">' + esc(v) + '</div>' : '<div class="none">아직 적지 않았어요</div>'; }
 
-    sec('', '📝 진행 상황 메모', text(p.progressNote));
-    sec(1, '한 줄 요약', text(p.summary));
-    sec(2, '어디에 사용할지', text(p.usage));
-    sec(3, '사업 내용', text(p.content));
-    var imgSec = sec(4, '관련 이미지', (p.images && p.images.length) ? '<div class="imgs"></div>' : '<div class="none">등록된 이미지가 없어요</div>');
-    if (p.images && p.images.length) fillImages(imgSec.querySelector('.imgs'), p, false);
-
-    var where = whereText(p);
-    var links = (p.links || '').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
-    var h = '';
-    if (where.length) h += '<div class="where-row">' + where.map(function (w) { return '<span class="chip">' + esc(w) + '</span>'; }).join('') + '</div>';
-    if (p.fileLocation) h += '<div class="kv"><b>저장 위치</b> · <span class="body">' + esc(p.fileLocation) + '</span></div>';
-    if (links.length) {
-      h += '<div class="links">' + links.map(function (l) {
-        var safe = /^https?:\/\//i.test(l);
-        return safe ? '<a href="' + esc(l) + '" target="_blank" rel="noopener">' + esc(l) + '</a>' : '<span class="kv">' + esc(l) + '</span>';
-      }).join('') + '</div>';
+    var th = $('dThumbs');
+    th.innerHTML = '';
+    th.hidden = !p.images.length;
+    var show = thumbsOpen || p.images.length <= 4 ? p.images : p.images.slice(0, 3);
+    show.forEach(function (img) { th.appendChild(thumb(img, false)); });
+    if (show.length < p.images.length) {
+      var more2 = document.createElement('button');
+      more2.type = 'button'; more2.className = 'plus';
+      more2.textContent = '④ +' + (p.images.length - show.length);
+      more2.addEventListener('click', function () { thumbsOpen = true; renderDetail(p); });
+      th.appendChild(more2);
     }
-    sec(5, '어디서 진행 중인지 · 링크', h || '<div class="none">아직 적지 않았어요</div>');
+
+    renderLogs($('dLogs'), p, false);
   }
-  $('editBtn').addEventListener('click', function () { if (current) location.hash = '#/p/' + current.id + '/edit'; });
+  function renderLogs(container, p, removable) {
+    var logs = p.logs.slice().sort(function (a, b) { return b.ts - a.ts; });
+    if (!logs.length) { container.innerHTML = removable ? '' : '<div class="none">아직 기록이 없어요. 수정하기에서 오늘 한 일을 남겨보세요.</div>'; return; }
+    container.innerHTML = '';
+    logs.forEach(function (l) {
+      var el = document.createElement('div');
+      el.className = 'tli';
+      el.innerHTML = '<div class="tm">' + hm(l.ts) + '<small>' + md(l.ts) + '</small></div><div class="d"></div><div class="tx">' + esc(l.text) + '</div>';
+      if (removable) {
+        var x = document.createElement('button');
+        x.type = 'button'; x.className = 'x'; x.textContent = '✕'; x.setAttribute('aria-label', '기록 삭제');
+        x.addEventListener('click', function () {
+          ask({ msg: '이 기록을 삭제할까요?', ok: '삭제', danger: true }, function () {
+            p.logs = p.logs.filter(function (y) { return y !== l; });
+            touch(p); renderEditLogs(p);
+          });
+        });
+        el.appendChild(x);
+      }
+      container.appendChild(el);
+    });
+  }
+  function goEdit() { if (current) location.hash = '#/p/' + current.id + '/edit'; }
+  $('editBtn').addEventListener('click', goEdit);
+  $('editLink').addEventListener('click', goEdit);
 
   // ---------------- EDIT ----------------
   var fields = Array.prototype.slice.call(document.querySelectorAll('#editView [data-key]'));
@@ -913,69 +789,148 @@
     el.addEventListener('input', function () {
       if (!current) return;
       current[el.getAttribute('data-key')] = el.value;
+      if (el.tagName === 'TEXTAREA') autoGrow(el);
+      if (el.id === 'fContent') updateCount();
       touch(current);
     });
   });
+  function updateCount() { $('fCount').textContent = current && current.content ? current.content.length + '자' : ''; }
 
-  function renderStageEditor(p) {
-    function refreshSteps() { renderSteps($('fSteps'), p, refreshSteps); }
-    refreshSteps();
-    var wrap = $('fStageNames');
+  // The memo draft is autosaved too, so a half-written note survives a crash.
+  $('fMemo').addEventListener('input', function () {
+    autoGrow(this);
+    if (!current) return;
+    current.memoDraft = this.value;
+    touch(current);
+  });
+  function commitMemo(p) {
+    var t = (p.memoDraft || '').trim();
+    if (!t) return false;
+    p.logs.push({ id: uid(), ts: Date.now(), text: t });
+    p.memoDraft = '';
+    touch(p);
+    return true;
+  }
+  $('memoAddBtn').addEventListener('click', function () {
+    if (!current || !commitMemo(current)) { $('fMemo').focus(); return; }
+    $('fMemo').value = ''; autoGrow($('fMemo'));
+    renderEditLogs(current);
+  });
+  function renderEditLogs(p) {
+    var box = $('fLogs');
+    box.hidden = !p.logs.length;
+    renderLogs(box, p, true);
+  }
+
+  function renderIcons(p) {
+    var wrap = $('fIcons');
+    wrap.innerHTML = '';
+    ICONS.forEach(function (ic) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = ic === p.icon ? 'on' : '';
+      b.textContent = ic;
+      b.setAttribute('aria-pressed', ic === p.icon ? 'true' : 'false');
+      b.addEventListener('click', function () { p.icon = ic; touch(p); renderIcons(p); });
+      wrap.appendChild(b);
+    });
+  }
+
+  function renderChips(p) {
+    var wrap = $('fChips');
     wrap.innerHTML = '';
     p.stages.forEach(function (name, i) {
-      var row = document.createElement('div');
-      row.className = 'stage-row';
-      row.innerHTML = '<span class="n">' + (i + 1) + '</span>';
-      var inp = document.createElement('input');
-      inp.className = 'input';
-      inp.value = name;
-      inp.placeholder = (i + 1) + '단계 이름';
-      inp.setAttribute('aria-label', (i + 1) + '단계 이름');
-      inp.addEventListener('input', function () { p.stages[i] = inp.value; touch(p); refreshSteps(); });
-      row.appendChild(inp);
-      var rm = document.createElement('button');
-      rm.type = 'button'; rm.className = 'icon-btn'; rm.textContent = '✕';
-      rm.setAttribute('aria-label', (i + 1) + '단계 삭제');
-      rm.disabled = p.stages.length <= MIN_STAGES;
-      rm.addEventListener('click', function () {
-        p.stages.splice(i, 1);
-        if (p.stage > p.stages.length) p.stage = p.stages.length;
-        else if (p.stage > i) p.stage -= 1;
-        touch(p); renderStageEditor(p);
+      var k = i + 1;
+      var b = document.createElement('button');
+      b.type = 'button';
+      var ok = k < p.stage || (isDone(p) && k === p.stages.length);
+      b.className = 'chip' + (ok ? ' ok' : '') + (k === p.stage && !isDone(p) ? ' cur' : '');
+      b.innerHTML = '<span class="n">' + k + (k === p.stage && !isDone(p) ? ' · 지금' : '') + '</span>' + esc(name || k + '단계') + (ok ? ' ✓' : '');
+      var timer = null, longPressed = false;
+      function start() {
+        longPressed = false;
+        timer = setTimeout(function () { longPressed = true; renameStage(p, i); }, 500);
+      }
+      function cancel() { clearTimeout(timer); }
+      b.addEventListener('touchstart', start, { passive: true });
+      b.addEventListener('touchend', cancel);
+      b.addEventListener('touchmove', cancel, { passive: true });
+      b.addEventListener('mousedown', start);
+      b.addEventListener('mouseup', cancel);
+      b.addEventListener('mouseleave', cancel);
+      b.addEventListener('contextmenu', function (e) { e.preventDefault(); });
+      b.addEventListener('click', function () {
+        if (longPressed) { longPressed = false; return; }
+        setStage(p, p.stage === k ? k - 1 : k);
+        renderChips(p);
       });
-      row.appendChild(rm);
-      wrap.appendChild(row);
+      wrap.appendChild(b);
     });
-    $('addStageBtn').disabled = p.stages.length >= MAX_STAGES;
+    if (p.stages.length < MAX_STAGES) {
+      var add = document.createElement('button');
+      add.type = 'button'; add.className = 'chip add';
+      add.textContent = '＋ 단계 추가';
+      add.addEventListener('click', function () {
+        ask({ msg: '새 단계 이름', value: '', ok: '추가' }, function (v) {
+          v = v.trim(); if (!v) return;
+          p.stages.push(v);
+          touch(p); renderChips(p);
+        });
+      });
+      wrap.appendChild(add);
+    }
+    renderPresets(p);  // keep the template tag highlight in sync with the stage names
   }
-  $('addStageBtn').addEventListener('click', function () {
-    if (!current || current.stages.length >= MAX_STAGES) return;
-    current.stages.push('');
-    touch(current); renderStageEditor(current);
-    var inputs = $('fStageNames').querySelectorAll('input');
-    inputs[inputs.length - 1].focus();
-  });
-  $('resetStagesBtn').addEventListener('click', function () {
-    if (!current) return;
-    confirmDialog('단계 이름을 기본값(건조 → 완성 6단계)으로 되돌릴까요?', function () {
-      current.stages = DEFAULT_STAGES.slice();
-      if (current.stage > current.stages.length) current.stage = current.stages.length;
-      touch(current); renderStageEditor(current);
+  function renameStage(p, i) {
+    ask({ msg: (i + 1) + '단계 이름 수정', value: p.stages[i], ok: '저장', extra: p.stages.length > MIN_STAGES ? '단계 삭제' : '' },
+      function (v) { v = v.trim(); if (!v) return; p.stages[i] = v; touch(p); renderChips(p); },
+      function () {
+        p.stages.splice(i, 1);
+        var dates = {};
+        Object.keys(p.stageDates).forEach(function (key) {
+          var k = +key;
+          if (k < i + 1) dates[k] = p.stageDates[key];
+          else if (k > i + 1) dates[k - 1] = p.stageDates[key];
+        });
+        p.stageDates = dates;
+        if (p.stage > i) p.stage -= 1;
+        p.stage = Math.min(p.stage, p.stages.length);
+        touch(p); renderChips(p);
+      });
+  }
+  function renderPresets(p) {
+    var wrap = $('fPresets');
+    wrap.innerHTML = '';
+    Object.keys(PRESETS).forEach(function (name) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      var same = PRESETS[name].join('|') === p.stages.join('|');
+      b.className = 'tag' + (same ? ' on' : '');
+      b.textContent = name;
+      b.addEventListener('click', function () {
+        if (same) return;
+        function apply() {
+          p.stages = PRESETS[name].slice();
+          p.stage = Math.min(p.stage, p.stages.length);
+          touch(p); renderChips(p); renderPresets(p);
+        }
+        if (p.stage === 0) apply();
+        else ask({ msg: '단계 이름을 "' + name + '" 템플릿으로 바꿀까요? 현재 진행 위치(' + p.stage + '단계)는 유지돼요.', ok: '바꾸기' }, apply);
+      });
+      wrap.appendChild(b);
     });
-  });
-
+  }
   function renderTools(p) {
     var wrap = $('fTools');
     wrap.innerHTML = '';
     TOOLS.forEach(function (t) {
       var b = document.createElement('button');
       b.type = 'button';
-      var on = (p.tools || []).indexOf(t) >= 0;
-      b.className = 'tool' + (on ? ' on' : '');
+      var on = p.tools.indexOf(t) >= 0;
+      b.className = 'tag' + (on ? ' on' : '');
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
       b.textContent = t;
       b.addEventListener('click', function () {
-        p.tools = p.tools || [];
         var i = p.tools.indexOf(t);
         if (i >= 0) p.tools.splice(i, 1); else p.tools.push(t);
         touch(p); renderTools(p);
@@ -985,6 +940,17 @@
     });
   }
 
+  function renderEditThumbs(p) {
+    var th = $('fThumbs');
+    th.innerHTML = '';
+    p.images.forEach(function (img) { th.appendChild(thumb(img, true, p, function () { renderEditThumbs(p); })); });
+    var add = document.createElement('button');
+    add.type = 'button'; add.className = 'plus';
+    add.innerHTML = '📷<br>추가';
+    add.style.lineHeight = '1.4';
+    add.addEventListener('click', function () { $('fImgInput').click(); });
+    th.appendChild(add);
+  }
   $('fImgInput').addEventListener('change', function () {
     var p = current, files = Array.prototype.slice.call(this.files || []);
     this.value = '';
@@ -992,37 +958,41 @@
     setSaveState('saving');
     files.reduce(function (chain, f) {
       return chain.then(function () {
-        return shrink(f).then(storeImage).then(function (img) {
-          p.images = p.images || [];
-          p.images.push(img);
-          touch(p);
-        }).catch(function () {});
+        return shrink(f).then(storeImage).then(function (img) { p.images.push(img); touch(p); }).catch(function () {});
       });
-    }, Promise.resolve()).then(function () {
-      if (current === p) fillImages($('fImgs'), p, true);
-    });
+    }, Promise.resolve()).then(function () { if (current === p) renderEditThumbs(p); });
   });
 
   function renderEdit(p) {
     fields.forEach(function (el) { el.value = p[el.getAttribute('data-key')] || ''; });
-    renderStageEditor(p);
+    $('fMemo').value = p.memoDraft || '';
+    renderIcons(p);
+    renderChips(p);
     renderTools(p);
-    fillImages($('fImgs'), p, true);
-    setSaveState('saved');
-    $('saveText').textContent = '적는 내용은 자동으로 저장돼요';
+    renderEditThumbs(p);
+    renderEditLogs(p);
+    updateCount();
+    $('saveChip').classList.remove('saving', 'error');
+    $('saveText').textContent = '적는 대로 자동 저장돼요';
+    requestAnimationFrame(function () {
+      Array.prototype.forEach.call(document.querySelectorAll('#editView textarea'), autoGrow);
+    });
     if (!p.name) setTimeout(function () { $('fName').focus(); }, 50);
   }
   function finishEdit() {
+    if (!current) return;
+    commitMemo(current);  // an unsent memo becomes a timeline entry rather than being left behind
     flushSave();
-    if (current) location.hash = '#/p/' + current.id;
+    location.hash = '#/p/' + current.id;
   }
   $('doneBtn').addEventListener('click', finishEdit);
   $('doneBtn2').addEventListener('click', finishEdit);
+  $('backBtn').addEventListener('click', finishEdit);
   $('deleteBtn').addEventListener('click', function () {
     var p = current;
     if (!p) return;
-    confirmDialog('"' + (p.name || '이름 없는 사업') + '"을(를) 삭제할까요? 되돌릴 수 없어요.', function () {
-      (p.images || []).forEach(deleteImage);
+    ask({ msg: '"' + (p.name || '이름 없는 사업') + '"을(를) 삭제할까요? 되돌릴 수 없어요.', ok: '삭제', danger: true }, function () {
+      p.images.forEach(deleteImage);
       state.projects = state.projects.filter(function (x) { return x !== p; });
       if (saveTimer) clearTimeout(saveTimer);
       saveTimer = null;
@@ -1033,29 +1003,35 @@
   });
 
   // ---------------- router ----------------
+  var lastId = null;
   function route() {
     flushSave();
     var m = location.hash.match(/^#\/p\/([^/]+)(\/edit)?$/);
     var p = m ? find(m[1]) : null;
-    $('listView').hidden = !!p;
-    $('detailView').hidden = !(p && !m[2]);
-    $('editView').hidden = !(p && m[2]);
+    var mode = !p ? 'list' : m[2] ? 'edit' : 'detail';
+    $('listView').hidden = mode !== 'list';
+    $('detailView').hidden = mode !== 'detail';
+    $('editView').hidden = mode !== 'edit';
+    $('nav').hidden = mode !== 'list';
+    if (p && p.id !== lastId) { longOpen = false; thumbsOpen = false; }
+    lastId = p ? p.id : null;
     current = p;
-    if (!p) {
+    if (mode === 'list') {
       if (location.hash && location.hash !== '#/') history.replaceState(null, '', '#/');
       renderList();
-    } else if (m[2]) {
-      renderEdit(p);
-    } else {
-      renderDetail(p);
-    }
+    } else if (mode === 'edit') renderEdit(p);
+    else renderDetail(p);
     window.scrollTo(0, 0);
   }
   window.addEventListener('hashchange', route);
-  // Another tab edited the data: pick it up when not mid-edit.
+  // Another tab changed the data: pick it up unless we're mid-edit.
   window.addEventListener('storage', function (e) {
     if (e.key !== LS_KEY || !$('editView').hidden) return;
     state = load(); route();
+  });
+  window.addEventListener('resize', function () {
+    if (!$('detailView').hidden && current) renderDetail(current);
+    else if (!$('listView').hidden) renderList();
   });
   route();
 
