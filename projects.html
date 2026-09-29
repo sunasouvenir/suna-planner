@@ -379,7 +379,7 @@
     '제작': ['건조', '건조 완료', '작업 시작', '레진 작업 중', '샌딩 중', '완성']
   };
   var DEFAULT_PRESET = '상품 기획';
-  var ICONS = ['🌿', '🌸', '✨', '🎨', '🎄', '🎁', '🤍', '💙', '💜', '🩷', '👀', '📚', '🔎', '✏️', '📍', '⚒️', '💡', '🗒️'];
+  var ICONS = ['🌿', '🌸', '✨', '🎨', '🎄', '🎁', '🤍', '🖤', '💜', '🩷', '👀', '📚', '🔎', '✏️', '📍', '⚒️', '💡', '🗒️'];
   var TOOLS = ['Claude', 'ChatGPT', '직접 작업', 'Gemini', '노션', '기타'];
   var MIN_STAGES = 2, MAX_STAGES = 10;
   var FILTERS = ['전체', '진행 중', '완성'];
@@ -410,7 +410,7 @@
   function normalize(p) {
     if (!Array.isArray(p.stages) || p.stages.length < MIN_STAGES) p.stages = PRESETS[DEFAULT_PRESET].slice();
     p.stage = Math.max(0, Math.min(p.stages.length, p.stage | 0));
-    if (!p.icon) p.icon = '🤍';
+    if (!p.icon) p.icon = '🖤';
     p.focus = p.focus === true;
     if (!p.stageDates || typeof p.stageDates !== 'object') p.stageDates = {};
     if (!Array.isArray(p.logs)) p.logs = [];
