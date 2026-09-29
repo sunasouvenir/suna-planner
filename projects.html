@@ -104,8 +104,10 @@
 
   /* ---------- LIST ---------- */
   .hello { display: flex; align-items: center; gap: 10px; }
-  .av { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg,#D9B7A6,#92675C); color: #fff; font-weight: 800; font-size: 13px; display: flex; align-items: center; justify-content: center; flex: none; }
+  .logo { width: 46px; height: 36px; flex: none; background-color: var(--ink); -webkit-mask: url(mini-logo.png) center / contain no-repeat; mask: url(mini-logo.png) center / contain no-repeat; }
+  .themebtn { margin-left: auto; height: 34px; padding: 0 12px; border-radius: 99px; background: var(--surface); box-shadow: var(--shadow); font-size: 10.5px; font-weight: 700; color: var(--ink-2); white-space: nowrap; }
   .hello h1 { font-size: 13.5px; font-weight: 700; }
+  .hello .round { margin-left: -2px; }
   .hello p { font-size: 10px; }
   .hero { background: var(--accent); color: var(--on-accent); border-radius: 22px; padding: 16px 16px 16px; margin-top: 14px; }
   .hero .t { font-size: 10px; color: var(--hero-sub); }
@@ -199,6 +201,11 @@
   .savechip.error { background: #FBE3E3; color: var(--danger); }
   .lab { font-size: 10.5px; font-weight: 700; color: var(--ink-2); margin: 14px 2px 6px; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
   .lab span { font-weight: 500; color: var(--faint); font-size: 9.5px; text-align: right; }
+  .name-row { display: flex; gap: 8px; align-items: center; }
+  .name-row .inp { flex: 1; min-width: 0; }
+  .star { width: 42px; height: 42px; flex: none; border-radius: 11px; background: var(--surface); border: 1px solid var(--line); font-size: 19px; line-height: 1; color: var(--faint); }
+  .star.on { background: var(--accent); border-color: var(--accent); color: #F5B800; }
+  .star-hint { font-size: 9.5px; color: var(--faint); margin: 5px 2px 0; }
   .inp, .ta { display: block; width: 100%; background: var(--surface); border: 1px solid var(--line); border-radius: 11px; padding: 9px 11px; font-size: 12px; outline: none; }
   .inp { font-weight: 600; }
   .inp::placeholder, .ta::placeholder { color: var(--faint); font-weight: 500; }
@@ -256,9 +263,10 @@
   <!-- ============ LIST ============ -->
   <section id="listView" hidden>
     <div class="hello">
-      <div class="av">수</div>
-      <div><h1>안녕하세요, 수나공방</h1><p class="muted" id="helloSub"></p></div>
-      <a class="round" href="index.html" style="margin-left:auto" title="플래너" aria-label="플래너로 가기">📅</a>
+      <div class="logo" role="img" aria-label="수나 수브니르 로고"></div>
+      <div><h1>안녕하세요, 수나 수브니르</h1><p class="muted" id="helloSub"></p></div>
+      <button type="button" class="themebtn" id="themeBtn" aria-label="화면 모드 바꾸기"></button>
+      <a class="round" href="index.html" title="플래너" aria-label="플래너로 가기">📅</a>
     </div>
     <div class="hero">
       <div class="t">전체 평균 진행률</div>
@@ -297,7 +305,11 @@
     </div>
 
     <div class="lab">사업 이름</div>
-    <input class="inp" id="fName" data-key="name" placeholder="예: 압화 DIY 키트 상품 기획">
+    <div class="name-row">
+      <input class="inp" id="fName" data-key="name" placeholder="예: 압화 DIY 키트 상품 기획">
+      <button type="button" class="star" id="starBtn" aria-label="지금 집중 중인 사업으로 표시" aria-pressed="false">☆</button>
+    </div>
+    <p class="star-hint" id="starHint">☆를 누르면 처음 화면 맨 위 "지금 집중 중인 사업"에 나와요</p>
     <div class="lab">아이콘</div>
     <div class="icons" id="fIcons"></div>
 
@@ -337,7 +349,7 @@
 </div>
 
 <nav class="nav" id="nav" hidden>
-  <a href="#/" class="on">⌂ 홈</a>
+  <a href="#/" class="on" id="homeBtn">⌂ 홈</a>
   <a href="index.html" aria-label="플래너">📅 플래너</a>
   <button type="button" id="navAdd" aria-label="새 사업">＋</button>
 </nav>
@@ -369,7 +381,7 @@
   var ICONS = ['🎁', '📄', '🌸', '🧑‍🏫', '💡', '🛍️', '📦', '🎨', '📷', '✏️', '🌿', '💰'];
   var TOOLS = ['Claude', 'ChatGPT', '직접 작업', 'Gemini', '노션', '기타'];
   var MIN_STAGES = 2, MAX_STAGES = 10;
-  var FILTERS = ['진행 중', '전체', '완성'];
+  var FILTERS = ['전체', '진행 중', '완성'];
 
   function $(id) { return document.getElementById(id); }
   function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
@@ -398,6 +410,7 @@
     if (!Array.isArray(p.stages) || p.stages.length < MIN_STAGES) p.stages = PRESETS[DEFAULT_PRESET].slice();
     p.stage = Math.max(0, Math.min(p.stages.length, p.stage | 0));
     if (!p.icon) p.icon = '🎁';
+    p.focus = p.focus === true;
     if (!p.stageDates || typeof p.stageDates !== 'object') p.stageDates = {};
     if (!Array.isArray(p.logs)) p.logs = [];
     if (p.progressNote) {  // v1 had a single memo box; keep it as the first timeline entry
@@ -655,10 +668,10 @@
       body.innerHTML = '<div class="empty">' + (q ? '"' + esc(q) + '"에 맞는 사업이 없어요.' : f + ' 사업이 없어요.') + '</div>';
       return;
     }
-    // The most recently touched in-progress project gets the big tracking card.
-    var focus = (!q && f !== '완성') ? ps.filter(function (p) { return !isDone(p); })[0] : null;
-    if (focus) {
-      body.insertAdjacentHTML('beforeend', '<div class="sec-t">지금 집중 중인 사업</div>');
+    // Projects starred in the edit screen get the big tracking card; a search shows plain results.
+    var focusList = q ? [] : ps.filter(function (p) { return p.focus; });
+    if (focusList.length) body.insertAdjacentHTML('beforeend', '<div class="sec-t">지금 집중 중인 사업</div>');
+    focusList.forEach(function (focus) {
       var a = document.createElement('a');
       a.className = 'focus';
       a.href = '#/p/' + focus.id;
@@ -671,10 +684,10 @@
         '<div class="stepper"></div>';
       body.appendChild(a);
       renderStepper(a.querySelector('.stepper'), focus, false, null);
-    }
-    var rest = ps.filter(function (p) { return p !== focus; });
+    });
+    var rest = ps.filter(function (p) { return focusList.indexOf(p) < 0; });
     if (rest.length) {
-      body.insertAdjacentHTML('beforeend', '<div class="sec-t">' + (focus ? '다른 사업' : f === '완성' ? '완성된 사업' : '사업 목록') + '</div>');
+      body.insertAdjacentHTML('beforeend', '<div class="sec-t">' + (focusList.length ? '다른 사업' : q ? '검색 결과' : f === '완성' ? '완성된 사업' : '사업 목록') + '</div>');
       rest.forEach(function (p) {
         var a = document.createElement('a');
         a.className = 'mini';
@@ -696,7 +709,10 @@
   }
   $('addBtn').addEventListener('click', addProject);
   $('navAdd').addEventListener('click', addProject);
-  $('allBtn').addEventListener('click', function () { filterIdx = 1; $('searchInput').value = ''; renderList(); });
+  // Home / 전체 보기 clear the search and filter so every project is listed again.
+  function showAll() { filterIdx = 0; $('searchInput').value = ''; renderList(); window.scrollTo(0, 0); }
+  $('allBtn').addEventListener('click', showAll);
+  $('homeBtn').addEventListener('click', showAll);
   $('filterBtn').addEventListener('click', function () { filterIdx = (filterIdx + 1) % FILTERS.length; renderList(); });
   $('searchInput').addEventListener('input', renderList);
 
@@ -705,7 +721,7 @@
   var longOpen = false, thumbsOpen = false;
   function renderDetail(p) {
     $('dIcon').textContent = p.icon;
-    $('dName').textContent = p.name || '이름 없는 사업';
+    $('dName').textContent = (p.focus ? '★ ' : '') + (p.name || '이름 없는 사업');
     $('dPill').innerHTML = pillHtml(p);
     $('dSummary').textContent = p.summary ? '① ' + p.summary : '';
     $('dSummary').hidden = !p.summary;
@@ -963,7 +979,21 @@
     }, Promise.resolve()).then(function () { if (current === p) renderEditThumbs(p); });
   });
 
+  function renderStar(p) {
+    var b = $('starBtn');
+    b.classList.toggle('on', p.focus);
+    b.textContent = p.focus ? '★' : '☆';
+    b.setAttribute('aria-pressed', p.focus ? 'true' : 'false');
+    $('starHint').textContent = p.focus ? '집중 중인 사업이에요. 처음 화면 맨 위에 크게 나와요' : '☆를 누르면 처음 화면 맨 위 "지금 집중 중인 사업"에 나와요';
+  }
+  $('starBtn').addEventListener('click', function () {
+    if (!current) return;
+    current.focus = !current.focus;
+    touch(current); renderStar(current);
+  });
+
   function renderEdit(p) {
+    renderStar(p);
     fields.forEach(function (el) { el.value = p[el.getAttribute('data-key')] || ''; });
     $('fMemo').value = p.memoDraft || '';
     renderIcons(p);
@@ -1001,6 +1031,26 @@
       location.hash = '#/';
     });
   });
+
+  // ---------------- theme (same setting as the planner) ----------------
+  var THEME_KEY = 'sunaPlanner.themeMode';
+  var THEME_LABELS = { auto: '🌗 자동', light: '☀️ 라이트', dark: '🌙 다크' };
+  function themeMode() {
+    try { var v = localStorage.getItem(THEME_KEY); return v === 'light' || v === 'dark' ? v : 'auto'; } catch (e) { return 'auto'; }
+  }
+  function applyTheme(m) {
+    if (m === 'auto') document.documentElement.removeAttribute('data-theme');
+    else document.documentElement.setAttribute('data-theme', m);
+    try { if (m === 'auto') localStorage.removeItem(THEME_KEY); else localStorage.setItem(THEME_KEY, m); } catch (e) {}
+    $('themeBtn').textContent = THEME_LABELS[m];
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = (m === 'dark' || (m === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? '#0F0F10' : '#F6F6F7';
+  }
+  $('themeBtn').addEventListener('click', function () {
+    var order = ['auto', 'light', 'dark'];
+    applyTheme(order[(order.indexOf(themeMode()) + 1) % 3]);
+  });
+  applyTheme(themeMode());
 
   // ---------------- router ----------------
   var lastId = null;
