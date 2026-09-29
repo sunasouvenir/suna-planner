@@ -1,0 +1,1068 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>수나공방 사업 진행표</title>
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#92675C">
+<link rel="icon" href="icon-512.png">
+<link rel="apple-touch-icon" href="icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F8EFEC;
+    --bg-elevated: #FFFAF9;
+    --bg-well: #FBF3F1;
+    --ink: #3D2B26;
+    --ink-soft: #7A6059;
+    --ink-faint: #AC968E;
+    --line: #E8D6D0;
+    --line-soft: #F1E4E0;
+
+    --moss: #92675C;
+    --moss-ink: #6B463D;
+    --moss-tint: #EFE1DC;
+
+    --clay: #C98B76;
+    --clay-tint: #F6E5DC;
+
+    --rust: #7C4A45;
+    --rust-tint: #F0DEDA;
+
+    --mustard: #A9825A;
+    --mustard-tint: #F1E6D6;
+
+    --locked-bg: #EDE1DA;
+    --locked-ink: #93796F;
+
+    --ring: #92675C;
+    --danger: #A8483D;
+    --on-accent: #FBF3F1;
+    --shadow: 0 1px 2px rgba(61,43,38,0.06), 0 6px 20px -10px rgba(61,43,38,0.18);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #211917;
+      --bg-elevated: #2A201D;
+      --bg-well: #251C19;
+      --ink: #F0E4DF;
+      --ink-soft: #C7B3AC;
+      --ink-faint: #8C7570;
+      --line: #453330;
+      --line-soft: #3A2B28;
+
+      --moss: #C9998C;
+      --moss-ink: #E4C4BA;
+      --moss-tint: #3A2925;
+
+      --clay: #E0A98F;
+      --clay-tint: #3E2B23;
+
+      --rust: #C99089;
+      --rust-tint: #3B2624;
+
+      --mustard: #D6B784;
+      --mustard-tint: #3A2F1F;
+
+      --locked-bg: #362824;
+      --locked-ink: #A4897F;
+
+      --ring: #C9998C;
+      --danger: #E0917E;
+      --on-accent: #211917;
+      --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 10px 24px -12px rgba(0,0,0,0.5);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --bg: #211917;
+    --bg-elevated: #2A201D;
+    --bg-well: #251C19;
+    --ink: #F0E4DF;
+    --ink-soft: #C7B3AC;
+    --ink-faint: #8C7570;
+    --line: #453330;
+    --line-soft: #3A2B28;
+
+    --moss: #C9998C;
+    --moss-ink: #E4C4BA;
+    --moss-tint: #3A2925;
+
+    --clay: #E0A98F;
+    --clay-tint: #3E2B23;
+
+    --rust: #C99089;
+    --rust-tint: #3B2624;
+
+    --mustard: #D6B784;
+    --mustard-tint: #3A2F1F;
+
+    --locked-bg: #362824;
+    --locked-ink: #A4897F;
+
+    --ring: #C9998C;
+    --danger: #E0917E;
+    --on-accent: #211917;
+    --shadow: 0 1px 2px rgba(0,0,0,0.25), 0 10px 24px -12px rgba(0,0,0,0.5);
+  }
+
+  * { box-sizing: border-box; }
+  html { color-scheme: light dark; font-size: 92%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Noto Sans KR', -apple-system, 'Malgun Gothic', sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 760px; margin: 0 auto; padding: 20px 16px 60px; display: flex; flex-direction: column; gap: 18px; }
+  h1, h2, h3 { font-weight: 700; margin: 0; color: var(--ink); letter-spacing: -0.01em; text-wrap: balance; }
+  button { font-family: inherit; }
+  input, textarea, select { font-family: inherit; font-size: 1rem; color: var(--ink); }
+
+  .topbar { display: flex; align-items: center; gap: 10px; }
+  .topbar .spacer { flex: 1; }
+  .eyebrow { margin: 0; font-size: 0.76rem; letter-spacing: 0.13em; color: var(--moss); font-weight: 600; }
+  .title { font-size: clamp(1.35rem, 4.5vw, 1.8rem); }
+
+  .btn {
+    font-size: 0.88rem; font-weight: 700; padding: 9px 16px; border-radius: 100px;
+    border: 1px solid var(--moss); background: var(--moss); color: var(--on-accent); cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px; text-decoration: none; white-space: nowrap;
+  }
+  .btn:hover { filter: brightness(1.06); }
+  .btn:focus-visible, .icon-btn:focus-visible, .step:focus-visible, .card:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+  .btn.ghost { background: transparent; color: var(--moss-ink); }
+  .btn.danger { background: transparent; border-color: var(--danger); color: var(--danger); }
+  .btn.small { padding: 6px 12px; font-size: 0.8rem; }
+  .icon-btn {
+    width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--line); background: var(--bg-elevated);
+    color: var(--ink); cursor: pointer; font-size: 1.1rem; text-decoration: none; display: inline-flex; align-items: center; justify-content: center; flex: none;
+  }
+
+  /* ---------- progress bar ---------- */
+  .bar { height: 8px; border-radius: 100px; background: var(--line-soft); overflow: hidden; }
+  .bar > span { display: block; height: 100%; border-radius: 100px; background: var(--moss); transition: width .3s ease; }
+  .bar.done > span { background: var(--mustard); }
+  .pct { font-variant-numeric: tabular-nums; font-weight: 700; color: var(--moss-ink); }
+
+  /* ---------- summary strip ---------- */
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .stat { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; }
+  .stat b { display: block; font-size: 1.3rem; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .stat span { font-size: 0.76rem; color: var(--ink-soft); }
+
+  /* ---------- list ---------- */
+  .list { display: flex; flex-direction: column; gap: 10px; }
+  .card {
+    display: block; width: 100%; text-align: left; cursor: pointer;
+    background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px;
+    box-shadow: var(--shadow); color: var(--ink); text-decoration: none;
+  }
+  .card:hover { border-color: var(--moss); }
+  .card-head { display: flex; align-items: baseline; gap: 10px; margin-bottom: 8px; }
+  .card-name { font-weight: 700; font-size: 1.02rem; flex: 1; min-width: 0; overflow-wrap: anywhere; }
+  .card-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; font-size: 0.78rem; color: var(--ink-soft); }
+  .chip { font-size: 0.74rem; padding: 3px 9px; border-radius: 100px; background: var(--moss-tint); color: var(--moss-ink); font-weight: 600; }
+  .chip.soft { background: transparent; border: 1px solid var(--line); color: var(--ink-soft); font-weight: 500; }
+  .chip.done { background: var(--mustard-tint); color: var(--mustard); }
+  .list-label { font-size: 0.8rem; color: var(--ink-faint); font-weight: 600; margin: 8px 2px 0; }
+  .empty { text-align: center; padding: 40px 16px; color: var(--ink-soft); border: 1px dashed var(--line); border-radius: 14px; }
+
+  /* ---------- stepper ---------- */
+  .steps { display: grid; grid-template-columns: repeat(var(--n, 6), minmax(0, 1fr)); gap: 6px; }
+  .step {
+    display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 8px 2px; border-radius: 10px;
+    border: 1px solid var(--line); background: var(--bg-elevated); color: var(--ink-soft); cursor: pointer; min-width: 0;
+  }
+  .step .num { width: 24px; height: 24px; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; font-size: 0.78rem; font-weight: 700; border: 1.5px solid var(--line); background: var(--bg); }
+  .step .lbl { font-size: 0.72rem; line-height: 1.25; text-align: center; overflow-wrap: anywhere; }
+  .step.passed { background: var(--moss-tint); color: var(--moss-ink); border-color: transparent; }
+  .step.passed .num { background: var(--moss); border-color: var(--moss); color: var(--on-accent); }
+  .step.current { border-color: var(--moss); color: var(--moss-ink); font-weight: 700; box-shadow: 0 0 0 2px var(--moss-tint); }
+  .step.current .num { background: var(--moss); border-color: var(--moss); color: var(--on-accent); }
+  .steps-hint { font-size: 0.76rem; color: var(--ink-faint); margin-top: 6px; }
+  @media (max-width: 480px) {
+    .steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+
+  /* ---------- detail ---------- */
+  .panel { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 16px; box-shadow: var(--shadow); }
+  .progress-head { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; margin-bottom: 8px; }
+  .progress-head .stage-now { font-weight: 700; color: var(--moss-ink); }
+  .sections { display: flex; flex-direction: column; gap: 12px; }
+  .sec { background: var(--bg-elevated); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; }
+  .sec h3 { font-size: 0.86rem; color: var(--moss); display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .sec h3 .n { width: 20px; height: 20px; border-radius: 50%; background: var(--moss-tint); color: var(--moss-ink); font-size: 0.72rem; display: inline-flex; align-items: center; justify-content: center; }
+  .sec .body { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .sec .none { color: var(--ink-faint); font-size: 0.9rem; }
+  .imgs { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 8px; }
+  .imgs figure { margin: 0; position: relative; aspect-ratio: 1; border-radius: 10px; overflow: hidden; background: var(--bg-well); border: 1px solid var(--line); }
+  .imgs img { width: 100%; height: 100%; object-fit: cover; display: block; cursor: zoom-in; }
+  .imgs .rm { position: absolute; top: 4px; right: 4px; width: 26px; height: 26px; border-radius: 50%; border: 0; background: rgba(0,0,0,.55); color: #fff; cursor: pointer; }
+  .where-row { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-bottom: 6px; }
+  .links { display: flex; flex-direction: column; gap: 4px; margin-top: 6px; }
+  .links a { color: var(--moss-ink); overflow-wrap: anywhere; }
+  .kv { font-size: 0.86rem; color: var(--ink-soft); }
+  .kv b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- edit form ---------- */
+  .form { display: flex; flex-direction: column; gap: 14px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field > label, .field > .label { font-size: 0.84rem; font-weight: 700; color: var(--moss-ink); }
+  .field .hint { font-size: 0.76rem; color: var(--ink-faint); font-weight: 400; }
+  .input, .textarea, .select {
+    width: 100%; padding: 10px 12px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg);
+    outline: none;
+  }
+  .input:focus, .textarea:focus, .select:focus { border-color: var(--moss); box-shadow: 0 0 0 3px var(--moss-tint); }
+  .textarea { min-height: 110px; resize: vertical; line-height: 1.6; }
+  .textarea.tall { min-height: 180px; }
+  .stage-edit { display: flex; flex-direction: column; gap: 6px; }
+  .stage-row { display: flex; gap: 6px; align-items: center; }
+  .stage-row .n { width: 26px; flex: none; text-align: center; font-weight: 700; color: var(--moss-ink); font-size: 0.86rem; }
+  .stage-row .input { flex: 1; min-width: 0; }
+  .stage-row .icon-btn { width: 32px; height: 32px; font-size: 0.9rem; }
+  .row-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  .tools { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tool { padding: 7px 12px; border-radius: 100px; border: 1px solid var(--line); background: var(--bg); color: var(--ink-soft); cursor: pointer; font-size: 0.84rem; }
+  .tool.on { background: var(--moss); border-color: var(--moss); color: var(--on-accent); font-weight: 700; }
+
+  .save-state {
+    position: sticky; top: 0; z-index: 5; margin: -4px -4px 0; padding: 8px 12px; border-radius: 10px;
+    background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(6px);
+    display: flex; align-items: center; gap: 8px; font-size: 0.8rem; color: var(--ink-soft);
+  }
+  .save-state .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--moss); flex: none; }
+  .save-state.saving .dot { background: var(--mustard); }
+  .save-state.error .dot { background: var(--danger); }
+  .save-state.error { color: var(--danger); }
+  .save-state .spacer { flex: 1; }
+
+  .banner { font-size: 0.84rem; border-radius: 10px; padding: 10px 14px; border: 1px solid var(--danger); color: var(--danger); display: none; }
+  .banner.show { display: block; }
+
+  .lightbox { position: fixed; inset: 0; background: rgba(0,0,0,.85); display: none; align-items: center; justify-content: center; z-index: 50; padding: 16px; }
+  .lightbox.show { display: flex; }
+  .lightbox img { max-width: 100%; max-height: 100%; border-radius: 8px; }
+
+  .dialog { position: fixed; inset: 0; background: rgba(0,0,0,.4); display: none; align-items: center; justify-content: center; z-index: 60; padding: 16px; }
+  .dialog.show { display: flex; }
+  .dialog .box { background: var(--bg-elevated); border-radius: 14px; padding: 18px; max-width: 360px; width: 100%; box-shadow: var(--shadow); }
+  .dialog p { margin: 0 0 14px; }
+  .dialog .row-actions { justify-content: flex-end; }
+  [hidden] { display: none !important; }
+</style>
+<script>
+(function () {
+  'use strict';
+  function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+  function normHue(h) { h = h % 360; if (h < 0) h += 360; return h; }
+
+  function hexToRgb(hex) {
+    hex = hex.replace('#', '');
+    if (hex.length === 3) hex = hex.split('').map(function (c) { return c + c; }).join('');
+    var num = parseInt(hex, 16);
+    return { r: (num >> 16) & 255, g: (num >> 8) & 255, b: num & 255 };
+  }
+  function rgbToHex(r, g, b) {
+    function h2(n) { n = clamp(Math.round(n), 0, 255); var s = n.toString(16); return s.length === 1 ? '0' + s : s; }
+    return '#' + h2(r) + h2(g) + h2(b);
+  }
+  function rgbToHsl(r, g, b) {
+    r /= 255; g /= 255; b /= 255;
+    var max = Math.max(r, g, b), min = Math.min(r, g, b);
+    var h, s, l = (max + min) / 2;
+    if (max === min) { h = 0; s = 0; }
+    else {
+      var d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      if (max === r) h = (g - b) / d + (g < b ? 6 : 0);
+      else if (max === g) h = (b - r) / d + 2;
+      else h = (r - g) / d + 4;
+      h *= 60;
+    }
+    return { h: h, s: s * 100, l: l * 100 };
+  }
+  function hslToRgb(h, s, l) {
+    h = normHue(h) / 360; s = clamp(s, 0, 100) / 100; l = clamp(l, 0, 100) / 100;
+    if (s === 0) { var v = Math.round(l * 255); return { r: v, g: v, b: v }; }
+    function hue2rgb(p, q, t) {
+      if (t < 0) t += 1; if (t > 1) t -= 1;
+      if (t < 1 / 6) return p + (q - p) * 6 * t;
+      if (t < 1 / 2) return q;
+      if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+      return p;
+    }
+    var q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+    var p = 2 * l - q;
+    return {
+      r: Math.round(hue2rgb(p, q, h + 1 / 3) * 255),
+      g: Math.round(hue2rgb(p, q, h) * 255),
+      b: Math.round(hue2rgb(p, q, h - 1 / 3) * 255)
+    };
+  }
+  function hsl(h, s, l) { var rgb = hslToRgb(h, s, l); return rgbToHex(rgb.r, rgb.g, rgb.b); }
+
+  function buildPalette(baseHex) {
+    var rgb0 = hexToRgb(baseHex);
+    var base = rgbToHsl(rgb0.r, rgb0.g, rgb0.b);
+    var h = base.h;
+    var sBase = clamp(base.s, 32, 72);
+    var lBase = clamp(base.l, 26, 42);
+
+    var light = {
+      '--bg': hsl(h, clamp(sBase * 0.5, 14, 34), 95.5),
+      '--bg-elevated': hsl(h, clamp(sBase * 0.35, 8, 22), 98),
+      '--bg-well': hsl(h, clamp(sBase * 0.45, 10, 28), 96.3),
+      '--ink': hsl(h, clamp(sBase * 0.55, 18, 42), 18),
+      '--ink-soft': hsl(h, clamp(sBase * 0.42, 14, 32), 38),
+      '--ink-faint': hsl(h, clamp(sBase * 0.32, 10, 24), 60),
+      '--line': hsl(h, clamp(sBase * 0.48, 14, 32), 84),
+      '--line-soft': hsl(h, clamp(sBase * 0.38, 10, 26), 90),
+
+      '--moss': hsl(h, sBase, lBase),
+      '--moss-ink': hsl(h, clamp(sBase * 1.05, 40, 78), clamp(lBase - 16, 18, 34)),
+      '--moss-tint': hsl(h, clamp(sBase * 0.48, 14, 32), 90),
+
+      '--clay': hsl(h + 35, clamp(sBase * 0.82, 28, 62), clamp(lBase + 10, 42, 62)),
+      '--clay-tint': hsl(h + 35, clamp(sBase * 0.42, 12, 28), 92),
+
+      '--rust': hsl(h - 30, clamp(sBase * 1.05, 35, 72), clamp(lBase - 6, 26, 44)),
+      '--rust-tint': hsl(h - 30, clamp(sBase * 0.42, 12, 28), 92),
+
+      '--mustard': hsl(h + 72, clamp(sBase * 0.66, 22, 52), clamp(lBase + 7, 44, 62)),
+      '--mustard-tint': hsl(h + 72, clamp(sBase * 0.38, 10, 26), 91),
+
+      '--locked-bg': hsl(h, clamp(sBase * 0.32, 7, 18), 89),
+      '--locked-ink': hsl(h, clamp(sBase * 0.28, 7, 18), 55),
+
+      '--ring': hsl(h, sBase, lBase),
+      '--danger': hsl(6, 52, 40),
+      '--on-accent': hsl(h, clamp(sBase * 0.45, 10, 26), 97)
+    };
+
+    var dark = {
+      '--bg': hsl(h, clamp(sBase * 0.42, 12, 26), 12.5),
+      '--bg-elevated': hsl(h, clamp(sBase * 0.4, 12, 26), 15.5),
+      '--bg-well': hsl(h, clamp(sBase * 0.42, 12, 26), 13.8),
+      '--ink': hsl(h, clamp(sBase * 0.28, 8, 20), 92),
+      '--ink-soft': hsl(h, clamp(sBase * 0.32, 10, 24), 78),
+      '--ink-faint': hsl(h, clamp(sBase * 0.3, 8, 22), 55),
+      '--line': hsl(h, clamp(sBase * 0.4, 10, 24), 25),
+      '--line-soft': hsl(h, clamp(sBase * 0.34, 8, 20), 20),
+
+      '--moss': hsl(h, clamp(sBase * 0.85, 30, 60), clamp(lBase + 32, 62, 76)),
+      '--moss-ink': hsl(h, clamp(sBase * 0.7, 24, 50), clamp(lBase + 46, 76, 88)),
+      '--moss-tint': hsl(h, clamp(sBase * 0.44, 12, 28), 19),
+
+      '--clay': hsl(h + 35, clamp(sBase * 0.7, 24, 50), clamp(lBase + 32, 64, 78)),
+      '--clay-tint': hsl(h + 35, clamp(sBase * 0.4, 10, 24), 19),
+
+      '--rust': hsl(h - 30, clamp(sBase * 0.78, 28, 55), clamp(lBase + 28, 60, 74)),
+      '--rust-tint': hsl(h - 30, clamp(sBase * 0.4, 10, 24), 19),
+
+      '--mustard': hsl(h + 72, clamp(sBase * 0.6, 20, 45), clamp(lBase + 30, 62, 76)),
+      '--mustard-tint': hsl(h + 72, clamp(sBase * 0.36, 9, 22), 18),
+
+      '--locked-bg': hsl(h, clamp(sBase * 0.26, 6, 16), 22),
+      '--locked-ink': hsl(h, clamp(sBase * 0.22, 6, 16), 62),
+
+      '--ring': hsl(h, clamp(sBase * 0.85, 30, 60), clamp(lBase + 32, 62, 76)),
+      '--danger': hsl(6, 62, 62),
+      '--on-accent': hsl(h, clamp(sBase * 0.5, 12, 28), 15)
+    };
+
+    return { light: light, dark: dark };
+  }
+
+  function varsToCss(vars, selector) {
+    var lines = Object.keys(vars).map(function (k) { return '  ' + k + ': ' + vars[k] + ';'; });
+    return selector + ' {\n' + lines.join('\n') + '\n}';
+  }
+
+  function fullThemeCss(baseHex) {
+    var pal = buildPalette(baseHex);
+    var sL = hexToRgb(pal.light['--ink']);
+    var lightVars = Object.assign({}, pal.light, {
+      '--shadow': '0 1px 2px rgba(' + sL.r + ',' + sL.g + ',' + sL.b + ',0.06), 0 6px 20px -10px rgba(' + sL.r + ',' + sL.g + ',' + sL.b + ',0.18)'
+    });
+    var darkVars = Object.assign({}, pal.dark, {
+      '--shadow': '0 1px 2px rgba(0,0,0,0.3), 0 6px 20px -10px rgba(0,0,0,0.5)'
+    });
+    return (
+      varsToCss(lightVars, ':root') + '\n' +
+      '@media (prefers-color-scheme: dark) {\n' +
+      varsToCss(darkVars, ':root:not([data-theme="light"])').split('\n').map(function (l) { return '  ' + l; }).join('\n') + '\n' +
+      '}\n' +
+      varsToCss(darkVars, ':root[data-theme="dark"]')
+    );
+  }
+
+  var STORAGE_KEY = 'sunaPlanner.themeColor';
+  var DEFAULT_COLOR = '#92675C';
+  var MODE_STORAGE_KEY = 'sunaPlanner.themeMode';
+  var DEFAULT_MODE = 'auto';
+
+  function loadThemeColor() {
+    try {
+      var v = localStorage.getItem(STORAGE_KEY);
+      return v && /^#[0-9a-fA-F]{6}$/.test(v) ? v : DEFAULT_COLOR;
+    } catch (e) { return DEFAULT_COLOR; }
+  }
+  function saveThemeColor(hex) {
+    try { localStorage.setItem(STORAGE_KEY, hex); } catch (e) {}
+  }
+  function loadThemeMode() {
+    try {
+      var v = localStorage.getItem(MODE_STORAGE_KEY);
+      return v === 'light' || v === 'dark' ? v : DEFAULT_MODE;
+    } catch (e) { return DEFAULT_MODE; }
+  }
+  function saveThemeMode(mode) {
+    try {
+      if (mode === 'auto') localStorage.removeItem(MODE_STORAGE_KEY);
+      else localStorage.setItem(MODE_STORAGE_KEY, mode);
+    } catch (e) {}
+  }
+  function applyThemeMode(mode) {
+    if (mode === 'light' || mode === 'dark') {
+      document.documentElement.setAttribute('data-theme', mode);
+    } else {
+      document.documentElement.removeAttribute('data-theme');
+    }
+  }
+  function applyPalette(baseHex) {
+    var css = fullThemeCss(baseHex);
+    var styleEl = document.getElementById('themeOverrideStyle');
+    if (!styleEl) {
+      styleEl = document.createElement('style');
+      styleEl.id = 'themeOverrideStyle';
+      // Insert right after this script tag (i.e. right after the main
+      // hardcoded <style> block) so it wins the cascade regardless of
+      // exactly how the surrounding page is structured.
+      if (document.currentScript && document.currentScript.parentNode) {
+        document.currentScript.parentNode.insertBefore(styleEl, document.currentScript.nextSibling);
+      } else {
+        document.head.appendChild(styleEl);
+      }
+    }
+    styleEl.textContent = css;
+  }
+
+  window.SunaTheme = {
+    loadThemeColor: loadThemeColor,
+    saveThemeColor: saveThemeColor,
+    applyPalette: applyPalette,
+    loadThemeMode: loadThemeMode,
+    saveThemeMode: saveThemeMode,
+    applyThemeMode: applyThemeMode,
+    DEFAULT_COLOR: DEFAULT_COLOR,
+    DEFAULT_MODE: DEFAULT_MODE
+  };
+
+  applyPalette(loadThemeColor());
+  applyThemeMode(loadThemeMode());
+})();
+</script>
+</head>
+<body>
+<div class="page" id="app">
+  <div class="banner" id="storageBanner">이 브라우저에서는 저장이 안 되고 있어요 (사생활 보호 모드이거나 저장 공간이 꽉 찼을 수 있어요). 사진 수를 줄이거나 다른 브라우저로 열어주세요.</div>
+
+  <!-- ============ LIST ============ -->
+  <section id="listView" hidden>
+    <div class="topbar">
+      <a class="icon-btn" href="index.html" title="플래너로 돌아가기" aria-label="플래너로 돌아가기">←</a>
+      <div>
+        <p class="eyebrow">수나공방 · PROJECTS</p>
+        <h1 class="title">진행 중인 사업</h1>
+      </div>
+      <span class="spacer"></span>
+      <button class="btn" type="button" id="addBtn">＋ 새 사업</button>
+    </div>
+    <div class="stats" id="stats" style="margin-top:16px"></div>
+    <div class="list" id="list" style="margin-top:14px"></div>
+  </section>
+
+  <!-- ============ DETAIL ============ -->
+  <section id="detailView" hidden>
+    <div class="topbar">
+      <a class="icon-btn" href="#/" aria-label="목록으로">←</a>
+      <span class="spacer"></span>
+      <button class="btn" type="button" id="editBtn">✏️ 수정하기</button>
+    </div>
+    <h1 class="title" id="dName" style="margin:14px 0 12px"></h1>
+    <div class="panel">
+      <div class="progress-head">
+        <span>현재 단계 · <span class="stage-now" id="dStage"></span></span>
+        <span class="pct" id="dPct"></span>
+      </div>
+      <div class="bar" id="dBar"><span></span></div>
+      <div class="steps" id="dSteps" style="margin-top:14px"></div>
+      <p class="steps-hint">단계를 누르면 바로 진행 단계가 바뀌어요.</p>
+    </div>
+    <div class="sections" id="dSections" style="margin-top:14px"></div>
+  </section>
+
+  <!-- ============ EDIT ============ -->
+  <section id="editView" hidden>
+    <div class="save-state" id="saveState"><span class="dot"></span><span id="saveText">자동 저장 중이에요</span><span class="spacer"></span><button class="btn small" type="button" id="doneBtn">완료</button></div>
+    <div class="form" style="margin-top:12px">
+      <div class="field">
+        <label for="fName">사업 이름</label>
+        <input class="input" id="fName" data-key="name" placeholder="예: 레진 코스터 신제품">
+      </div>
+
+      <div class="field">
+        <span class="label">진행 단계 <span class="hint">· 이름을 바꾸고, 지금 단계를 눌러 선택하세요</span></span>
+        <div class="steps" id="fSteps"></div>
+        <div class="stage-edit" id="fStageNames" style="margin-top:8px"></div>
+        <div class="row-actions">
+          <button class="btn ghost small" type="button" id="addStageBtn">＋ 단계 추가</button>
+          <button class="btn ghost small" type="button" id="resetStagesBtn">기본 단계로</button>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="fProgress">진행 상황 메모 <span class="hint">· 적는 대로 자동 저장돼요</span></label>
+        <textarea class="textarea tall" id="fProgress" data-key="progressNote" placeholder="오늘 어디까지 했는지, 다음에 할 일 등을 자유롭게 적어두세요"></textarea>
+      </div>
+
+      <div class="field">
+        <label for="fSummary">1. 한 줄 요약</label>
+        <input class="input" id="fSummary" data-key="summary" placeholder="이 사업을 한 줄로">
+      </div>
+      <div class="field">
+        <label for="fUsage">2. 어디에 사용할지</label>
+        <textarea class="textarea" id="fUsage" data-key="usage" placeholder="예: 스마트스토어 판매, 원데이 클래스 재료, 인스타 콘텐츠"></textarea>
+      </div>
+      <div class="field">
+        <label for="fContent">3. 사업 내용</label>
+        <textarea class="textarea tall" id="fContent" data-key="content" placeholder="사업에 대한 자세한 내용"></textarea>
+      </div>
+      <div class="field">
+        <span class="label">4. 관련 이미지</span>
+        <div class="imgs" id="fImgs"></div>
+        <div class="row-actions">
+          <label class="btn ghost small" style="cursor:pointer">📷 사진 추가<input type="file" id="fImgInput" accept="image/*" multiple hidden></label>
+        </div>
+      </div>
+      <div class="field">
+        <span class="label">5. 어디서 진행 중인지</span>
+        <div class="tools" id="fTools"></div>
+        <input class="input" id="fToolOther" data-key="toolOther" placeholder="기타 도구·장소 (직접 입력)">
+        <label for="fFile" class="hint" style="margin-top:4px">저장 위치 (파일 이름, 폴더, 대화 제목 등)</label>
+        <input class="input" id="fFile" data-key="fileLocation" placeholder="예: 구글드라이브/수나공방/코스터.docx, Claude 대화 '코스터 기획'">
+        <label for="fLinks" class="hint" style="margin-top:4px">링크 (한 줄에 하나씩)</label>
+        <textarea class="textarea" id="fLinks" data-key="links" placeholder="https://..."></textarea>
+      </div>
+
+      <div class="row-actions" style="justify-content:space-between; margin-top:8px">
+        <button class="btn danger small" type="button" id="deleteBtn">이 사업 삭제</button>
+        <button class="btn" type="button" id="doneBtn2">완료</button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="lightbox" id="lightbox"><img alt=""></div>
+<div class="dialog" id="dialog">
+  <div class="box">
+    <p id="dialogMsg"></p>
+    <div class="row-actions">
+      <button class="btn ghost small" type="button" id="dialogCancel">취소</button>
+      <button class="btn danger small" type="button" id="dialogOk">확인</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  var LS_KEY = 'sunaProjects.v1';
+  var DEFAULT_STAGES = ['건조', '건조 완료', '작업 시작', '레진 작업 중', '샌딩 중', '완성'];
+  var TOOLS = ['Claude', 'ChatGPT', '직접 작업', 'Gemini', '노션', '기타'];
+  var MIN_STAGES = 2, MAX_STAGES = 10;
+
+  function $(id) { return document.getElementById(id); }
+  function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2, 7); }
+  function esc(s) {
+    return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
+  // ---------------- storage ----------------
+  var state = load();
+  function load() {
+    try {
+      var raw = localStorage.getItem(LS_KEY);
+      if (raw) {
+        var p = JSON.parse(raw);
+        if (p && Array.isArray(p.projects)) return p;
+      }
+    } catch (e) {}
+    return { projects: [] };
+  }
+
+  var saveTimer = null;
+  function persist() {
+    try {
+      localStorage.setItem(LS_KEY, JSON.stringify(state));
+      $('storageBanner').classList.remove('show');
+      return true;
+    } catch (e) {
+      $('storageBanner').classList.add('show');
+      return false;
+    }
+  }
+  function flushSave() {
+    if (!saveTimer) return;
+    clearTimeout(saveTimer);
+    saveTimer = null;
+    var ok = persist();
+    setSaveState(ok ? 'saved' : 'error');
+  }
+  function scheduleSave() {
+    setSaveState('saving');
+    if (saveTimer) clearTimeout(saveTimer);
+    saveTimer = setTimeout(flushSave, 400);
+  }
+  // Save immediately if the app is backgrounded / closed / crashes mid-typing.
+  document.addEventListener('visibilitychange', function () { if (document.hidden) flushSave(); });
+  window.addEventListener('pagehide', flushSave);
+  window.addEventListener('beforeunload', flushSave);
+
+  function setSaveState(kind) {
+    var el = $('saveState'), txt = $('saveText');
+    el.classList.remove('saving', 'error');
+    if (kind === 'saving') { el.classList.add('saving'); txt.textContent = '저장 중…'; }
+    else if (kind === 'error') { el.classList.add('error'); txt.textContent = '저장 실패 — 저장 공간을 확인해주세요'; }
+    else {
+      var d = new Date();
+      txt.textContent = '자동 저장됨 · ' + d.getHours() + ':' + String(d.getMinutes()).padStart(2, '0') + ':' + String(d.getSeconds()).padStart(2, '0');
+    }
+  }
+
+  // ---------------- images (IndexedDB, falls back to inline data URLs) ----------------
+  var idb = null;
+  var idbReady = new Promise(function (resolve) {
+    try {
+      var req = indexedDB.open('sunaProjects', 1);
+      req.onupgradeneeded = function () { req.result.createObjectStore('images'); };
+      req.onsuccess = function () { idb = req.result; resolve(); };
+      req.onerror = function () { resolve(); };
+    } catch (e) { resolve(); }
+  });
+  function idbTx(mode, fn) {
+    return idbReady.then(function () {
+      if (!idb) return Promise.reject(new Error('no idb'));
+      return new Promise(function (resolve, reject) {
+        var tx = idb.transaction('images', mode);
+        var r = fn(tx.objectStore('images'));
+        tx.oncomplete = function () { resolve(r && r.result); };
+        tx.onerror = function () { reject(tx.error); };
+      });
+    });
+  }
+  var urlCache = {};
+  function imageSrc(img) {
+    if (img.data) return Promise.resolve(img.data);
+    if (urlCache[img.id]) return Promise.resolve(urlCache[img.id]);
+    return idbTx('readonly', function (s) { return s.get(img.id); }).then(function (v) {
+      urlCache[img.id] = v || '';
+      return urlCache[img.id];
+    }).catch(function () { return ''; });
+  }
+  function storeImage(dataUrl) {
+    var id = uid();
+    return idbTx('readwrite', function (s) { s.put(dataUrl, id); })
+      .then(function () { urlCache[id] = dataUrl; return { id: id }; })
+      .catch(function () { return { id: id, data: dataUrl }; });
+  }
+  function deleteImage(img) {
+    delete urlCache[img.id];
+    if (!img.data) idbTx('readwrite', function (s) { s.delete(img.id); }).catch(function () {});
+  }
+  function shrink(file) {
+    return new Promise(function (resolve, reject) {
+      var reader = new FileReader();
+      reader.onerror = reject;
+      reader.onload = function () {
+        var im = new Image();
+        im.onerror = reject;
+        im.onload = function () {
+          var max = 1400, w = im.width, h = im.height;
+          if (w > max || h > max) { var k = max / Math.max(w, h); w = Math.round(w * k); h = Math.round(h * k); }
+          var c = document.createElement('canvas');
+          c.width = w; c.height = h;
+          c.getContext('2d').drawImage(im, 0, 0, w, h);
+          resolve(c.toDataURL('image/jpeg', 0.82));
+        };
+        im.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  function fillImages(container, p, removable) {
+    container.innerHTML = '';
+    (p.images || []).forEach(function (img) {
+      var fig = document.createElement('figure');
+      var el = document.createElement('img');
+      el.alt = '';
+      fig.appendChild(el);
+      imageSrc(img).then(function (src) { if (src) el.src = src; });
+      el.addEventListener('click', function () { if (el.src) openLightbox(el.src); });
+      if (removable) {
+        var rm = document.createElement('button');
+        rm.type = 'button'; rm.className = 'rm'; rm.textContent = '✕'; rm.setAttribute('aria-label', '사진 삭제');
+        rm.addEventListener('click', function () {
+          confirmDialog('이 사진을 삭제할까요?', function () {
+            p.images = p.images.filter(function (x) { return x !== img; });
+            deleteImage(img);
+            touch(p); fillImages(container, p, true);
+          });
+        });
+        fig.appendChild(rm);
+      }
+      container.appendChild(fig);
+    });
+  }
+
+  // ---------------- model helpers ----------------
+  function newProject() {
+    return {
+      id: uid(), name: '', stages: DEFAULT_STAGES.slice(), stage: 0,
+      progressNote: '', summary: '', usage: '', content: '', images: [],
+      tools: [], toolOther: '', fileLocation: '', links: '',
+      createdAt: Date.now(), updatedAt: Date.now()
+    };
+  }
+  function find(id) {
+    for (var i = 0; i < state.projects.length; i++) if (state.projects[i].id === id) return state.projects[i];
+    return null;
+  }
+  function pct(p) { return p.stages.length ? Math.round(p.stage / p.stages.length * 100) : 0; }
+  function stageLabel(p) { return p.stage > 0 ? p.stages[p.stage - 1] : '시작 전'; }
+  function isDone(p) { return p.stages.length > 0 && p.stage >= p.stages.length; }
+  function touch(p) { p.updatedAt = Date.now(); scheduleSave(); }
+  function whereText(p) {
+    var t = (p.tools || []).filter(function (x) { return x !== '기타'; });
+    if (p.toolOther) t.push(p.toolOther);
+    return t;
+  }
+  function ago(ts) {
+    var s = Math.floor((Date.now() - ts) / 1000);
+    if (s < 60) return '방금 전';
+    if (s < 3600) return Math.floor(s / 60) + '분 전';
+    if (s < 86400) return Math.floor(s / 3600) + '시간 전';
+    if (s < 86400 * 30) return Math.floor(s / 86400) + '일 전';
+    var d = new Date(ts);
+    return (d.getMonth() + 1) + '월 ' + d.getDate() + '일';
+  }
+
+  // ---------------- shared UI ----------------
+  function renderSteps(container, p, onPick) {
+    container.style.setProperty('--n', p.stages.length);
+    container.innerHTML = '';
+    p.stages.forEach(function (name, i) {
+      var n = i + 1;
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.className = 'step' + (n < p.stage ? ' passed' : '') + (n === p.stage ? ' current' : '');
+      b.setAttribute('aria-pressed', n === p.stage ? 'true' : 'false');
+      b.innerHTML = '<span class="num">' + (n < p.stage ? '✓' : n) + '</span><span class="lbl">' + esc(name || (n + '단계')) + '</span>';
+      b.addEventListener('click', function () {
+        // tapping the current stage again steps back one, so a mis-tap is undoable
+        p.stage = (p.stage === n) ? n - 1 : n;
+        touch(p); onPick();
+      });
+      container.appendChild(b);
+    });
+  }
+  function setBar(bar, p) {
+    bar.querySelector('span').style.width = pct(p) + '%';
+    bar.classList.toggle('done', isDone(p));
+  }
+  function openLightbox(src) {
+    var lb = $('lightbox');
+    lb.querySelector('img').src = src;
+    lb.classList.add('show');
+  }
+  $('lightbox').addEventListener('click', function () { this.classList.remove('show'); });
+
+  var dialogCb = null;
+  function confirmDialog(msg, cb) {
+    $('dialogMsg').textContent = msg;
+    dialogCb = cb;
+    $('dialog').classList.add('show');
+    $('dialogOk').focus();
+  }
+  $('dialogCancel').addEventListener('click', function () { $('dialog').classList.remove('show'); dialogCb = null; });
+  $('dialogOk').addEventListener('click', function () {
+    $('dialog').classList.remove('show');
+    var cb = dialogCb; dialogCb = null;
+    if (cb) cb();
+  });
+
+  // ---------------- LIST ----------------
+  function renderList() {
+    var ps = state.projects.slice();
+    var active = ps.filter(function (p) { return !isDone(p); }).sort(function (a, b) { return b.updatedAt - a.updatedAt; });
+    var done = ps.filter(isDone).sort(function (a, b) { return b.updatedAt - a.updatedAt; });
+    var avg = active.length ? Math.round(active.reduce(function (s, p) { return s + pct(p); }, 0) / active.length) : 0;
+
+    $('stats').innerHTML =
+      '<div class="stat"><b>' + active.length + '</b><span>진행 중</span></div>' +
+      '<div class="stat"><b>' + done.length + '</b><span>완성</span></div>' +
+      '<div class="stat"><b>' + avg + '%</b><span>평균 진행률</span></div>';
+
+    var list = $('list');
+    list.innerHTML = '';
+    if (!ps.length) {
+      list.innerHTML = '<div class="empty">아직 등록된 사업이 없어요.<br>오른쪽 위 <b>＋ 새 사업</b>을 눌러 시작해보세요.</div>';
+      return;
+    }
+    function card(p) {
+      var a = document.createElement('a');
+      a.className = 'card';
+      a.href = '#/p/' + p.id;
+      var where = whereText(p);
+      a.innerHTML =
+        '<div class="card-head"><span class="card-name">' + esc(p.name || '이름 없는 사업') + '</span>' +
+        '<span class="pct">' + pct(p) + '%</span></div>' +
+        '<div class="bar' + (isDone(p) ? ' done' : '') + '"><span style="width:' + pct(p) + '%"></span></div>' +
+        '<div class="card-meta">' +
+          '<span class="chip' + (isDone(p) ? ' done' : '') + '">' + (p.stage > 0 ? p.stage + '/' + p.stages.length + ' · ' : '') + esc(stageLabel(p)) + '</span>' +
+          where.map(function (w) { return '<span class="chip soft">' + esc(w) + '</span>'; }).join('') +
+          '<span style="margin-left:auto">' + ago(p.updatedAt) + '</span>' +
+        '</div>' +
+        (p.summary ? '<div class="kv" style="margin-top:6px">' + esc(p.summary) + '</div>' : '');
+      return a;
+    }
+    active.forEach(function (p) { list.appendChild(card(p)); });
+    if (done.length) {
+      var lbl = document.createElement('p');
+      lbl.className = 'list-label';
+      lbl.textContent = '완성된 사업';
+      list.appendChild(lbl);
+      done.forEach(function (p) { list.appendChild(card(p)); });
+    }
+  }
+  $('addBtn').addEventListener('click', function () {
+    var p = newProject();
+    state.projects.push(p);
+    persist();
+    location.hash = '#/p/' + p.id + '/edit';
+  });
+
+  // ---------------- DETAIL ----------------
+  var current = null;
+  function renderDetail(p) {
+    $('dName').textContent = p.name || '이름 없는 사업';
+    $('dStage').textContent = stageLabel(p);
+    $('dPct').textContent = pct(p) + '%';
+    setBar($('dBar'), p);
+    renderSteps($('dSteps'), p, function () { flushSave(); renderDetail(p); });
+
+    var box = $('dSections');
+    box.innerHTML = '';
+    function sec(n, title, html) {
+      var s = document.createElement('div');
+      s.className = 'sec';
+      s.innerHTML = '<h3>' + (n ? '<span class="n">' + n + '</span>' : '') + esc(title) + '</h3>' + html;
+      box.appendChild(s);
+      return s;
+    }
+    function text(v) { return v ? '<div class="body">' + esc(v) + '</div>' : '<div class="none">아직 적지 않았어요</div>'; }
+
+    sec('', '📝 진행 상황 메모', text(p.progressNote));
+    sec(1, '한 줄 요약', text(p.summary));
+    sec(2, '어디에 사용할지', text(p.usage));
+    sec(3, '사업 내용', text(p.content));
+    var imgSec = sec(4, '관련 이미지', (p.images && p.images.length) ? '<div class="imgs"></div>' : '<div class="none">등록된 이미지가 없어요</div>');
+    if (p.images && p.images.length) fillImages(imgSec.querySelector('.imgs'), p, false);
+
+    var where = whereText(p);
+    var links = (p.links || '').split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
+    var h = '';
+    if (where.length) h += '<div class="where-row">' + where.map(function (w) { return '<span class="chip">' + esc(w) + '</span>'; }).join('') + '</div>';
+    if (p.fileLocation) h += '<div class="kv"><b>저장 위치</b> · <span class="body">' + esc(p.fileLocation) + '</span></div>';
+    if (links.length) {
+      h += '<div class="links">' + links.map(function (l) {
+        var safe = /^https?:\/\//i.test(l);
+        return safe ? '<a href="' + esc(l) + '" target="_blank" rel="noopener">' + esc(l) + '</a>' : '<span class="kv">' + esc(l) + '</span>';
+      }).join('') + '</div>';
+    }
+    sec(5, '어디서 진행 중인지 · 링크', h || '<div class="none">아직 적지 않았어요</div>');
+  }
+  $('editBtn').addEventListener('click', function () { if (current) location.hash = '#/p/' + current.id + '/edit'; });
+
+  // ---------------- EDIT ----------------
+  var fields = Array.prototype.slice.call(document.querySelectorAll('#editView [data-key]'));
+  fields.forEach(function (el) {
+    el.addEventListener('input', function () {
+      if (!current) return;
+      current[el.getAttribute('data-key')] = el.value;
+      touch(current);
+    });
+  });
+
+  function renderStageEditor(p) {
+    function refreshSteps() { renderSteps($('fSteps'), p, refreshSteps); }
+    refreshSteps();
+    var wrap = $('fStageNames');
+    wrap.innerHTML = '';
+    p.stages.forEach(function (name, i) {
+      var row = document.createElement('div');
+      row.className = 'stage-row';
+      row.innerHTML = '<span class="n">' + (i + 1) + '</span>';
+      var inp = document.createElement('input');
+      inp.className = 'input';
+      inp.value = name;
+      inp.placeholder = (i + 1) + '단계 이름';
+      inp.setAttribute('aria-label', (i + 1) + '단계 이름');
+      inp.addEventListener('input', function () { p.stages[i] = inp.value; touch(p); refreshSteps(); });
+      row.appendChild(inp);
+      var rm = document.createElement('button');
+      rm.type = 'button'; rm.className = 'icon-btn'; rm.textContent = '✕';
+      rm.setAttribute('aria-label', (i + 1) + '단계 삭제');
+      rm.disabled = p.stages.length <= MIN_STAGES;
+      rm.addEventListener('click', function () {
+        p.stages.splice(i, 1);
+        if (p.stage > p.stages.length) p.stage = p.stages.length;
+        else if (p.stage > i) p.stage -= 1;
+        touch(p); renderStageEditor(p);
+      });
+      row.appendChild(rm);
+      wrap.appendChild(row);
+    });
+    $('addStageBtn').disabled = p.stages.length >= MAX_STAGES;
+  }
+  $('addStageBtn').addEventListener('click', function () {
+    if (!current || current.stages.length >= MAX_STAGES) return;
+    current.stages.push('');
+    touch(current); renderStageEditor(current);
+    var inputs = $('fStageNames').querySelectorAll('input');
+    inputs[inputs.length - 1].focus();
+  });
+  $('resetStagesBtn').addEventListener('click', function () {
+    if (!current) return;
+    confirmDialog('단계 이름을 기본값(건조 → 완성 6단계)으로 되돌릴까요?', function () {
+      current.stages = DEFAULT_STAGES.slice();
+      if (current.stage > current.stages.length) current.stage = current.stages.length;
+      touch(current); renderStageEditor(current);
+    });
+  });
+
+  function renderTools(p) {
+    var wrap = $('fTools');
+    wrap.innerHTML = '';
+    TOOLS.forEach(function (t) {
+      var b = document.createElement('button');
+      b.type = 'button';
+      var on = (p.tools || []).indexOf(t) >= 0;
+      b.className = 'tool' + (on ? ' on' : '');
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      b.textContent = t;
+      b.addEventListener('click', function () {
+        p.tools = p.tools || [];
+        var i = p.tools.indexOf(t);
+        if (i >= 0) p.tools.splice(i, 1); else p.tools.push(t);
+        touch(p); renderTools(p);
+        if (t === '기타' && p.tools.indexOf('기타') >= 0) $('fToolOther').focus();
+      });
+      wrap.appendChild(b);
+    });
+  }
+
+  $('fImgInput').addEventListener('change', function () {
+    var p = current, files = Array.prototype.slice.call(this.files || []);
+    this.value = '';
+    if (!p || !files.length) return;
+    setSaveState('saving');
+    files.reduce(function (chain, f) {
+      return chain.then(function () {
+        return shrink(f).then(storeImage).then(function (img) {
+          p.images = p.images || [];
+          p.images.push(img);
+          touch(p);
+        }).catch(function () {});
+      });
+    }, Promise.resolve()).then(function () {
+      if (current === p) fillImages($('fImgs'), p, true);
+    });
+  });
+
+  function renderEdit(p) {
+    fields.forEach(function (el) { el.value = p[el.getAttribute('data-key')] || ''; });
+    renderStageEditor(p);
+    renderTools(p);
+    fillImages($('fImgs'), p, true);
+    setSaveState('saved');
+    $('saveText').textContent = '적는 내용은 자동으로 저장돼요';
+    if (!p.name) setTimeout(function () { $('fName').focus(); }, 50);
+  }
+  function finishEdit() {
+    flushSave();
+    if (current) location.hash = '#/p/' + current.id;
+  }
+  $('doneBtn').addEventListener('click', finishEdit);
+  $('doneBtn2').addEventListener('click', finishEdit);
+  $('deleteBtn').addEventListener('click', function () {
+    var p = current;
+    if (!p) return;
+    confirmDialog('"' + (p.name || '이름 없는 사업') + '"을(를) 삭제할까요? 되돌릴 수 없어요.', function () {
+      (p.images || []).forEach(deleteImage);
+      state.projects = state.projects.filter(function (x) { return x !== p; });
+      if (saveTimer) clearTimeout(saveTimer);
+      saveTimer = null;
+      persist();
+      current = null;
+      location.hash = '#/';
+    });
+  });
+
+  // ---------------- router ----------------
+  function route() {
+    flushSave();
+    var m = location.hash.match(/^#\/p\/([^/]+)(\/edit)?$/);
+    var p = m ? find(m[1]) : null;
+    $('listView').hidden = !!p;
+    $('detailView').hidden = !(p && !m[2]);
+    $('editView').hidden = !(p && m[2]);
+    current = p;
+    if (!p) {
+      if (location.hash && location.hash !== '#/') history.replaceState(null, '', '#/');
+      renderList();
+    } else if (m[2]) {
+      renderEdit(p);
+    } else {
+      renderDetail(p);
+    }
+    window.scrollTo(0, 0);
+  }
+  window.addEventListener('hashchange', route);
+  // Another tab edited the data: pick it up when not mid-edit.
+  window.addEventListener('storage', function (e) {
+    if (e.key !== LS_KEY || !$('editView').hidden) return;
+    state = load(); route();
+  });
+  route();
+
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () { navigator.serviceWorker.register('sw.js').catch(function () {}); });
+  }
+})();
+</script>
+</body>
+</html>
