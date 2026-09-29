@@ -1,4 +1,4 @@
-const CACHE_NAME = 'suna-planner-v41';
+const CACHE_NAME = 'suna-planner-v42';
 const ASSETS = ['./', './index.html', './projects.html', './mini-logo.png', './manifest.json', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', function (event) {

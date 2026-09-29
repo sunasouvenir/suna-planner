@@ -266,6 +266,99 @@
   .oneline { margin: 16px 2px 0; }
   .bigpct { margin: 14px 2px 6px; }
   .oneline:not([hidden]) + .bigpct { margin-top: 22px; }
+  /* ---------- bear logo = calendar button ---------- */
+  button.logo-btn { position: relative; flex: none; padding: 0; border-radius: 10px; }
+  .logo-btn .badge { position: absolute; right: -3px; bottom: -2px; width: 17px; height: 17px; border-radius: 50%; background: var(--accent); color: var(--on-accent); font-size: 9px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 0 2px var(--bg); }
+
+  /* ---------- deadline bits shared by list / detail ---------- */
+  .dchip { display: inline-flex; align-items: center; gap: 2px; border-radius: 99px; font-size: 10px; font-weight: 700; padding: 3px 9px; background: var(--card); color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums; flex: none; }
+  .dchip.hot { background: var(--accent); color: var(--on-accent); }
+  .dchip.over { background: var(--danger); color: #fff; }
+  .focus .due { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin: -2px 0 9px; font-size: 9px; color: var(--muted); }
+  .focus .due b { display: block; font-size: 10.5px; color: var(--ink); font-weight: 700; margin-top: 1px; }
+  .upnext { margin-top: 12px; background: var(--surface); border-radius: 18px; padding: 11px 14px 4px; }
+  .upnext .h { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+  .upnext .h b { font-size: 12.5px; }
+  .upnext .h button { font-size: 10px; font-weight: 600; color: var(--ink-2); }
+  .ur { display: flex; align-items: center; gap: 8px; padding: 8px 0; font-size: 11px; font-weight: 600; }
+  .ur + .ur { border-top: 1px solid var(--line-soft); }
+  .ur .n { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .ur .n small { display: block; font-size: 9px; color: var(--muted); font-weight: 500; }
+  .ur .stars { font-size: 10px; letter-spacing: -1px; flex: none; }
+
+  /* ---------- deadline editor ---------- */
+  .duebox { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 11px 12px; }
+  .duebox.on { border: 1.4px solid var(--accent); }
+  .duebox .top { display: flex; justify-content: space-between; align-items: center; gap: 10px; font-size: 11.5px; font-weight: 700; }
+  .switch { width: 38px; height: 22px; border-radius: 99px; background: var(--track); position: relative; flex: none; transition: background .2s; }
+  .switch::after { content: ""; position: absolute; left: 3px; top: 3px; width: 16px; height: 16px; border-radius: 50%; background: #fff; transition: transform .2s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+  .switch[aria-checked="true"] { background: var(--accent); }
+  .switch[aria-checked="true"]::after { transform: translateX(16px); background: var(--on-accent); }
+  .duebox .date { display: block; width: 100%; margin-top: 10px; background: var(--bg); border: 1px solid var(--line); border-radius: 11px; padding: 10px 12px; font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; outline: none; min-height: 42px; }
+  .duebox .date:focus { border-color: var(--accent); }
+  .steps3 { margin-top: 8px; display: flex; flex-direction: column; gap: 4px; }
+  .steps3 div { display: flex; align-items: center; gap: 8px; font-size: 10.5px; padding: 7px 10px; border-radius: 10px; background: var(--bg); }
+  .steps3 b { width: 34px; letter-spacing: -1px; font-size: 11px; }
+  .steps3 span { flex: 1; color: var(--ink-2); }
+  .steps3 em { font-style: normal; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .steps3 .last { background: var(--accent); color: var(--on-accent); }
+  .steps3 .last span { color: inherit; opacity: .75; }
+  .duebox .clear { display: block; margin: 8px 0 0 auto; color: var(--danger); font-size: 10.5px; font-weight: 700; }
+  .duehint { font-size: 9.5px; color: var(--faint); margin: 5px 2px 0; }
+
+  /* ---------- CALENDAR ---------- */
+  #calView { --cal-line: var(--ink); }
+  .ctop { display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; }
+  .ctop .home { justify-self: start; font-size: 10.5px; font-weight: 700; background: var(--surface); border-radius: 99px; padding: 6px 11px; box-shadow: var(--shadow); margin-top: 4px; }
+  .ctop .mnav { justify-self: end; display: flex; gap: 5px; margin-top: 4px; }
+  .ctop .mnav button { width: 28px; height: 28px; border-radius: 50%; background: var(--surface); box-shadow: var(--shadow); font-size: 14px; font-weight: 700; }
+  .ctop .bear { display: flex; flex-direction: column; align-items: center; }
+  .ctop .bear .logo { width: 72px; height: 54px; }
+  .ctop .month { display: flex; align-items: baseline; justify-content: center; gap: 7px; margin-top: 2px; }
+  .ctop .month b { font-family: 'Cormorant Garamond', serif; font-weight: 600; font-size: 50px; line-height: .95; font-variant-numeric: lining-nums; font-feature-settings: 'lnum' 1; }
+  .ctop .month span { font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; font-size: 18px; white-space: nowrap; }
+  .today-btn { display: block; margin: 6px auto 0; font-size: 9.5px; font-weight: 700; color: var(--muted); }
+  .cpills { display: flex; gap: 5px; justify-content: center; margin-top: 10px; flex-wrap: wrap; }
+  .cpills button { font-size: 9px; font-weight: 700; border: 1px solid var(--cal-line); border-radius: 99px; padding: 3px 9px; letter-spacing: .02em; }
+  .cpills button.on { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .plan { display: flex; gap: 12px; margin-top: 14px; align-items: flex-start; }
+  .plan .t { width: 80px; flex: none; }
+  .plan .t b { display: block; font-size: 16px; font-weight: 700; letter-spacing: -0.02em; line-height: 1; }
+  .plan .t i { display: block; font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 600; line-height: 1; margin-top: 3px; }
+  .dl { flex: 1; min-width: 0; }
+  .dl .h { display: flex; justify-content: space-between; font-size: 9px; color: var(--ink-2); border-bottom: 1.6px solid var(--cal-line); padding-bottom: 3px; }
+  .dl a, .dl .none { display: flex; align-items: center; gap: 6px; border-bottom: 1px solid var(--cal-line); padding: 6px 0; font-size: 10.5px; font-weight: 600; }
+  .dl .none { color: var(--faint); font-weight: 500; }
+  .dl .n { flex: 1; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .dl .d { text-align: right; font-variant-numeric: tabular-nums; flex: none; }
+  .dl .s { width: 30px; text-align: right; font-size: 9.5px; letter-spacing: -1px; flex: none; }
+  .dow { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); margin-top: 14px; font-size: 9px; font-weight: 700; color: var(--ink-2); padding: 0 2px 3px; border-bottom: 1.6px solid var(--cal-line); }
+  .cgrid { display: grid; grid-template-columns: repeat(7, minmax(0, 1fr)); border-left: 1px solid var(--cal-line); }
+  .cc { min-height: 84px; border-right: 1px solid var(--cal-line); border-bottom: 1px solid var(--cal-line); padding: 3px 2px 4px; text-align: left; display: flex; flex-direction: column; gap: 2px; min-width: 0; overflow: hidden; }
+  .cc.dim { background: repeating-linear-gradient(135deg, transparent 0 5px, var(--card) 5px 6px); }
+  .cc.dim .dn { color: var(--faint); }
+  .cc.sel { box-shadow: inset 0 0 0 2px var(--accent); }
+  .cc .dn { font-size: 9px; font-weight: 700; font-variant-numeric: tabular-nums; line-height: 15px; height: 15px; }
+  .cc.today .dn { display: inline-flex; width: 15px; border-radius: 50%; background: var(--accent); color: var(--on-accent); align-items: center; justify-content: center; }
+  .ev { border-radius: 5px; padding: 2px 3px; font-size: 7.5px; line-height: 1.2; background: var(--surface); border: .8px solid var(--cal-line); color: var(--ink); }
+  .ev b { display: block; font-size: 7.5px; letter-spacing: -1px; line-height: 1.1; }
+  .ev i { font-style: normal; font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+  .ev.s2 { border-width: 1.3px; }
+  .ev.s3 { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  .ck { font-size: 7.5px; line-height: 1.25; color: var(--ink-2); font-weight: 500; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; overflow-wrap: anywhere; }
+  .ck em { font-style: normal; font-weight: 800; color: var(--ink); margin-right: 1px; }
+  .cc .more { font-size: 7.5px; color: var(--muted); font-weight: 700; }
+  .legend { display: flex; justify-content: center; flex-wrap: wrap; gap: 4px 12px; margin-top: 9px; font-size: 9.5px; color: var(--ink-2); font-weight: 600; }
+  .legend b { color: var(--ink); letter-spacing: -1px; }
+  .legend .k3 { display: inline-block; background: var(--accent); color: var(--on-accent); border-radius: 4px; padding: 0 4px; letter-spacing: -1px; }
+  .dayp { margin-top: 12px; background: var(--surface); border-radius: 18px; padding: 11px 14px 6px; }
+  .dayp .h { font-size: 12.5px; font-weight: 700; margin-bottom: 6px; }
+  .dayp .none { font-size: 10.5px; color: var(--faint); padding-bottom: 6px; }
+  .dayp a, .dayp .row { display: flex; gap: 8px; align-items: flex-start; padding: 7px 0; font-size: 11px; border-top: 1px solid var(--line-soft); }
+  .dayp .row:first-of-type, .dayp a:first-of-type { border-top: 0; }
+  .dayp .ic { width: 34px; flex: none; font-weight: 800; letter-spacing: -1px; font-size: 10.5px; }
+  .dayp .tx { flex: 1; min-width: 0; overflow-wrap: anywhere; white-space: pre-wrap; color: var(--ink-2); }
+  .dayp .tx b { color: var(--ink); display: block; }
 </style>
 </head>
 <body>
@@ -275,7 +368,7 @@
   <!-- ============ LIST ============ -->
   <section id="listView" hidden>
     <div class="hello">
-      <div class="logo" role="img" aria-label="수나 수브니르 로고"></div>
+      <button type="button" class="logo-btn" id="bearBtn" aria-label="마감 달력 열기"><span class="logo" style="display:block"></span><span class="badge" aria-hidden="true">✦</span></button>
       <div><h1 class="ti">Hello, Suna Souvenir</h1><p class="muted" id="helloSub"></p></div>
       <button type="button" class="themebtn" id="themeBtn" aria-label="화면 모드 바꾸기"></button>
       <a class="round" href="index.html" title="플래너" aria-label="플래너로 가기">📅</a>
@@ -287,7 +380,34 @@
       <div class="btns"><button type="button" id="addBtn">＋ New</button><button type="button" id="allBtn">View All</button></div>
     </div>
     <div class="search">🔍<input id="searchInput" type="search" placeholder="Search projects" aria-label="Search projects"><button type="button" class="f" id="filterBtn"></button></div>
+    <div id="upNext"></div>
     <div id="listBody"></div>
+  </section>
+
+  <!-- ============ CALENDAR ============ -->
+  <section id="calView" hidden>
+    <div class="ctop">
+      <a class="home" href="#/">← Home</a>
+      <div class="bear">
+        <button type="button" id="calBear" aria-label="홈으로"><span class="logo" style="display:block;width:72px;height:54px"></span></button>
+        <div class="month"><b id="calMonthNum"></b><span id="calMonthName"></span></div>
+      </div>
+      <div class="mnav"><button type="button" id="calPrev" aria-label="이전 달">‹</button><button type="button" id="calNext" aria-label="다음 달">›</button></div>
+    </div>
+    <button type="button" class="today-btn" id="calToday">Today</button>
+    <div class="cpills" id="calPills">
+      <button type="button" data-f="all" class="on">#MONTHLY</button>
+      <button type="button" data-f="due">#DEADLINE</button>
+      <button type="button" data-f="done">#DONE</button>
+    </div>
+    <div class="plan">
+      <div class="t"><b>MONTHLY</b><i>PLAN</i></div>
+      <div class="dl"><div class="h"><span>upcoming deadlines</span><span>due</span></div><div id="calDl"></div></div>
+    </div>
+    <div class="dow"><span>mon</span><span>tue</span><span>wed</span><span>thu</span><span>fri</span><span>sat</span><span>sun</span></div>
+    <div class="cgrid" id="calGrid"></div>
+    <div class="legend"><span><b>★</b> 1주 전</span><span><b>★★</b> 3일 전</span><span><span class="k3">★★★</span> 마감일</span><span>✓ 한 일</span></div>
+    <div class="dayp" id="calDay"></div>
   </section>
 
   <!-- ============ DETAIL ============ -->
@@ -328,6 +448,17 @@
     <div class="lab">Stage<span>눌러서 선택 · 길게 눌러 이름 수정/삭제</span></div>
     <div class="chips" id="fChips"></div>
     <div class="links-row"><span class="k">Template</span><span id="fPresets" style="display:contents"></span></div>
+
+    <div class="lab">Deadline<span>선택 사항 · 없어도 돼요</span></div>
+    <div class="duebox" id="fDueBox">
+      <div class="top"><span>마감일 정하기</span><button type="button" class="switch" id="fDueSwitch" role="switch" aria-checked="false" aria-label="마감일 정하기"></button></div>
+      <div id="fDueBody" hidden>
+        <input type="date" class="date" id="fDue" aria-label="마감일">
+        <div class="steps3" id="fDueSteps"></div>
+        <button type="button" class="clear" id="fDueClear">Clear date</button>
+      </div>
+    </div>
+    <p class="duehint" id="fDueHint">마감일을 정하면 달력에 1주 전 ★ · 3일 전 ★★ · 마감일 ★★★ 로 표시돼요</p>
 
     <div class="lab">Progress Note<span>기록하면 날짜·시간이 붙어요</span></div>
     <div class="memo-row">
@@ -424,6 +555,7 @@
     p.stage = Math.max(0, Math.min(p.stages.length, p.stage | 0));
     if (!p.icon) p.icon = '🖤';
     p.focus = p.focus === true;
+    if (typeof p.due !== 'string' || !/^\d{4}-\d{2}-\d{2}$/.test(p.due)) p.due = '';
     if (!p.stageDates || typeof p.stageDates !== 'object') p.stageDates = {};
     if (!Array.isArray(p.logs)) p.logs = [];
     if (p.progressNote) {  // v1 had a single memo box; keep it as the first timeline entry
@@ -555,6 +687,42 @@
   }
 
   // ---------------- model helpers ----------------
+  // ---------------- deadlines ----------------
+  var WD = ['일', '월', '화', '수', '목', '금', '토'];
+  var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  function ymd(d) { return d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate()); }
+  function parseYmd(s) { var a = s.split('-'); return new Date(+a[0], +a[1] - 1, +a[2]); }
+  function addDays(d, n) { return new Date(d.getFullYear(), d.getMonth(), d.getDate() + n); }
+  function today0() { var d = new Date(); return new Date(d.getFullYear(), d.getMonth(), d.getDate()); }
+  function mdw(d) { return (d.getMonth() + 1) + '.' + pad(d.getDate()) + ' (' + WD[d.getDay()] + ')'; }
+  function daysLeft(p) { return p.due ? Math.round((parseYmd(p.due) - today0()) / 864e5) : null; }
+  // Stars a project carries today: 1 from a week out, 2 from three days out, 3 on the day (and after, while unfinished).
+  function starsNow(p) {
+    var n = daysLeft(p);
+    if (n == null || isDone(p)) return 0;
+    return n <= 0 ? 3 : n <= 3 ? 2 : n <= 7 ? 1 : 0;
+  }
+  function stars(n) { return n ? new Array(n + 1).join('★') : ''; }
+  function ddayText(n) { return n === 0 ? 'D-Day' : n > 0 ? 'D-' + n : 'D+' + (-n); }
+  function dchip(p) {
+    var n = daysLeft(p);
+    if (n == null) return '';
+    if (isDone(p)) return '<span class="dchip">Done</span>';
+    var cls = n < 0 ? ' over' : n <= 7 ? ' hot' : '';
+    var st = starsNow(p);
+    return '<span class="dchip' + cls + '">' + (st ? stars(st) + ' ' : '') + ddayText(n) + '</span>';
+  }
+  // The three marker days for a deadline: [date, starCount]
+  function markers(p) {
+    if (!p.due) return [];
+    var d = parseYmd(p.due);
+    return [[addDays(d, -7), 1], [addDays(d, -3), 2], [d, 3]];
+  }
+  function upcoming() {
+    return state.projects.filter(function (p) { return p.due && !isDone(p); })
+      .sort(function (a, b) { return a.due < b.due ? -1 : a.due > b.due ? 1 : 0; });
+  }
+
   function newProject() {
     return normalize({ id: uid(), stages: PRESETS[DEFAULT_PRESET].slice(), stage: 0, createdAt: Date.now(), updatedAt: Date.now() });
   }
@@ -671,6 +839,7 @@
       return (p.name + ' ' + p.summary).toLowerCase().indexOf(q) >= 0;
     }).sort(function (a, b) { return b.updatedAt - a.updatedAt; });
 
+    renderUpNext(q);
     var body = $('listBody');
     body.innerHTML = '';
     if (!all.length) {
@@ -694,6 +863,7 @@
         '<span class="pill ' + (focus.stage ? 'blue' : 'gray') + '">' + esc(stageLabel(focus)) + '</span></div>' +
         '<div class="meta"><div>Tools<b>' + esc(where.join(' · ') || '—') + '</b></div>' +
         '<div style="text-align:right">Progress<b>' + focus.stage + ' / ' + focus.stages.length + ' · ' + pct(focus) + '%</b></div></div>' +
+        (focus.due ? '<div class="due"><div>Deadline<b>' + mdw(parseYmd(focus.due)) + '</b></div>' + dchip(focus) + '</div>' : '') +
         '<div class="stepper"></div>';
       body.appendChild(a);
       renderStepper(a.querySelector('.stepper'), focus, false, null);
@@ -705,7 +875,7 @@
         var a = document.createElement('a');
         a.className = 'mini';
         a.href = '#/p/' + p.id;
-        var sub = [stageLabel(p)].concat(whereList(p)).join(' · ');
+        var sub = [stageLabel(p)].concat(p.due && !isDone(p) ? [ddayText(daysLeft(p))] : []).concat(whereList(p)).join(' · ');
         a.innerHTML =
           '<div class="th">' + esc(p.icon) + '</div>' +
           '<div class="txt"><div class="nm">' + esc(p.name || '이름 없는 사업') + '</div><div class="sub">' + esc(sub) + '</div></div>' +
@@ -713,6 +883,19 @@
         body.appendChild(a);
       });
     }
+  }
+  function renderUpNext(q) {
+    var box = $('upNext');
+    var ups = q ? [] : upcoming().slice(0, 3);
+    box.innerHTML = '';
+    if (!ups.length) return;
+    var html = '<div class="upnext"><div class="h"><b class="ti">Upcoming</b><button type="button" id="upCal">Calendar →</button></div>';
+    ups.forEach(function (p) {
+      html += '<a class="ur" href="#/p/' + p.id + '"><div class="n">' + esc(p.icon) + ' ' + esc(p.name || '이름 없는 사업') +
+        '<small>' + mdw(parseYmd(p.due)) + ' 마감</small></div>' + dchip(p) + '</a>';
+    });
+    box.innerHTML = html + '</div>';
+    $('upCal').addEventListener('click', function () { location.hash = '#/cal'; });
   }
   function addProject() {
     var p = newProject();
@@ -728,6 +911,7 @@
   $('homeBtn').addEventListener('click', showAll);
   $('filterBtn').addEventListener('click', function () { filterIdx = (filterIdx + 1) % FILTERS.length; renderList(); });
   $('searchInput').addEventListener('input', renderList);
+  $('bearBtn').addEventListener('click', function () { location.hash = '#/cal'; });
 
   // ---------------- DETAIL ----------------
   var current = null;
@@ -746,7 +930,8 @@
     var links = p.links.split('\n').map(function (s) { return s.trim(); }).filter(Boolean);
     function row(label, html) { return '<div class="kv"><span>' + label + '</span>' + html + '</div>'; }
     function val(v) { return v ? '<b>' + esc(v) + '</b>' : '<b class="none">—</b>'; }
-    var kv = row('Usage', val(p.usage)) +
+    var kv = (p.due ? row('Deadline', '<b>' + mdw(parseYmd(p.due)) + ' &nbsp;' + dchip(p) + '</b>') : '') +
+      row('Usage', val(p.usage)) +
       row('Tools', val(where.join(' · '))) +
       row('Location', val(p.fileLocation));
     links.forEach(function (l, i) {
@@ -1005,7 +1190,48 @@
     touch(current); renderStar(current);
   });
 
+  // Deadline is optional: the switch shows the date field; turning it off clears the date.
+  var dueOpen = false;
+  function renderDue(p) {
+    var on = dueOpen || !!p.due;
+    $('fDueSwitch').setAttribute('aria-checked', on ? 'true' : 'false');
+    $('fDueBox').classList.toggle('on', on);
+    $('fDueBody').hidden = !on;
+    $('fDue').value = p.due;
+    var st = $('fDueSteps');
+    st.innerHTML = '';
+    if (p.due) {
+      var labels = ['1주 전', '3일 전', '마감일'];
+      markers(p).forEach(function (m, i) {
+        st.insertAdjacentHTML('beforeend', '<div' + (i === 2 ? ' class="last"' : '') + '><b>' + stars(m[1]) + '</b><span>' + labels[i] + '</span><em>' + mdw(m[0]) + '</em></div>');
+      });
+    }
+    $('fDueHint').textContent = on
+      ? (p.due ? '달력에 ★ · ★★ · ★★★ 가 자동으로 표시돼요' : '날짜를 골라주세요')
+      : '스위치를 켜면 마감일을 정할 수 있어요. 끄면 날짜 없이 저장돼요';
+  }
+  $('fDueSwitch').addEventListener('click', function () {
+    if (!current) return;
+    var on = !(dueOpen || !!current.due);
+    dueOpen = on;
+    if (!on && current.due) { current.due = ''; touch(current); }
+    renderDue(current);
+    if (on) setTimeout(function () { try { $('fDue').showPicker(); } catch (e) { $('fDue').focus(); } }, 50);
+  });
+  $('fDue').addEventListener('change', function () {
+    if (!current) return;
+    current.due = /^\d{4}-\d{2}-\d{2}$/.test(this.value) ? this.value : '';
+    touch(current); renderDue(current);
+  });
+  $('fDueClear').addEventListener('click', function () {
+    if (!current) return;
+    current.due = ''; dueOpen = false;
+    touch(current); renderDue(current);
+  });
+
   function renderEdit(p) {
+    dueOpen = false;
+    renderDue(p);
     renderStar(p);
     fields.forEach(function (el) { el.value = p[el.getAttribute('data-key')] || ''; });
     $('fMemo').value = p.memoDraft || '';
@@ -1065,13 +1291,115 @@
   });
   applyTheme(themeMode());
 
+  // ---------------- CALENDAR ----------------
+  var calMonth = null;   // first day of the month on screen
+  var calFilter = 'all';
+  var calSel = null;     // selected yyyy-mm-dd
+  function dayMap() {
+    // yyyy-mm-dd -> { ev: [[project, stars]], done: [[project, log]] }
+    var map = {};
+    function slot(k) { return map[k] || (map[k] = { ev: [], done: [] }); }
+    state.projects.forEach(function (p) {
+      markers(p).forEach(function (m) { slot(ymd(m[0])).ev.push([p, m[1]]); });
+      p.logs.forEach(function (l) { slot(ymd(new Date(l.ts))).done.push([p, l]); });
+    });
+    Object.keys(map).forEach(function (k) {
+      map[k].ev.sort(function (a, b) { return b[1] - a[1]; });
+      map[k].done.sort(function (a, b) { return a[1].ts - b[1].ts; });
+    });
+    return map;
+  }
+  function renderCal() {
+    if (!calMonth) { var t = today0(); calMonth = new Date(t.getFullYear(), t.getMonth(), 1); }
+    var y = calMonth.getFullYear(), mo = calMonth.getMonth();
+    $('calMonthNum').textContent = mo + 1;
+    $('calMonthName').textContent = MONTHS[mo] + ' ' + y;
+    Array.prototype.forEach.call($('calPills').children, function (b) { b.classList.toggle('on', b.getAttribute('data-f') === calFilter); });
+
+    // Deadlines table: unfinished projects due this month or later, soonest first.
+    var monthStart = ymd(calMonth);
+    var dl = upcoming().filter(function (p) { return p.due >= monthStart || daysLeft(p) >= -7; }).slice(0, 5);
+    $('calDl').innerHTML = dl.length ? dl.map(function (p) {
+      var d = parseYmd(p.due), st = starsNow(p);
+      return '<a href="#/p/' + p.id + '"><span class="n">' + esc(p.name || '이름 없는 사업') + '</span><span class="d">~' + (d.getMonth() + 1) + '.' + pad(d.getDate()) +
+        '</span><span class="s">' + (st ? stars(st) : '<span style="color:var(--faint)">—</span>') + '</span></a>';
+    }).join('') : '<div class="none">마감일이 있는 사업이 없어요 · 수정하기에서 정할 수 있어요</div>';
+
+    var map = dayMap();
+    var first = new Date(y, mo, 1);
+    var start = addDays(first, -((first.getDay() + 6) % 7));   // Monday on or before the 1st
+    var last = new Date(y, mo + 1, 0);
+    var end = addDays(last, 6 - ((last.getDay() + 6) % 7));    // Sunday on or after the last day
+    var tk = ymd(today0());
+    var grid = $('calGrid');
+    grid.innerHTML = '';
+    for (var d = start; d <= end; d = addDays(d, 1)) {
+      var k = ymd(d), inMonth = d.getMonth() === mo;
+      var cell = document.createElement('button');
+      cell.type = 'button';
+      cell.className = 'cc' + (inMonth ? '' : ' dim') + (k === tk ? ' today' : '') + (k === calSel ? ' sel' : '');
+      cell.setAttribute('data-k', k);
+      var html = '<span class="dn">' + d.getDate() + '</span>';
+      var info = map[k], shown = 0, total = 0;
+      if (info && inMonth) {
+        var items = [];
+        if (calFilter !== 'done') info.ev.forEach(function (e) { items.push('<div class="ev s' + e[1] + '"><b>' + stars(e[1]) + '</b><i>' + esc(e[0].name || '이름 없는 사업') + '</i></div>'); });
+        if (calFilter !== 'due') info.done.forEach(function (x) { items.push('<div class="ck"><em>✓</em>' + esc(x[1].text) + '</div>'); });
+        total = items.length;
+        items.slice(0, 3).forEach(function (h) { html += h; shown++; });
+        if (total > shown) html += '<span class="more">+' + (total - shown) + '</span>';
+      }
+      cell.setAttribute('aria-label', (d.getMonth() + 1) + '월 ' + d.getDate() + '일' + (total ? ', ' + total + '개' : ''));
+      cell.innerHTML = html;
+      grid.appendChild(cell);
+    }
+    renderCalDay(map);
+  }
+  function renderCalDay(map) {
+    var box = $('calDay');
+    var k = calSel || ymd(today0());
+    var d = parseYmd(k);
+    var info = (map || dayMap())[k] || { ev: [], done: [] };
+    var h = '<div class="h">' + (d.getMonth() + 1) + '.' + pad(d.getDate()) + ' (' + WD[d.getDay()] + ')' + (k === ymd(today0()) ? ' · Today' : '') + '</div>';
+    var labels = { 1: '1주 전', 2: '3일 전', 3: '마감일' };
+    info.ev.forEach(function (e) {
+      h += '<a href="#/p/' + e[0].id + '"><span class="ic">' + stars(e[1]) + '</span><span class="tx"><b>' + esc(e[0].name || '이름 없는 사업') + '</b>' + labels[e[1]] + '</span></a>';
+    });
+    info.done.forEach(function (x) {
+      h += '<a href="#/p/' + x[0].id + '"><span class="ic">✓ ' + '</span><span class="tx"><b>' + esc(x[0].name || '이름 없는 사업') + ' · ' + hm(x[1].ts) + '</b>' + esc(x[1].text) + '</span></a>';
+    });
+    if (!info.ev.length && !info.done.length) h += '<div class="none">이 날은 마감도 기록도 없어요. 날짜 칸을 누르면 그날 내용을 볼 수 있어요.</div>';
+    box.innerHTML = h;
+  }
+  $('calGrid').addEventListener('click', function (e) {
+    var c = e.target.closest('.cc');
+    if (!c) return;
+    var k = c.getAttribute('data-k');
+    var d = parseYmd(k);
+    if (d.getMonth() !== calMonth.getMonth()) calMonth = new Date(d.getFullYear(), d.getMonth(), 1);
+    calSel = k;
+    renderCal();
+    $('calDay').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  });
+  $('calPrev').addEventListener('click', function () { calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() - 1, 1); calSel = null; renderCal(); });
+  $('calNext').addEventListener('click', function () { calMonth = new Date(calMonth.getFullYear(), calMonth.getMonth() + 1, 1); calSel = null; renderCal(); });
+  $('calToday').addEventListener('click', function () { calMonth = null; calSel = null; renderCal(); });
+  $('calBear').addEventListener('click', function () { location.hash = '#/'; });
+  $('calPills').addEventListener('click', function (e) {
+    var b = e.target.closest('button');
+    if (!b) return;
+    calFilter = b.getAttribute('data-f');
+    renderCal();
+  });
+
   // ---------------- router ----------------
   var lastId = null;
   function route() {
     flushSave();
     var m = location.hash.match(/^#\/p\/([^/]+)(\/edit)?$/);
     var p = m ? find(m[1]) : null;
-    var mode = !p ? 'list' : m[2] ? 'edit' : 'detail';
+    var mode = !p ? (location.hash === '#/cal' ? 'cal' : 'list') : m[2] ? 'edit' : 'detail';
+    $('calView').hidden = mode !== 'cal';
     $('listView').hidden = mode !== 'list';
     $('detailView').hidden = mode !== 'detail';
     $('editView').hidden = mode !== 'edit';
@@ -1082,7 +1410,8 @@
     if (mode === 'list') {
       if (location.hash && location.hash !== '#/') history.replaceState(null, '', '#/');
       renderList();
-    } else if (mode === 'edit') renderEdit(p);
+    } else if (mode === 'cal') renderCal();
+    else if (mode === 'edit') renderEdit(p);
     else renderDetail(p);
     window.scrollTo(0, 0);
   }
