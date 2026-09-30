@@ -1,0 +1,9 @@
+/* Bundled copies of the web fonts so the app looks the same offline. All faces are SIL OFL. */
+@font-face { font-family: 'Arimo'; font-weight: 400; font-style: normal; font-display: swap; src: url(fonts/Arimo-400.ttf) format('truetype'); }
+@font-face { font-family: 'Arimo'; font-weight: 500; font-style: normal; font-display: swap; src: url(fonts/Arimo-500.ttf) format('truetype'); }
+@font-face { font-family: 'Arimo'; font-weight: 600; font-style: normal; font-display: swap; src: url(fonts/Arimo-600.ttf) format('truetype'); }
+@font-face { font-family: 'Arimo'; font-weight: 700; font-style: normal; font-display: swap; src: url(fonts/Arimo-700.ttf) format('truetype'); }
+@font-face { font-family: 'Cormorant Garamond'; font-weight: 600; font-style: normal; font-display: swap; src: url(fonts/CormorantGaramond-600.ttf) format('truetype'); }
+@font-face { font-family: 'Cormorant Garamond'; font-weight: 700; font-style: normal; font-display: swap; src: url(fonts/CormorantGaramond-700.ttf) format('truetype'); }
+@font-face { font-family: 'Cormorant Garamond'; font-weight: 600; font-style: italic; font-display: swap; src: url(fonts/CormorantGaramond-600italic.ttf) format('truetype'); }
+@font-face { font-family: 'Pretendard Variable'; font-weight: 45 920; font-style: normal; font-display: swap; src: url(fonts/PretendardVariable.woff2) format('woff2-variations'); }
