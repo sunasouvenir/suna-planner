@@ -1282,9 +1282,21 @@
     else document.documentElement.setAttribute('data-theme', m);
     try { if (m === 'auto') localStorage.removeItem(THEME_KEY); else localStorage.setItem(THEME_KEY, m); } catch (e) {}
     $('themeBtn').textContent = THEME_LABELS[m];
-    var meta = document.querySelector('meta[name="theme-color"]');
-    if (meta) meta.content = (m === 'dark' || (m === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches)) ? '#0F0F10' : '#F6F6F7';
+    syncBars();
   }
+  // Browser address bar / Android app system bars follow the page's light or dark look.
+  function syncBars() {
+    var m = themeMode();
+    var dark = m === 'dark' || (m === 'auto' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var color = dark ? '#0F0F10' : '#F6F6F7';
+    var meta = document.querySelector('meta[name="theme-color"]');
+    if (meta) meta.content = color;
+    try { if (window.SunaApp) window.SunaApp.setBars(color, !dark); } catch (e) {}
+  }
+  try {
+    var mq = window.matchMedia('(prefers-color-scheme: dark)');
+    if (mq.addEventListener) mq.addEventListener('change', syncBars); else if (mq.addListener) mq.addListener(syncBars);
+  } catch (e) {}
   $('themeBtn').addEventListener('click', function () {
     var order = ['auto', 'light', 'dark'];
     applyTheme(order[(order.indexOf(themeMode()) + 1) % 3]);
