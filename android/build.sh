@@ -32,14 +32,15 @@ WWW="$OUT/assets/www"
 mkdir -p "$WWW/fonts" "$OUT/res" "$OUT/gen" "$OUT/classes"
 
 # ---- web files (the same pages as the website, with fonts bundled and no service worker) ----
-cp "$ROOT/index.html" "$ROOT/projects.html" "$ROOT/mini-logo.png" "$ROOT/icon-192.png" "$ROOT/icon-512.png" "$ROOT/manifest.json" "$WWW/"
+# The app is only the project tracker: the old planner (index.html) is not bundled.
+cp "$ROOT/projects.html" "$ROOT/mini-logo.png" "$WWW/"
 cp "$HERE"/fonts/* "$WWW/fonts/"
 cp "$HERE/fonts.css" "$WWW/fonts.css"
 python3 - "$WWW" <<'PY'
 import re, sys, os
 www = sys.argv[1]
 SW = re.compile(r"\s*if \('serviceWorker' in navigator\) \{\s*window\.addEventListener\('load', function \(\) \{\s*navigator\.serviceWorker\.register\('sw\.js'\)\.catch\(function \(\) \{\}\);\s*\}\);\s*\}", re.S)
-for name in ('projects.html', 'index.html'):
+for name in ('projects.html',):
     p = os.path.join(www, name)
     s = open(p, encoding='utf-8').read()
     s, n = SW.subn('', s)
@@ -49,6 +50,11 @@ for name in ('projects.html', 'index.html'):
         s, n = re.subn(r'<link rel="preconnect"[^>]*>\s*<link rel="preconnect"[^>]*>\s*<link rel="stylesheet" href="https://fonts\.googleapis\.com[^>]*>\s*<link rel="stylesheet" href="https://cdn\.jsdelivr\.net[^>]*>',
                        '<link rel="stylesheet" href="fonts.css">', s)
         assert n == 1, 'font links not found'
+        # remove the links back to the web planner (header 📅 button and the Planner tab)
+        s, n1 = re.subn(r'\s*<a class="round" href="index\.html"[^>]*>📅</a>', '', s)
+        s, n2 = re.subn(r'\s*<a href="index\.html" aria-label="Planner">📅 Planner</a>', '', s)
+        assert n1 == 1 and n2 == 1, 'planner links not found'
+        assert 'index.html' not in s
     open(p, 'w', encoding='utf-8').write(s)
 PY
 
